@@ -27,7 +27,7 @@
           if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(function(position){
               // On récupère la position
-              var pos=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+              pos=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
               console.log(pos);
               map.setCenter(pos);
               map.setZoom(15);
@@ -38,15 +38,18 @@
               //   content:"Vous êtes ici"
               // });
               // Affiche un marker
-              var marker=new google.maps.Marker({
+              pos=new google.maps.Marker({
                 position:pos,
+                id:position,
                 map:map,
+                animation:google.maps.Animation.BOUNCE,
                 title:"Vous êtes ici"
               });
 
             });
           }
         }
+
     </script>
   </head>
   <body onload="initialize()">
