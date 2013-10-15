@@ -14,8 +14,8 @@
       var map;
       function initialize() {
         var mapOptions = {
-          zoom: 8,
-          center: new google.maps.LatLng(0, 0),
+          zoom: 13,
+          center: new google.maps.LatLng(48.856614, 2.3522219000000177),
           mapTypeId: google.maps.MapTypeId.ROADMAP
         };
 
@@ -30,6 +30,7 @@
               var pos=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
               console.log(pos);
               map.setCenter(pos);
+              map.setZoom(15);
               // affichage d'un panneau
               // var panel=new google.maps.InfoWindow({
               //   map:map,
