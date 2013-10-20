@@ -12,6 +12,7 @@
     </style>
     <script language="JavaScript" type="text/javascript">
       var map;
+      var pos;
       function initialize() {
         var mapOptions = {
           zoom: 13,
@@ -21,6 +22,21 @@
 
         map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 
+        google.maps.event.addListener(map, 'rightclick',function(event){
+          placeMarker(event.latLng,map);
+        });
+
+      }
+
+      function placeMarker(location,map){
+        var r=confirm("Êtes vous sur de vouloir ajouter un spot ici ?")
+        if (r==true) {
+          var marker=new google.maps.Marker({
+            position:location,
+            map:map
+          });
+          map.panTo(location);
+        }
       }
 
       function trouve(){
