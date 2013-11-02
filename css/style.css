@@ -1,0 +1,425 @@
+/*
+
+Mémo des font-face utilisées : 
+
+font-family: 'Pacifico', cursive;
+font-family: 'Open Sans', sans-serif;
+
+*/
+
+
+*{
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+body.inscription {
+	width:100%;
+	height:100%;
+	background:url('../img/bg_inscription_full.jpg') no-repeat center fixed;
+	background-size: cover; 
+}
+
+/* Inscription - Formulaire */
+
+aside.wrap-form-inscription{
+	width:380px;
+	height:auto;
+	padding:25px 55px 45px 55px;
+	margin-bottom:20px;
+	background:#f4f3f0;
+	border-radius:5px;
+	position:absolute;
+	right:10%;
+}
+
+aside h2{
+	font-size:2.5rem;
+	font-family: 'Pacifico', cursive;
+	color:#8cc152;
+	text-align:center;
+	margin-bottom:0.5em;
+}
+
+
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+	border-radius: 4px 4px 4px 4px;
+	color: #555555;
+	font-family:'Open Sans', sans-serif;
+	display: inline-block;
+	font-size: 0.8rem;
+	height: 32px;
+	/*width:100%;*/
+	line-height: 20px;
+	margin-bottom: 18px;
+	padding: 8px 12px;
+	vertical-align: middle;
+}
+
+aside.wrap-form-inscription input,
+aside.wrap-form-inscription select{
+	width:100%;
+}
+
+aside.wrap-form-inscription select {
+    color: #7d7d7b;
+}
+aside.wrap-form-inscription select option:disabled {
+    color:#C4C4C4;
+}
+aside.wrap-form-inscription select option:selected{
+	color:#555555;
+}
+
+aside.wrap-form-inscription input:invalid,
+aside.wrap-form-inscription select:invalid,
+aside.wrap-form-inscription input.erreur,
+aside.wrap-form-inscription select.erreur{
+	background:url('../img/invalid.png') no-repeat 95% center;
+	transition:background 500ms ease;
+}
+aside.wrap-form-inscription input.erreur:valid,
+aside.wrap-form-inscription select.erreur:valid,
+aside.wrap-form-inscription input.erreur:readonly,
+aside.wrap-form-inscription select.erreur:readonly{
+	background-position:400px center;
+}
+
+select::-moz-placeholder, 
+textarea::-moz-placeholder, 
+input[type="text"]::-moz-placeholder, 
+input[type="password"]::-moz-placeholder, 
+input[type="number"]::-moz-placeholder, 
+input[type="email"]::-moz-placeholder,
+input[type="search"]::-moz-placeholder,
+input[type="tel"]::-moz-placeholder, 
+.uneditable-input::-moz-placeholder {
+	text-transform: uppercase;
+}
+
+input:focus:invalid:focus, textarea:focus:invalid:focus, select:focus:invalid:focus{
+	box-shadow: none;
+}
+
+aside.wrap-form-inscription input:nth-child(1),aside.wrap-form-inscription input:nth-child(2){
+	width:50%;
+	float:left;
+}
+
+aside.wrap-form-inscription input:nth-child(1){
+	border-radius: 4px 0px 0px 4px;
+
+}
+aside.wrap-form-inscription input:nth-child(2){
+	border-radius: 0px 4px 4px 0px;
+	border-left:1px solid transparent;
+}
+
+
+
+aside.wrap-form-inscription textarea{
+	height:70px;
+	width:100%;
+	resize:vertical;
+	max-height:100px;
+}
+
+select[name="skill"]{
+	height:36px;
+	color:#555555;
+	text-transform: uppercase;
+	padding:8px 9px;
+}
+
+
+.btn-primary {
+  background-color: #006DCC;
+  background-image: linear-gradient(to bottom, #8bc052, #6da546);
+  background-repeat: repeat-x;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  color: #FFFFFF;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+.btn-submit,
+input[type="submit"]{
+	margin-top:1em;
+	height:2.5em;
+	line-height:normal;
+	color:#FFF;
+	text-shadow:none;
+	background-image:linear-gradient(to bottom, #8BC052, #6DA546);
+	border:solid 1px #629c42;
+	-webkit-box-shadow: inset 0px 0px 2px 0px #629c42, inset 0px 1px 0px 1px #a8d17d, inset 0px -1px 0px 0px #62933F;
+	box-shadow: inset 0px 0px 2px 0px #629c42, inset 0px 1px 0px 1px #a8d17d, inset 0px -1px 0px 0px #62933F;
+	
+
+}
+
+textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[type="datetime"]:focus, input[type="datetime-local"]:focus, input[type="date"]:focus, input[type="month"]:focus, input[type="time"]:focus, input[type="week"]:focus, input[type="number"]:focus, input[type="email"]:focus, input[type="url"]:focus, input[type="search"]:focus, input[type="tel"]:focus, input[type="color"]:focus, .uneditable-input:focus {
+	border-color: #70A647;
+	box-shadow:none;
+	outline: 0 none;
+}
+
+aside.wrap-form-inscription input:nth-child(2):focus:valid, aside.wrap-form-inscription input:nth-child(2):active:valid{
+	border-left:1px solid #70A647;
+}
+aside.wrap-form-inscription input:nth-child(2):focus:invalid, aside.wrap-form-inscription input:nth-child(2):active:invalid{
+	border-left:1px solid #E9322D;
+}
+
+.email-error{
+	color:#B94A48;
+	text-align:center;
+}
+.hasDatepicker{
+	position:relative;
+	z-index:10;
+}
+.ui-datepicker .ui-datepicker-title select{
+	padding:4px 6px;
+}
+
+
+/* Inscription - Checkbox */
+
+.chkbox {
+	font-family: 'Open Sans',sans-serif;
+	width: 17px;
+	height: 17px;
+	color:#7d7d7b;
+	position: relative;
+	float:left;
+	width:33%;
+	margin-bottom:4px;
+}
+
+
+.chkbox label {
+	cursor: pointer;
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	left: 2px;
+	top: 2px;
+	line-height:14px;
+	text-indent:17px;
+	background: #fff;
+	border:solid 2px #c5c5c5 ;
+}
+
+.chkbox label:before {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	content: '';
+	position: absolute;
+	left:0;
+	width: 12px;
+	height: 12px;
+	background: #00bf00;
+
+	background:#8cc152;
+
+	-webkit-transition:all 250ms ease;
+	-moz-transition:all 250ms ease;
+	transition:all 250ms ease;
+
+}
+.chkbox select:focus, .chkbox input[type="checkbox"]:focus, select:focus{
+	outline:none;
+}
+
+.chkbox input[type=checkbox]:checked + label:before {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+
+div>input[type='checkbox']{
+	position: absolute;
+	top: -2px;
+	left: -13px;
+}
+
+
+/* Inscription - Bouton Facebook */
+
+#fb-connect {
+	position:relative;
+	background: none repeat scroll 0 0 #354F88;
+	color: #FFFFFF;
+	display: block;
+	font-family: 'Oswald',sans-serif;
+	font-size: 15px;
+	height: 37px;
+	line-height: 20px;
+	padding:10px 0px 0 55px;
+	text-transform: uppercase;
+	width: auto;
+	margin-bottom:1em;
+}
+
+#fb-connect:before {
+	content: url("../img/fb-icon.png");
+	display: inline-block;
+	top:10px;left:20px;
+	position:absolute;
+}
+#fb-connect:hover{
+	color:#FFF;
+	text-decoration:none;
+}
+
+#fb-bg {
+	background: #3b5998;
+	display: block;
+	height: 37px;
+	margin: 0 0 30px 41px;
+	width: auto; 
+}
+
+#fb-bg:after {
+	color: #fff;
+	content: "Compléter avec facebook";
+	font-family: 'Oswald', sans-serif;
+	height: 37px;
+	left: 11%;
+	position: relative;
+	text-transform: uppercase;
+	top: 22%;
+	width: 41px; 
+}
+
+#fb-bg:hover{
+  cursor: pointer;
+}
+
+#fb-bg:active{
+  background: #354f88;
+}
+
+/* Inscription - Toggle Switch OUI/NON */
+
+.switch-button {
+    display: block;
+    height: 30px;
+    position: relative;
+    overflow: visible;
+    padding: 0;
+    margin-left: 80px;
+    background:#FFF;
+    font-family: 'Open Sans',sans-serif;
+    min-height:35px;
+    border-radius: 4px;
+    border:solid 1px #c5c5c5;
+}
+
+.switch-button.small{
+    width:120px;
+    font-size:12px;
+}
+
+.switch-button span span {
+	display: none; 
+}
+
+.switch-button a {
+	display: block;
+	-webkit-transition: all 0.3s ease-out;
+	-moz-transition: all 0.3s ease-out;
+	transition: all 0.3s ease-out; 
+}
+
+.switch-button label, .switch-button > span {
+	line-height: 35px;
+	vertical-align: middle; 
+}
+.switch-button input:focus ~ a, .switch-button input:focus + label {
+  /*outline: 1px dotted #888888;*/
+ }
+.switch-button label {
+	position: relative;
+	z-index: 3;
+	display: block;
+	width: 100%;
+}
+.switch-button input {
+	position: absolute;
+	opacity: 0;
+	z-index: 5; 
+}
+.switch-button input:checked ~ a {
+	right: 0%; 
+	border-radius: 0 4px 4px 0;
+}
+.switch-button input:not(:checked) ~ a {
+	border-radius: 4px 0 0 4px;
+}
+.switch-button > span {
+	position: absolute;
+	left: -80px;
+	width: 100%;
+	margin: 0;
+	padding-right: 100px;
+	text-align: left; 
+	color:#7d7d7b;
+	text-transform:uppercase;
+	}
+.switch-button > span span {
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 5;
+	display: block;
+	width: 50%;
+	margin-left: 80px;
+	text-align: center;
+	text-transform: uppercase;
+	color:#FFF;
+}
+
+#material:checked + span span:first-child{
+	color:#7d7d7b;
+}
+#material:not(:checked) + span span:last-child{
+	color:#7d7d7b;
+}
+#material:checked + a{
+	border-radius: 0 4px 4px 0;
+}
+
+.switch-button > span span:last-child {
+	left: 50%; 
+}
+.switch-button a {
+	position: absolute;
+	right: 50%;
+	top: 0;
+	z-index: 4;
+	display: block;
+	width: 50%;
+	height: 100%;
+	padding: 0; 
+	border:none;
+	outline:none;
+}
+
+/* Bugfix for older Webkit, including mobile Webkit. Adapted from
+* http://css-tricks.com/webkit-sibling-bug/
+*/
+
+@media only screen and (-webkit-max-device-pixel-ratio: 2) and (max-device-width: 1280px) {
+	.switch-button {	-webkit-animation: webkitSiblingBugfix infinite 1s; } 
+}
+
+@-webkit-keyframes webkitSiblingBugfix {
+	from {
+	-webkit-transform: translate3d(0, 0, 0); }
+	to {
+	-webkit-transform: translate3d(0, 0, 0); } 
+}
+
+
