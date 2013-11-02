@@ -50,16 +50,31 @@
             <form>
                 <fieldset>
                     <label for="name">Nom du spot : </label>
-                    <input type="text" name="name" class="text ui-widget-content ui-corner-all" />
+                    <input type="text" name="name" class="text ui-widget-content ui-corner-all" id="name" />
                     <label for="description">Description du spot : </label>
                     <input type="text" name="description" class="text ui-widget-content ui-corner-all" />
+                    <!-- <input type="checkbox" name="categorie" value="shortline"><label>shortline</label>
+                    <input type="checkbox" name="categorie" value="longline"><label>longline</label> -->
                 </fieldset>
             </form>
         </div>
-
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        <script type="text/javascript"src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBoOm_lPvUSlokpQ8XHfSrGUJOm6vNxLjg&sensor=true"></script>
         <script language="JavaScript" type="text/javascript">
             var map;
             var pos;
+            $("#dialog-form").hide();
+
+            // Icone perso
+                var iconePerso=new google.maps.MarkerImage("icons/locationNonOccupe.svg",
+                    // Dimensions
+                    new google.maps.Size(74,102),
+                    // Origin
+                    new google.maps.Point(0,0),
+                    // Encre
+                    new google.maps.Point(49.5,75 )
+                );
 
             function initialize() {
                 // On défini le niveau de zoom, ainsi que la position ou la map sera centrée puis son type
@@ -71,32 +86,52 @@
                 // Initialisation de la map
                 map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 
+                
+
+                // Preparation du geocoding
+                geocoder = new google.maps.Geocoder();
+
                 // Listener pour l'ajout d'un marker au clic droit
                 google.maps.event.addListener(map, 'rightclick',function(event){
                     placeMarker(event.latLng,map);
                     $( "#dialog-form" ).dialog( "open" );
                 });
 
+                // On charge les markers de la BDD sur la carte
                 var list_markers=[ <?php echo $listMarkers; ?> ];
                 var i=0;
                 li=list_markers.length;
                 while(i<li){
                     new google.maps.Marker({
                     position:new google.maps.LatLng(list_markers[i][0],list_markers[i][1]),
+                        icon:iconePerso,
                         map:map,
+                        infoWindowIndex:i, 
                         title:'Marker '+i
                     });
                     i++;
                 }
+
+                // Ecouteur pour afficher les informations d'un marker
+                google.maps.event.addListener(marker,'click',function(data){
+                    infowindow.setContent('position :'+data.latLng.toUrlValue(5));
+                    infowindow.open(this.getMap(),this);
+                });
+
+                var infowindow=new google.maps.InfoWindow({
+                    content:content
+                });
             }
 
             // function pour placer un marker
             function placeMarker(location,map){
+                // Récupération des coordonnées
                 var lat=location.lat();
                 var lng=location.lng();
                 console.log('latitude du marker : '+lat);
                 console.log('longitude du marker : '+lng);
-                
+
+
                 $("#dialog-form").dialog({
                 autoOpen:false,
                 height:300,
@@ -104,17 +139,20 @@
                 modal:true,
                 buttons:{
                     "Ajouter le spot":function(){
+                        var titre=$('#name').val();
+                        var description=$("input[name='description']").val();
                         // Appel Ajax pour insertion dans la BDD
                         var sendAjax=$.ajax({
                             url: 'insert.php',
                             type: 'POST',
-                            data: 'latitude='+lat+'&longitude='+lng,
+                            data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description,
                             success:handleResponse
                         })
                         function handleResponse(){
                             $('#answer').get(0).innerHTML=sendAjax.responseText;
                         }
                         var marker=new google.maps.Marker({
+                            icon:iconePerso,
                             position:location,
                             map:map
                         });
@@ -157,8 +195,6 @@
             }
 
         </script>
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script type="text/javascript"src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBoOm_lPvUSlokpQ8XHfSrGUJOm6vNxLjg&sensor=true"></script>
+        
     </body>
 </html>
