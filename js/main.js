@@ -373,7 +373,7 @@ $( document ).ready(function() {
             var profil = "<p><span> Nom :       </span><span>"+data[0].nom+"</span></p>";
             profil+= "<p><span> Prénom :        </span><span>"+data[0].prenom+"</span></p>";
             profil+= "<p><span> Email :         </span><span>"+data[0].email+"</span></p>";
-            profil+= "<p><span> Date naissance :</span><span>"+data[0].date_naissance+"</span></p>";
+            profil+= "<p><span> Date naissance :</span><span data-value="+data[0].date_naissance+">"+data[0].date_naissance+"</span></p>";
             profil+= "<p><span> Niveau :        </span><span>"+data[0].niveau+"</span></p>";
             profil+= "<p><span> Technique :     </span><span>"+data[0].technique+"</span></p>";
             profil+= "<p><span> Description :   </span><span>"+data[0].description+"</span></p>";
@@ -413,7 +413,7 @@ $( document ).ready(function() {
             type: 'combodate',
             url: './includes/actions.php',
             format: 'YYYY-MM-DD',
-            viewformat: 'DD.MM.YYYY',
+            viewformat: 'DD/MM/YYYY',
             template: 'D / MM / YYYY',
             combodate: {
                 minYear: 1920,
@@ -443,9 +443,18 @@ $( document ).ready(function() {
         });
 
         $('#affichageProfil p:nth-child(7) span:nth-child(2)').editable({
+            name : 'description',
             url: './includes/actions.php',
             type: 'textarea',
+            value:"description",
             rows : 5
+
+        });
+
+        $('#affichageProfil p:nth-child(9) span:nth-child(2)').editable({
+            name: 'telephone',
+            url: './includes/actions.php',
+            type: 'tel',
 
         });
 

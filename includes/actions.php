@@ -273,9 +273,50 @@ else{
 
 		global $PDO;
 
-		// Sanitize les modifs de l'utilisateurs
+		// Nettoie l'envoie de l'utilisateur (sécurité)
 		$column = filter_var($_POST['name'] , FILTER_SANITIZE_STRING);
-		$value = filter_var($_POST['value'], FILTER_SANITIZE_STRING);
+
+		// Nettoyage & vérifications mineures des valeurs envoyées
+		if($column == "telephone"){
+			$value = filter_var($_POST['value'], FILTER_SANITIZE_NUMBER_INT);
+
+			if(strlen($value) != 10){
+				header('HTTP/1.1 400 Incorrect value');
+		    	die( "Numéro de téléphone incorrect" );
+			}
+		}
+		elseif($column == "niveau"){
+			$value = filter_var($_POST['value'], FILTER_SANITIZE_STRING);
+			$niveaux = array("debutant","intermediaire","confirme","expert");
+
+			if( ! in_array($value, $niveaux )){
+				header('HTTP/1.1 400 Incorrect value');
+		    	die( "Valeur incorrect" );
+			}
+		}
+		elseif($column == "materiel"){
+			$value = filter_var($_POST['value'], FILTER_SANITIZE_NUMBER_INT);
+			if(strlen($value) != 1){
+				header('HTTP/1.1 400 Incorrect value');
+		    	die( "Valeur incorrect" );
+			}
+		}
+		elseif($column == "date_naissance"){
+			$value = filter_var($_POST['value'], FILTER_SANITIZE_STRING);
+			if (!preg_match("/^[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/",$value)){
+				header('HTTP/1.1 400 Incorrect value');
+		    	die( "Date de naissance incorrect" );
+			}
+			else{
+				
+			}
+
+		}
+
+		else{
+			$value = filter_var($_POST['value'], FILTER_SANITIZE_STRING);
+		}
+		
 
 		$currentUserId = (int)$_SESSION['membre_id'];
 
@@ -285,6 +326,7 @@ else{
 
 		// Vérification sur l'utilisateur avant modification des infos de son compte
 		if($currentUserId == $pk){
+			$reponse = null;
 
 			switch($column)
 		    {
@@ -325,7 +367,10 @@ else{
 		    	
 		    }
 		    else{
-				echo json_encode(array("erreur" => true, "msg" => "Problème de mise à jour"));
+
+		    	header('HTTP/1.1 400 Bad Request');
+		    	die( "Erreur : modification impossible" );
+
 			}
 
 		}
