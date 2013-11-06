@@ -172,6 +172,7 @@ else{
 	    switch($action) {
 	        case 'addFavSlacker' : addFavSlacker(); break;
 	        case 'removeFavSlacker' : removeFavSlacker(); break;
+	        case 'editProfil' : editProfil(); break;
 
 	        //case 'blah' : blah();break;
 	        // ...etc...
@@ -266,6 +267,75 @@ else{
 			$reponse->closeCursor();
 
 		}
+	}
+
+	function editProfil(){
+
+		global $PDO;
+
+		// Sanitize les modifs de l'utilisateurs
+		$column = filter_var($_POST['name'] , FILTER_SANITIZE_STRING);
+		$value = filter_var($_POST['value'], FILTER_SANITIZE_STRING);
+
+		$currentUserId = (int)$_SESSION['membre_id'];
+
+		if(isset($_POST['pk']) && !empty($_POST['pk'])){
+			$pk = (int)$_POST['pk'];
+		}
+
+		// Vérification sur l'utilisateur avant modification des infos de son compte
+		if($currentUserId == $pk){
+
+			switch($column)
+		    {
+		        case "nom":
+		            $reponse = $PDO->prepare('UPDATE utilisateurs SET nom = :valeur WHERE id = :currentUserId');
+		            break;
+		        case "date_naissance":
+		            $reponse = $PDO->prepare('UPDATE utilisateurs SET date_naissance = :valeur WHERE id = :currentUserId');
+		            break;
+		        case "niveau":
+		            $reponse = $PDO->prepare('UPDATE utilisateurs SET niveau = :valeur WHERE id = :currentUserId');
+		            break;
+		        case "technique":
+		            $reponse = $PDO->prepare('UPDATE utilisateurs SET technique = :valeur WHERE id = :currentUserId');
+		            break;
+		        case "description":
+		            $reponse = $PDO->prepare('UPDATE utilisateurs SET description = :valeur WHERE id = :currentUserId');
+		            break;
+		        case "materiel":
+		            $reponse = $PDO->prepare('UPDATE utilisateurs SET materiel = :valeur WHERE id = :currentUserId');
+		            break;
+		        case "telephone":
+		            $reponse = $PDO->prepare('UPDATE utilisateurs SET telephone = :valeur WHERE id = :currentUserId');
+		            break;
+		        
+		    }
+
+		    if($reponse){
+
+				$reponse->bindValue(':valeur', $value);
+				$reponse->bindValue(':currentUserId', $currentUserId);
+				$reponse->execute();
+
+				echo json_encode(array("erreur" => false, 
+					"msg" => "Informations modifiées !",
+					"value" => $value
+				));
+		    	
+		    }
+		    else{
+				echo json_encode(array("erreur" => true, "msg" => "Problème de mise à jour"));
+			}
+
+		}
+		else{
+			echo json_encode(array("erreur" => true, "msg" => "Problème d'identification"));
+		}
+
+
+
+
 	}
 
 

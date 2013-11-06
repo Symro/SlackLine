@@ -13,7 +13,13 @@ $( document ).ready(function() {
     $('#materiel').on('click', function(){
         console.log($(this).is(':checked'));
     });
-	
+
+
+    //turn to inline mode
+    $.fn.editable.defaults.mode = 'inline';
+    $.fn.editable.defaults.params = { action : "editProfil" };
+    $.fn.editable.defaults.pk = id;
+
 	
 	var request = {
 
@@ -243,7 +249,7 @@ $( document ).ready(function() {
         {
             $.ajax({
                 type: "POST",
-                url: "includes/search.php",
+                url: "includes/searchUser.php",
                 data: dataString,
                 cache: false,
                 success: function(data) {
@@ -364,22 +370,97 @@ $( document ).ready(function() {
         }
         else{
 
-            var profil = "<br/> Nom :       "+data[0].nom;
-            profil+= "<br/> Prénom :        "+data[0].prenom;
-            profil+= "<br/> Email :         "+data[0].email;
-            profil+= "<br/> Date naissance :"+data[0].date_naissance;
-            profil+= "<br/> Niveau :        "+data[0].niveau;
-            profil+= "<br/> Technique :     "+data[0].technique;
-            profil+= "<br/> Description :   "+data[0].description;
-            profil+= "<br/> Matériel :      "+data[0].materiel;
-            profil+= "<br/> Téléphone :     "+data[0].telephone;
+            var profil = "<p><span> Nom :       </span><span>"+data[0].nom+"</span></p>";
+            profil+= "<p><span> Prénom :        </span><span>"+data[0].prenom+"</span></p>";
+            profil+= "<p><span> Email :         </span><span>"+data[0].email+"</span></p>";
+            profil+= "<p><span> Date naissance :</span><span>"+data[0].date_naissance+"</span></p>";
+            profil+= "<p><span> Niveau :        </span><span>"+data[0].niveau+"</span></p>";
+            profil+= "<p><span> Technique :     </span><span>"+data[0].technique+"</span></p>";
+            profil+= "<p><span> Description :   </span><span>"+data[0].description+"</span></p>";
+            profil+= "<p><span> Matériel :      </span><span>"+data[0].materiel+"</span></p>";
+            profil+= "<p><span> Téléphone :     </span><span>"+data[0].telephone+"</span></p>";
 
-            $('#affichageProfil').html( profil );
+            $('#affichageProfil').html( profil ).append('<button id="editProfil">Modifier mon profil </button><button id="disableEditProfil">Désactiver Modifs</button>');
+
+
 
         }
 
     };
+
+    var edit = function(){
+
+        console.log('enabled');
+        $('#affichageProfil .editable').editable('enable');
+
+
+        $('#affichageProfil p:nth-child(1) span:nth-child(2)').editable({
+            name: "nom",
+            type: 'text',
+            url: './includes/actions.php',
+            
+            title: 'Enter username',
+            success: function(response, newValue) {
+
+                console.log('username'+ newValue + " Response : "+response); 
+
+            }
+        });
+
+
+        $('#affichageProfil p:nth-child(4) span:nth-child(2)').editable({
+            name: 'date_naissance',
+            type: 'combodate',
+            url: './includes/actions.php',
+            format: 'YYYY-MM-DD',
+            viewformat: 'DD.MM.YYYY',
+            template: 'D / MM / YYYY',
+            combodate: {
+                minYear: 1920,
+                maxYear: 2013,
+                minuteStep: 1
+            }
+        });
+
+
+         $('#affichageProfil p:nth-child(5) span:nth-child(2)').editable({
+            name: 'niveau',
+            url: './includes/actions.php',
+            type: 'select',
+            title: 'Niveau : ',
+            value:"debutant",
+            select2: {
+                width: 200,
+                placeholder: 'Niveau',
+                allowClear: false
+            },
+            source: [
+                {value: "debutant", text: 'Débutant'},
+                {value: "intermediaire", text: 'Intermédiaire'},
+                {value: "confirme", text: 'Confirmé'},
+                {value: "expert", text: 'Expert'}
+            ]
+        });
+
+        $('#affichageProfil p:nth-child(7) span:nth-child(2)').editable({
+            url: './includes/actions.php',
+            type: 'textarea',
+            rows : 5
+
+        });
+
+    }
+
+    // Appelle la fonction d'édition du profil
+    $('body').on('click', '#editProfil',  edit );
+
+    // Désactive la possibilité de modifier les champs
+    $('body').on('click', '#disableEditProfil',  function(){
+        $('#affichageProfil .editable').editable('disable');
+    });
+
 	
+
 
 
 

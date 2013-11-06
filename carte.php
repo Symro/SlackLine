@@ -53,7 +53,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	<div id="slackers">
 	
 	</div>
-	<div id="affichageProfil">
+	<div id="affichageProfil" style="position:absolute; right:10%; top:10%;">
 
 	</div>
 

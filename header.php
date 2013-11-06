@@ -22,8 +22,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link href='http://fonts.googleapis.com/css?family=Pacifico|Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/bootstrap.css" type="text/css" media="screen" />
+        <link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/bootstrap-editable.css" type="text/css" media="screen" />
         <link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/jquery-ui-1.10.3.custom.css" type="text/css" media="screen" />
-        <link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/toggle-switch.css" type="text/css" media="screen" />
         <link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/style.css" type="text/css" media="screen" />
 
         <title><?php echo $titre; ?></title>
