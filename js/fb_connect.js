@@ -85,6 +85,9 @@ $(document).ready(function() {
                     $('#firstname').val(info.first_name).prop("readonly",true).removeClass("erreur");
                     $('#email').val(info.email).prop("readonly",true).removeClass("erreur");
                     $('#birthday').val(convertDate(info.birthday)).prop("readonly",true).removeClass("erreur");
+                    
+                    $('input[name=fb-picture]').val(info.id);
+                    console.log( $('input[name=fb-picture]').val() );
 
                 }
 

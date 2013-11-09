@@ -86,6 +86,7 @@ if(isset($_POST['submit'])){
                         $description = filter_var($description, FILTER_SANITIZE_STRING); 
                 }
 
+
                 /*
                 if (    !isset($_POST["phone"]) || empty($_POST["phone"]) ){$form_error['phone'] = "Veuillez renseigner votre téléphone";}
                 else{   $phone =  $_POST['phone'];}
@@ -113,6 +114,24 @@ if(isset($_POST['submit'])){
                             'telephone'         => ""
                         )
                     );
+
+                    // Récupère et sauvegarde la photo de l'utilisateur fb si il était connecté pdt l'inscription
+                    if( isset($_POST['fb-picture']) && !empty($_POST['fb-picture']) ){
+
+                            $fbPicture = 'http://graph.facebook.com/'. (int)$_POST['fb-picture'] .'/picture?width=100&height=100';
+                            $pictureName = $PDO->lastInsertId(); 
+
+                            copy($fbPicture, './upload/'.$pictureName.'.jpg');
+
+                            // Si copy ne fonctionne pas (version php trop ancienne sur le serveur)
+                            /*
+                            $content = file_get_contents($fbPicture);
+                            $fp = fopen('./upload/'.$pictureName.'.jpg', "w");
+                            fwrite($fp, $content);
+                            fclose($fp);
+                            */
+                            
+                    }
 
                     if($response == true){
 

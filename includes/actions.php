@@ -146,6 +146,13 @@ else{
 			if( $reponse ) {
 				$donnees = $reponse->fetchAll(PDO::FETCH_ASSOC);
 
+				if (file_exists('../upload/'.$_SESSION['membre_id'].'.jpg')) {
+					$donnees[0]['picture'] = ROOTPATH.'upload/'.$_SESSION['membre_id'].'.jpg';
+				}
+				else{
+					$donnees[0]['picture'] = ROOTPATH.'upload/default.jpg';
+				}
+
 				echo json_encode($donnees);
 				$reponse->closeCursor();
 			}
@@ -170,9 +177,10 @@ else{
 	if(isset($_POST['action']) && !empty($_POST['action'])) {
 	    $action = $_POST['action'];
 	    switch($action) {
-	        case 'addFavSlacker' : addFavSlacker(); break;
+	        case 'addFavSlacker' 	: addFavSlacker(); break;
 	        case 'removeFavSlacker' : removeFavSlacker(); break;
-	        case 'editProfil' : editProfil(); break;
+	        case 'editProfil' 		: editProfil(); break;
+	        case 'saveSkills' 		: saveSkills(); break;
 
 	        //case 'blah' : blah();break;
 	        // ...etc...
@@ -379,6 +387,38 @@ else{
 		}
 
 
+
+
+	}
+
+	function saveSkills(){
+		global $PDO;
+
+		$currentUserId = (int)$_SESSION['membre_id'];
+
+		if(isset($_POST['skills']) && !empty($_POST['skills'])){
+
+			$real_skills = array("shortline", "trickline", "jumpline", "longline", "highline", "blindline");
+			$skills = $_POST['skills'];
+			// On fait la différence entre les valeurs reçues par l'utilistaur et les 'vraies valeurs'
+			$difference = array_intersect($skills, $real_skills);
+			$final_skills = implode(", ", $difference);
+
+
+			$reponse = $PDO->prepare('UPDATE utilisateurs SET technique = :valeur WHERE id = :currentUserId');
+			$reponse->bindValue(':valeur', $final_skills);
+			$reponse->bindValue(':currentUserId', $currentUserId);
+			$reponse->execute();
+
+
+			echo json_encode(array("erreur" => false, 
+				"msg" => "Catégories pratiquées modifiées !",
+				"value" => $final_skills
+			));
+		}
+		else{
+			die( json_encode(array("erreur" => true, "msg" => "Aucune catégorie?" )));
+		}
 
 
 	}

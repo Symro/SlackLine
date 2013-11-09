@@ -15,8 +15,35 @@ $( document ).ready(function() {
     });
 
 
+    $('#UploadForm').on('submit', function(e) {
+        e.preventDefault();
+        $('#SubmitButton').attr('disabled', ''); // disable upload button
+        //show uploading message
+        $("#output").html('<div style="padding:10px"><img src="img/loading.gif" alt="Please Wait"/> <span>Uploading...</span></div>');
+        $(this).ajaxSubmit({
+            target: '#output',
+            success:  afterSuccess //call function after success
+        });
+    });
+
+    function afterSuccess(data)  { 
+        $('#UploadForm').resetForm();  // reset form
+        $('#SubmitButton').removeAttr('disabled'); //enable submit button
+
+        if(data.erreur === true){
+            // appelle fonction affichage message d'erreur ?
+        }
+        else{
+            // appelle fonction affichage succès !
+
+        }
+
+    } 
+
+
+
     //turn to inline mode
-    $.fn.editable.defaults.mode = 'inline';
+    //$.fn.editable.defaults.mode = 'inline';
     $.fn.editable.defaults.params = { action : "editProfil" };
     $.fn.editable.defaults.pk = id;
 
@@ -357,11 +384,12 @@ $( document ).ready(function() {
 
     };
 
-    $('body').on('click', '#profil' , function(){
+    $('body').on('click', '#getProfil' , function(){
 
         request.actionGet ( 'getUserProfil' , afficherProfil);
 
     })
+
 
     var afficherProfil = function(data){
 
@@ -370,7 +398,8 @@ $( document ).ready(function() {
         }
         else{
 
-            var profil = "<p><span> Nom :       </span><span>"+data[0].nom+"</span></p>";
+            /*var profil = "<img src="+data[0].picture+" alt=\"Picture\" />";
+            profil+= "<p><span> Nom :       </span><span>"+data[0].nom+"</span></p>";
             profil+= "<p><span> Prénom :        </span><span>"+data[0].prenom+"</span></p>";
             profil+= "<p><span> Email :         </span><span>"+data[0].email+"</span></p>";
             profil+= "<p><span> Date naissance :</span><span data-value="+data[0].date_naissance+">"+data[0].date_naissance+"</span></p>";
@@ -378,37 +407,93 @@ $( document ).ready(function() {
             profil+= "<p><span> Technique :     </span><span>"+data[0].technique+"</span></p>";
             profil+= "<p><span> Description :   </span><span>"+data[0].description+"</span></p>";
             profil+= "<p><span> Matériel :      </span><span>"+data[0].materiel+"</span></p>";
+            profil+= "<label class=\"switch-button small\" for=\"material\"><input type=\"checkbox\" id=\"material\" name=\"material\" value="+data[0].materiel+"  ><span>Matériel<span>Non</span><span>Oui</span></span><a class=\"btn btn-primary\"></a></label>";
             profil+= "<p><span> Téléphone :     </span><span>"+data[0].telephone+"</span></p>";
+            */
 
-            $('#affichageProfil').html( profil ).append('<button id="editProfil">Modifier mon profil </button><button id="disableEditProfil">Désactiver Modifs</button>');
+            $('#profil .infos img').attr('src', data[0].picture);
+            $('#profil .infos figcaption').text( data[0].nom + " " + data[0].prenom );
+            $('#profil .infos span:nth-of-type(1)').text ( data[0].date_naissance ).data('value',data[0].date_naissance);
+            $('#profil .infos span:nth-of-type(2)').text ( data[0].niveau ).data('value', data[0].niveau );
+            $('#profil .infos div:nth-of-type(2)').text( data[0].description ).data('value', data[0].description );
+
+            // Boucle sur les catégories pratiquées
+
+            var technique_formated = data[0].technique.replace(/\s/g,'');
+            technique_formated = technique_formated.split(",");
+
+            var skills = "";
+            for (var i=0; i<technique_formated.length; i++) {
+
+                if(technique_formated[i].length > 1){
+
+                    $(".skill").each(function() {
+                        var type = $(this).data("type");
+
+                        if(type == technique_formated[i]){
+                            $(this).addClass('active');
+                        }
+
+                    });
+                }
+            }
+
+            $('.skills > div').isotope({ filter: '.active' });
+            //$('#profil .skills div').html( skills );
 
 
 
+            $('#profil').append('<button id="disableEditProfil">Désactiver Modifs</button>');
+
+            if(parseInt(data[0].materiel) == 1){
+                $('#material').prop('checked','checked');
+            }
         }
 
     };
 
+
+    $('.skills > div').isotope({
+      // options
+      itemSelector : '.skill',
+      layoutMode : 'fitRows'
+
+    });
+
+
+    var afficherSkills = function(data){
+
+        if(data.erreur === false){
+            $('.skills > div').isotope({ filter: '.active' });
+            //$('body').off('click', 'input[name="editSkills"]');
+            $('input[name=editSkills]').toggleClass('hidden');
+            $('#profil').toggleClass('edition');
+        }
+
+    }
+
+
+
+
     var edit = function(){
 
         console.log('enabled');
-        $('#affichageProfil .editable').editable('enable');
+        $('#profil').toggleClass('edition');
+        $('#profil .editable').editable('enable');
+
+        $('.editProfilImage, input[name=editSkills]').toggleClass('hidden');
+
+        // on affiche toutes les catégories pratiquées
+        $('.skills > div').isotope({ filter: '*' });
+
+        $('#profil.edition').on('click', '.skill', function(){
+            console.log('click');
+            $(this).toggleClass('active');
+        })
 
 
-        $('#affichageProfil p:nth-child(1) span:nth-child(2)').editable({
-            name: "nom",
-            type: 'text',
-            url: './includes/actions.php',
-            
-            title: 'Enter username',
-            success: function(response, newValue) {
 
-                console.log('username'+ newValue + " Response : "+response); 
-
-            }
-        });
-
-
-        $('#affichageProfil p:nth-child(4) span:nth-child(2)').editable({
+        $('#profil .infos span:nth-of-type(1)').editable({
             name: 'date_naissance',
             type: 'combodate',
             url: './includes/actions.php',
@@ -423,12 +508,11 @@ $( document ).ready(function() {
         });
 
 
-         $('#affichageProfil p:nth-child(5) span:nth-child(2)').editable({
+         $('#profil .infos span:nth-of-type(2)').editable({
             name: 'niveau',
             url: './includes/actions.php',
             type: 'select',
             title: 'Niveau : ',
-            value:"debutant",
             select2: {
                 width: 200,
                 placeholder: 'Niveau',
@@ -442,16 +526,15 @@ $( document ).ready(function() {
             ]
         });
 
-        $('#affichageProfil p:nth-child(7) span:nth-child(2)').editable({
+        $('#profil .infos > div:nth-of-type(2)').editable({
             name : 'description',
             url: './includes/actions.php',
             type: 'textarea',
-            value:"description",
             rows : 5
 
         });
 
-        $('#affichageProfil p:nth-child(9) span:nth-child(2)').editable({
+        $('#profil p:nth-child(9) span:nth-child(2)').editable({
             name: 'telephone',
             url: './includes/actions.php',
             type: 'tel',
@@ -465,11 +548,30 @@ $( document ).ready(function() {
 
     // Désactive la possibilité de modifier les champs
     $('body').on('click', '#disableEditProfil',  function(){
-        $('#affichageProfil .editable').editable('disable');
+        $('#profil .editable').editable('disable');
+
+
     });
 
-	
+    // 
+    $('body').on('click', '#profil .infos img',  function(){
 
+    });
+
+    // Enregistrer les catégories pratiquées
+    $('body').on('click', 'input[name="editSkills"]', function(){
+        var skills = new Array();
+        // on récupère toutes les catégories de slackline actives
+        $(".skills .skill.active").each(function(i) {
+            skills[i] = $(this).data('type');
+        });
+
+        params = {action: 'saveSkills' , skills: skills };
+        request.actionPost ( params , afficherSkills );
+    })
+
+	
+    request.actionGet ( 'getUserProfil' , afficherProfil);
 
 
 

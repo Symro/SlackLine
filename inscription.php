@@ -31,7 +31,7 @@ include('form_traitement.php');
     
 
     <aside class="wrap-form-inscription">
-        <h2>Inscris-toi</h2>
+        <h1>Inscris-toi</h1>
 
         <a href="#" id="fb-connect">Compléter avec Facebook</a>
 
@@ -114,6 +114,7 @@ include('form_traitement.php');
             
 
             <br />
+            <input type="hidden" name="fb-picture"/>
             <input type="submit" name="submit" class="btn-primary btn-submit" value="OK">
         </form>
         <br />

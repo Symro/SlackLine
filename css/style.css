@@ -7,11 +7,23 @@ font-family: 'Open Sans', sans-serif;
 
 */
 
+body{
+	font-family: 'Open Sans', sans-serif;
+}
 
 *{
 	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
 	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
 	box-sizing: border-box;         /* Opera/IE 8+ */
+}
+
+.visible,
+.on{
+	display:block;
+}
+.hidden,
+.off{
+	display:none;
 }
 
 body.inscription {
@@ -34,7 +46,7 @@ aside.wrap-form-inscription{
 	right:10%;
 }
 
-aside h2{
+aside h1{
 	font-size:2.5rem;
 	font-family: 'Pacifico', cursive;
 	color:#8cc152;
@@ -134,14 +146,54 @@ select[name="skill"]{
 	padding:8px 9px;
 }
 
+button,
+.btn {
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+
+	background-color: #87ba5e;
+	background-image: -webkit-gradient(linear, 0 100%, 0 0, from(#8bc052), to(#6da546));
+	background-image: -webkit-linear-gradient(#8bc052, #6da546);
+	background-image: -moz-linear-gradient(#8bc052, #6da546);
+	background-image: -o-linear-gradient(#8bc052, #6da546);
+	background-image: linear-gradient(#8bc052, #6da546);
+	background-repeat: repeat-x;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	border-image: none;
+	border-radius: 4px;
+	border-style: solid;
+	border-width: 1px;
+	box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 1px 2px rgba(0, 0, 0, 0.05);
+	color: #FFFFFF;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 0.75rem;
+	line-height: 1rem;
+	margin-bottom: 0;
+	padding: 4px 12px;
+	text-align: center;
+	text-shadow:none;
+	text-transform: uppercase;
+	vertical-align: middle;  
+}
+button:hover{
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#8bc052), to(#6da546));
+	background-image: -webkit-linear-gradient(to top, #8bc052, #6da546);
+	background-image: -moz-linear-gradient(to top, #8bc052, #6da546);
+	background-image: -o-linear-gradient(to top, #8bc052, #6da546);
+	background-image: linear-gradient(to top, #8bc052, #6da546);
+}
+
 
 .btn-primary {
-  background-color: #006DCC;
-  background-image: linear-gradient(to bottom, #8bc052, #6da546);
-  background-repeat: repeat-x;
-  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-  color: #FFFFFF;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #87ba5e;
+	background-image: linear-gradient(to bottom, #8bc052, #6da546);
+	background-repeat: repeat-x;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	color: #FFFFFF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 
 .btn-submit,
@@ -424,4 +476,195 @@ div>input[type='checkbox']{
 	-webkit-transform: translate3d(0, 0, 0); } 
 }
 
+.editable-click, a.editable-click, a.editable-click:hover{
+	border-bottom: 1px dashed #629C42;
+}
 
+/* ________ ISOTOPE ________ */
+
+/**** Isotope Filtering ****/
+
+.isotope-item {
+  z-index: 2;
+}
+
+.isotope-hidden.isotope-item {
+  pointer-events: none;
+  z-index: 1;
+}
+
+/**** Isotope CSS3 transitions ****/
+
+.isotope,
+.isotope .isotope-item {
+  -webkit-transition-duration: 0.8s;
+     -moz-transition-duration: 0.8s;
+      -ms-transition-duration: 0.8s;
+       -o-transition-duration: 0.8s;
+          transition-duration: 0.8s;
+}
+
+.isotope {
+  -webkit-transition-property: height, width;
+     -moz-transition-property: height, width;
+      -ms-transition-property: height, width;
+       -o-transition-property: height, width;
+          transition-property: height, width;
+}
+
+.isotope .isotope-item {
+  -webkit-transition-property: -webkit-transform, opacity;
+     -moz-transition-property:    -moz-transform, opacity;
+      -ms-transition-property:     -ms-transform, opacity;
+       -o-transition-property:      -o-transform, opacity;
+          transition-property:         transform, opacity;
+}
+
+/**** disabling Isotope CSS3 transitions ****/
+
+.isotope.no-transition,
+.isotope.no-transition .isotope-item,
+.isotope .isotope-item.no-transition {
+  -webkit-transition-duration: 0s;
+     -moz-transition-duration: 0s;
+      -ms-transition-duration: 0s;
+       -o-transition-duration: 0s;
+          transition-duration: 0s;
+}
+
+
+
+/* ____________________ PARTIE CARTE _______________________ */
+/* _________________________________________________________ */
+
+
+#profil{
+	position:absolute;
+	right:0;
+	top:0;
+	background:#f4f3f0;
+	padding:45px 55px;
+	width:350px;
+}
+#profil section{
+	margin:0 0 45px 0;
+	clear:both;
+}
+#profil section h2{
+	text-transform: uppercase;
+	font-weight:normal;
+
+	font-size:1.1rem;
+	line-height:1rem;
+}
+#profil .infos figure{
+	margin:0 0 10px 0;
+}
+
+#profil .infos img{
+	display:block;
+	margin:0 auto 15px;
+	width:100px;height:100px;
+
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	border:solid 5px #97ce68;
+
+}
+#profil .infos figcaption,
+#profil .infos div:nth-of-type(1) span{
+	font-size:1.2em;
+	text-transform:uppercase;
+	text-align:center;
+	color:#97ce68;
+
+}
+#profil .infos > div:nth-of-type(1) span{
+	font-size:1.1em;
+	color:#2d394b;
+}
+#profil .infos > div:nth-of-type(1) span:first-child:after{
+	content:"·";
+	font-size:1.2em;
+	margin-left:5px;
+	vertical-align:text-bottom;
+}
+
+#profil .infos > div:nth-of-type(1){
+	text-align: center;
+	margin:10px 0;
+}
+
+#profil .infos > div:nth-of-type(2){
+	color:#828282;
+	margin:10px 0;
+}
+
+#profil .skills div{
+	clear:both;
+
+
+}
+
+#profil .skills li{
+	list-style:none;
+	float:left;
+	width:70px;
+	height:90px;
+	text-align:center;
+	text-transform:uppercase;
+	font-size:0.75rem;
+	margin-right:20px;
+	margin-top:5px;
+	margin-bottom:5px;
+	color:#828282;
+	display:block;
+}
+
+#profil .skills li:before{
+	content:'';
+	display:block;
+	width:60px;
+	height:60px;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	background:#858585;
+	border:solid 5px #97ce68;	
+	margin-bottom:5px;
+}
+
+#profil .skills li.active{
+	display:block;
+	
+}
+#profil.edition .skills li.active:hover:after{
+	content:'-';
+	font-size:3rem;
+	font-weight:bold;
+	color:#FFF;
+	position:absolute;
+	left:39%;
+	top:22%;
+	cursor:pointer;
+}
+#profil.edition .skills li:not(.active):before{
+	border:solid 5px #c5c4c2;
+}
+#profil.edition .skills li.active:hover:before,
+#profil.edition .skills li:not(.active):hover:before{
+	background:#94cb68;
+	border:solid 5px #c2c1bf;
+}
+#profil.edition .skills li:not(.active):after{
+	content:'+';
+	font-size:3rem;
+	font-weight:bold;
+	color:#FFF;
+	position:absolute;
+	left:30%;
+	top:26%;
+	cursor:pointer;
+}
+#profil.edition .skills li:not(.active):hover:after{
+
+}
