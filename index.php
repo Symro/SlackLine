@@ -5,43 +5,27 @@
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <meta charset="utf-8">
         <style type="text/css" src="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"></style>
-        <style type="text/css">
-            html { height: 100% }
-            body { height: 100%; margin: 0; padding: 0 }
-            #map-canvas { height: 100% }
-            label, input { display:block; }
-            input.text { margin-bottom:12px; width:95%; padding: .4em; }
-            fieldset { padding:0; border:0; margin-top:25px;}
-            form{background: #fff;}
-            h1 { font-size: 1.2em; margin: .6em 0; }
-            div#users-contain { width: 350px; margin: 20px 0; }
-            div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
-            div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
-            .ui-dialog .ui-state-error { padding: .3em; }
-            .validateTips { border: 1px solid transparent; padding: 0.3em; }
-        </style>
-
+        <link rel="stylesheet" href="mapstyle.css">
         <?php 
             // Connexion avec la BDD
             $bdd=new PDO('mysql:host=localhost;dbname=parislack','root','');
             // Obtenir la liste des points
-            $result=$bdd->query('SELECT latitude,longitude FROM spots ORDER BY id');
+            $result=$bdd->query('SELECT latitude,longitude,titre,description,adresse,materiel,note,categorie FROM spots');
             // On récupère la liste des markers dans un tableau
-            $listMarkers='';
-            while ($row=$result->fetch()) {
-                if ($listMarkers!='')$listMarkers.=','; //separation de la longitude et latitude par une virgule
-                $listMarkers.='['.$row['latitude'].','.$row['longitude'].']';
-            }
+            $markers=json_encode($result->fetchAll(PDO::FETCH_ASSOC));
             // Fermeture de la connexion
             $result->closeCursor();
+            // On crée un fichier JSON
+            $createJson=fopen("markers.json", 'w+');
+            // On écrit dans le fichier JSON les markers enregistrés dans la BDD
+            fputs($createJson,$markers);
         ?>
-
     </head>
 
-    <body onload="initialize()">
-        <button onclick="trouve()">Me localiser</button>
+    <body>
+        <button id="maPosition">Me localiser</button>
         <div id="answer">Reponse AJAXs :</div>
-        <div id="map-canvas">
+        <div id="map">
         </div>
 
         <div id="dialog-form" title="Ajouter un spot">
@@ -61,140 +45,7 @@
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script type="text/javascript"src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
         <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBoOm_lPvUSlokpQ8XHfSrGUJOm6vNxLjg&sensor=true"></script>
-        <script language="JavaScript" type="text/javascript">
-            var map;
-            var pos;
-            $("#dialog-form").hide();
-
-            // Icone perso
-                var iconePerso=new google.maps.MarkerImage("icons/locationNonOccupe.svg",
-                    // Dimensions
-                    new google.maps.Size(74,102),
-                    // Origin
-                    new google.maps.Point(0,0),
-                    // Encre
-                    new google.maps.Point(49.5,75 )
-                );
-
-            function initialize() {
-                // On défini le niveau de zoom, ainsi que la position ou la map sera centrée puis son type
-                var mapOptions = {
-                    zoom: 13,
-                    center: new google.maps.LatLng(48.856614, 2.352221),
-                    mapTypeId: google.maps.MapTypeId.ROADMAP
-                };
-                // Initialisation de la map
-                map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
-
-                
-
-                // Preparation du geocoding
-                geocoder = new google.maps.Geocoder();
-
-                // Listener pour l'ajout d'un marker au clic droit
-                google.maps.event.addListener(map, 'rightclick',function(event){
-                    placeMarker(event.latLng,map);
-                    $( "#dialog-form" ).dialog( "open" );
-                });
-
-                // On charge les markers de la BDD sur la carte
-                var list_markers=[ <?php echo $listMarkers; ?> ];
-                var i=0;
-                li=list_markers.length;
-                while(i<li){
-                    new google.maps.Marker({
-                    position:new google.maps.LatLng(list_markers[i][0],list_markers[i][1]),
-                        icon:iconePerso,
-                        map:map,
-                        infoWindowIndex:i, 
-                        title:'Marker '+i
-                    });
-                    i++;
-                }
-
-                // Ecouteur pour afficher les informations d'un marker
-                google.maps.event.addListener(marker,'click',function(data){
-                    infowindow.setContent('position :'+data.latLng.toUrlValue(5));
-                    infowindow.open(this.getMap(),this);
-                });
-
-                var infowindow=new google.maps.InfoWindow({
-                    content:content
-                });
-            }
-
-            // function pour placer un marker
-            function placeMarker(location,map){
-                // Récupération des coordonnées
-                var lat=location.lat();
-                var lng=location.lng();
-                console.log('latitude du marker : '+lat);
-                console.log('longitude du marker : '+lng);
-
-
-                $("#dialog-form").dialog({
-                autoOpen:false,
-                height:300,
-                width:350,
-                modal:true,
-                buttons:{
-                    "Ajouter le spot":function(){
-                        var titre=$('#name').val();
-                        var description=$("input[name='description']").val();
-                        // Appel Ajax pour insertion dans la BDD
-                        var sendAjax=$.ajax({
-                            url: 'insert.php',
-                            type: 'POST',
-                            data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description,
-                            success:handleResponse
-                        })
-                        function handleResponse(){
-                            $('#answer').get(0).innerHTML=sendAjax.responseText;
-                        }
-                        var marker=new google.maps.Marker({
-                            icon:iconePerso,
-                            position:location,
-                            map:map
-                        });
-                        $(this).dialog("close");
-                        map.panTo(location);            
-                        },
-                        Cancel:function(){
-                            $(this).dialog("close");
-                        }
-                },
-                close:function(){
-                    // allFields.val("").removeClass('ui-state-error');
-                    $(this).dialog("close");
-                }
-            });
-            }
-
-            
-
-            // Function de geolocalisation
-            function trouve(){
-              // Si le navigateur autorise la geoloc
-              if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function(position){
-                    // On récupère la position
-                    pos=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
-                    console.log(pos);
-                    map.setCenter(pos);
-                    map.setZoom(15);
-                    // On place un marker sur l'endroit géolocalisé
-                    pos=new google.maps.Marker({
-                        position:pos,
-                        id:position,
-                        map:map,
-                        animation:google.maps.Animation.BOUNCE,
-                        title:"Vous êtes ici"
-                    });
-                });
-              }
-            }
-
-        </script>
-        
+        <script type="text/javascript" src="mapoo.js"></script>      
+        <script type="text/javascript" src="mapuser.js"></script>      
     </body>
 </html>
