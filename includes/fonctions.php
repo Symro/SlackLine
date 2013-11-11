@@ -13,4 +13,18 @@ if(isset($_GET['logout'])){
     }
 }
 
+
+// Fonction de recheche de valeur dans un array d'array
+function deep_in_array($needle, $haystack) {
+    if(in_array($needle, $haystack)) {
+        return true;
+    }
+    foreach($haystack as $element) {
+        if(is_array($element) && deep_in_array($needle, $element))
+            return true;
+    }
+    return false;
+}
+
+
 ?>

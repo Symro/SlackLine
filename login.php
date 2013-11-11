@@ -37,7 +37,8 @@ if(isset($_POST['login'])){
             $form_error['email'] = "Veuillez renseigner votre email";  
       }
       else{  
-            $email =  mysql_real_escape_string(strtolower($_POST['email']));
+            //$email =  mysql_real_escape_string(strtolower($_POST['email']));
+            $email =  strtolower($_POST['email']);
       }
 
 
@@ -45,7 +46,8 @@ if(isset($_POST['login'])){
             $form_error['password'] = "Veuillez renseigner votre password";  
       }
       else{  
-            $password =  mysql_real_escape_string($_POST['password']);
+            ///$password =  mysql_real_escape_string($_POST['password']);
+            $password =  $_POST['password'];
       }
 
 

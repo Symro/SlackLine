@@ -22,7 +22,8 @@ if(isset($_POST['submit'])){
 
     else{   
 
-        $email = mysql_real_escape_string($_POST['email']);
+        //$email = mysql_real_escape_string($_POST['email']);
+        $email = $_POST['email'];
 
         // Vérification de la présence du compte dans la BDD
         $selectEmail = $PDO->prepare("SELECT email FROM utilisateurs WHERE email = :email ");
@@ -36,15 +37,18 @@ if(isset($_POST['submit'])){
 
 
                 if (    !isset($_POST["lastname"]) || empty($_POST["lastname"]) ){  $form_error['lastname'] = "Veuillez renseigner votre nom";  }
-                else{   $lastname =  mysql_real_escape_string($_POST['lastname']);}
+                //else{   $lastname =  mysql_real_escape_string($_POST['lastname']);}
+                else{   $lastname =  $_POST['lastname'];}
 
                 if (    !isset($_POST["firstname"]) || empty($_POST["firstname"]) ){$form_error['firstname'] = "Veuillez renseigner votre prénom";}
-                else{   $firstname =  mysql_real_escape_string($_POST['firstname']);}
+                //else{   $firstname =  mysql_real_escape_string($_POST['firstname']);}
+                else{   $firstname =  $_POST['firstname'];}
 
                 if (!isset($_POST["email"]) || empty($_POST["email"]) ){    $form_error['email'] = "Veuillez renseigner votre email";}
                 else{
                     if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-                        $email =  mysql_real_escape_string($_POST['email']);
+                        //$email =  mysql_real_escape_string($_POST['email']);
+                        $email =  $_POST['email'];
                     }
                     else{
                         $form_error['email'] = "Email invalide";
@@ -56,7 +60,8 @@ if(isset($_POST['submit'])){
 
                 if (    !isset($_POST["birthday"]) || empty($_POST["birthday"]) ){$form_error['birthday'] = "Veuillez renseigner votre date de naissance";}
                 else{   
-                        $birthday =  mysql_real_escape_string($_POST['birthday']);
+                        //$birthday =  mysql_real_escape_string($_POST['birthday']);
+                        $birthday =  $_POST['birthday'];
 
                         // Conversion du format facebook (02/19/1988) au format SQL Date (1988-02-19)
                         $birthdayDate   = DateTime::createFromFormat('d/m/Y', $_POST['birthday']);

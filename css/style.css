@@ -65,9 +65,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	/*
 	width:100%;
 	margin-bottom: 18px;
+	padding: 8px 12px;
 	*/
 	line-height: 20px;
-	padding: 8px 12px;
 	vertical-align: middle;
 }
 
@@ -184,6 +184,9 @@ button:hover{
 	background-image: -moz-linear-gradient(to top, #8bc052, #6da546);
 	background-image: -o-linear-gradient(to top, #8bc052, #6da546);
 	background-image: linear-gradient(to top, #8bc052, #6da546);
+}
+.btn:hover{
+	background-position:inherit;
 }
 
 
@@ -547,17 +550,19 @@ div>input[type='checkbox']{
 	width:350px;
 }
 #profil section{
+	position:relative;
 	margin:0 0 45px 0;
 	clear:both;
 }
 #profil section h2{
 	text-transform: uppercase;
 	font-weight:normal;
-
 	font-size:1.1rem;
 	line-height:1rem;
+	margin-bottom:16px;
 }
 #profil .infos figure{
+	position:relative;
 	margin:0 0 10px 0;
 }
 
@@ -665,6 +670,128 @@ div>input[type='checkbox']{
 	top:26%;
 	cursor:pointer;
 }
-#profil.edition .skills li:not(.active):hover:after{
+#profil.edition .infos img{
+	cursor:pointer;
+}
+#profil .editable-input textarea{
+	height:auto;
+}
+#profil .loader{
+	border:none;
+	border-radius:none;
+	margin:0 auto 5px;
+}
+.loader{
+	display:block;
+	background:url('../img/loading.gif');
+	width:16px;
+	height:16px;
+}
 
+
+
+/* Profil Recherche */
+
+#resultSpots,
+#resultUsers{
+	background:#FFF;
+	border:solid 1px #cdcdcd;
+	border-radius:4px;
+
+	height:185px;
+	overflow:auto;
+}
+#resultSpots .show,
+#resultUsers .show{
+	display:block; 
+	width:100%;
+	padding:5px 10px;
+	border-bottom:solid 1px #e1e1e1;
+	overflow:auto;
+	/*min-height:50px; Bug SlideUp() jquery */
+}
+#resultSpots .show:last-child,
+#resultUsers .show:last-child{
+	border-bottom:none;
+}
+#resultSpots .show:hover,
+.btn-search:hover{
+	background:rgba(166, 165, 163,0.15);
+}
+#resultUsers .show span{
+	display:inline-block;
+}
+#resultUsers .show span:nth-of-type(1){
+	margin-top:4px;
+}
+#resultUsers img{
+	width:50px;
+	height:50px;
+	border-radius:50%;
+	border:solid 3px #cac9c8;
+	float:left;
+	margin-right:10px;
+}
+
+.btn-search,
+.btn-search:hover{
+	width:40px;
+	height:32px;
+	background:#a6a5a3 url('../img/loupe.svg') 6px 1px no-repeat;
+	background-size: 32px 32px;
+	padding:0;
+	margin:0;
+	text-indent:-9999px;
+	box-shadow:none;
+	-webkit-transition:background-color 200ms linear;
+	-moz-transition:background-color 200ms linear;
+	transition:background-color 200ms linear;
+
+}
+.btn-search:hover{
+	background-color:#878787;
+	background-size: 32px 32px;
+}
+input[id^='search'] + .btn-search{
+	position:absolute;
+	right:0px;
+	top:32px;
+	border-radius:0px 4px 4px 0;
+	border:none;
+}
+input[id^='search']{
+	width:100% !important;
+}
+
+
+button.addFavSpot,
+button.removeFavSpot,
+button.addFavSlacker,
+button.removeFavSlacker{
+	float:right;
+	width:40px;
+	height:32px;
+	background:#fff url('../img/addFavSpot.svg') 6px -2px no-repeat;
+	background-size: 32px 32px;
+	padding:0;
+	margin:3px 0 0 0;
+	text-indent:-9999px;
+	box-shadow:none;
+	border:none;
+	-webkit-transition:background-color 200ms linear;
+	-moz-transition:background-color 200ms linear;
+	transition:background-color 200ms linear;
+
+}
+button.removeFavSpot{
+	background:transparent url('../img/removeFavSpot.svg') 6px -2px no-repeat;
+	background-size: 32px 32px;
+}
+button.addFavSlacker{
+	background:transparent url('../img/addFavSlacker.svg') 6px -2px no-repeat;
+	background-size: 32px 32px;
+}
+button.removeFavSlacker{
+	background:transparent url('../img/removeFavSlacker.svg') 6px -2px no-repeat;
+	background-size: 32px 32px;
 }

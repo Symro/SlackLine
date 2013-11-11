@@ -27,12 +27,6 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	?>
 
 
-	<button id="spotsLists"> Lister les spots </button>
-
-
-
-
-
 	<button id="getProfil"> Mon profil </button>
 
 	<a href="#" id="logout">Déconnexion</a>
@@ -58,6 +52,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 		<section class="infos">
 			<figure>
 				<img src="upload/default.jpg" alt="Photo de profil" />
+				<div></div>
 				<figcaption>
 					
 				</figcaption>
@@ -71,11 +66,10 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 			<button id="editProfil" class=" " >Modifier mon profil</button>
 
 			<div align="center" class="editProfilImage hidden">
-				<form action="processupload.php" method="post" enctype="multipart/form-data" id="UploadForm">
+				<form action="processupload.php" method="post" enctype="multipart/form-data" id="uploadForm">
 					<input name="ImageFile" type="file" />
-					<input type="submit"  id="SubmitButton" value="Upload" />
+					<input type="submit"  id="submitButton" value="Upload" />
 				</form>
-				<div id="output"></div>
 			</div>
 
 		</section>
@@ -95,21 +89,18 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 		<section class="spotsFav">
 			<h2><strong>Spots</strong> favoris</h2>
-			<input type="text" class="searchSpot" id="searchSpot" placeholder="Search for spots" />&nbsp; &nbsp; Ex: <b><i>Ourcq, Parc</i></b><br />
+			<input type="text" class="searchSpot" id="searchSpot" placeholder="Rechercher des spots" />
+			<button type='button' class='btn-search'>Rechercher</button>
 			<div id="resultSpots"></div>
-
-			<button id="favoriteSpots"> Mes spots favoris </button>
 
 		</section>
 
 		<section class="slackersFav">
 			<h2><strong>Slackers</strong> favoris</h2>
 
-			<input type="text" class="searchUser" id="searchUser" placeholder="Search for people" />&nbsp; &nbsp; Ex: <b><i>Sylvain, Augustin</i></b><br />
+			<input type="text" class="searchUser" id="searchUser" placeholder="Rechercher des slackers" />
+			<button type='button' class='btn-search'>Rechercher</button>
 			<div id="resultUsers"></div>
-
-			<button id="favoriteSlackers"> Mes slackers favoris </button>
-
 		</section>
 
 

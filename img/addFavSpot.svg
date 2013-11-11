@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="100px"
+	 height="100px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve">
+<g id="SupprimerFav" display="none">
+	<g display="inline">
+		<path fill="none" stroke="#97CE68" stroke-width="3" stroke-miterlimit="10" d="M54.324,35.393c-4.743,0-8.97,2.185-11.871,5.586
+			c-2.927-3.401-7.155-5.586-11.897-5.586c-8.754,0-15.855,7.247-15.855,16.181c0,20.246,27.753,32.388,27.753,32.388
+			s27.753-12.142,27.753-32.388C70.206,42.64,63.105,35.393,54.324,35.393z"/>
+	</g>
+	<circle display="inline" fill="#97CE68" cx="69.859" cy="35.045" r="17.693"/>
+	
+		<text transform="matrix(1 0 0 1 64.3076 45.8003)" display="inline" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="41.63">-</text>
+</g>
+<g id="Calque_4">
+	<g>
+		<path fill="none" stroke="#A6A5A3" stroke-width="3" stroke-miterlimit="10" d="M53.233,35.393c-4.743,0-8.971,2.185-11.871,5.586
+			c-2.927-3.401-7.155-5.586-11.897-5.586c-8.754,0-15.855,7.247-15.855,16.181c0,20.246,27.753,32.388,27.753,32.388
+			s27.753-12.142,27.753-32.388C69.115,42.64,62.015,35.393,53.233,35.393z"/>
+	</g>
+	<circle fill="#97CE68" cx="69.859" cy="35.045" r="17.693"/>
+	<text transform="matrix(1 0 0 1 60.1396 43.8003)" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="34">+</text>
+	<rect x="69.296" y="34.542" fill="none" width="2.357" height="0"/>
+</g>
+<g id="Calque_3" display="none">
+	
+		<circle display="inline" fill="none" stroke="#97CE68" stroke-width="3" stroke-miterlimit="10" cx="48.314" cy="38.028" r="14.676"/>
+	<path display="inline" fill="none" stroke="#97CE68" stroke-width="3" stroke-miterlimit="10" d="M16.671,81.016
+		c0,0,2.125-28.312,31.645-28.312s30.567,28.312,30.567,28.312s0.349,5.94-3.495,5.94s-54.523,0-54.523,0
+		S15.569,86.593,16.671,81.016z"/>
+	<circle display="inline" fill="#97CE68" cx="67.859" cy="25.045" r="17.693"/>
+	
+		<text transform="matrix(1 0 0 1 62.3076 35.8003)" display="inline" fill="#FFFFFF" font-family="'MyriadPro-Regular'" font-size="41.63">-</text>
+</g>
+</svg>

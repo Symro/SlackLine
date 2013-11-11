@@ -65,7 +65,7 @@ else{
 
 		try {
 
-			$reponse = $PDO->prepare('SELECT spots.titre, spots.description, spots.categorie, spots.note
+			$reponse = $PDO->prepare('SELECT spots_favoris.id_spot, spots.titre, spots.description, spots.adresse, spots.categorie, spots.note
 				FROM spots_favoris
 				INNER JOIN spots
 				ON spots_favoris.id_spot = spots.id
@@ -147,7 +147,7 @@ else{
 				$donnees = $reponse->fetchAll(PDO::FETCH_ASSOC);
 
 				if (file_exists('../upload/'.$_SESSION['membre_id'].'.jpg')) {
-					$donnees[0]['picture'] = ROOTPATH.'upload/'.$_SESSION['membre_id'].'.jpg';
+					$donnees[0]['picture'] = ROOTPATH.'upload/'.$_SESSION['membre_id'].'.jpg?';
 				}
 				else{
 					$donnees[0]['picture'] = ROOTPATH.'upload/default.jpg';
@@ -178,7 +178,9 @@ else{
 	    $action = $_POST['action'];
 	    switch($action) {
 	        case 'addFavSlacker' 	: addFavSlacker(); break;
+	        case 'addFavSpot' 		: addFavSpot(); break;
 	        case 'removeFavSlacker' : removeFavSlacker(); break;
+	        case 'removeFavSpot' 	: removeFavSpot(); break;
 	        case 'editProfil' 		: editProfil(); break;
 	        case 'saveSkills' 		: saveSkills(); break;
 
@@ -219,12 +221,12 @@ else{
 		  		));
 		  		$requete->closeCursor();
 
-		  		echo json_encode(array("erreur" => false));
+		  		echo json_encode(array("erreur" => false, "id" => $idFavorite));
 
 			}
 
 			else{
-				echo json_encode(array("erreur" => true));
+				echo json_encode(array("erreur" => true ));
 			}
 
 			$reponse->closeCursor();
@@ -265,7 +267,7 @@ else{
 		  		));
 		  		$requete->closeCursor();
 
-		  		echo json_encode(array("erreur" => false, "removedId" => $idFavorite));
+		  		echo json_encode(array("erreur" => false, "id" => $idFavorite));
 			}
 
 			else{
@@ -276,6 +278,99 @@ else{
 
 		}
 	}
+
+	function addFavSpot(){
+		global $PDO;
+
+		$currentUserId = (int)$_SESSION['membre_id'];
+
+		if(isset($_POST['spotId']) && !empty($_POST['spotId'])){
+			$idFavorite = ((int)$_POST['spotId'] == 0 ) ? 0 : (int)$_POST['spotId'];
+		}
+		else{
+			echo json_encode(
+				array(
+					"erreur" => true,
+					"msg" => "Une erreur est survenue lors de l'ajout de données"
+			));
+		}
+
+		if($idFavorite != 0){
+
+			$reponse = $PDO->prepare('SELECT id_utilisateur, id_spot, note FROM spots_favoris WHERE id_utilisateur = :userId AND id_spot = :idFavorite');
+			$reponse->bindValue('userId', $currentUserId);
+			$reponse->bindValue('idFavorite', $idFavorite); 
+			$reponse->execute();
+
+			if ($reponse->fetchColumn() == 0) {
+
+				$requete = $PDO->prepare("INSERT INTO spots_favoris (id_utilisateur, id_spot) VALUES (:id_user, :id_favorite)");
+				$requete->execute(array(
+					':id_user' 		=> $_SESSION['membre_id'],
+					':id_favorite' 	=> $idFavorite
+		  		));
+		  		$requete->closeCursor();
+
+		  		echo json_encode(array("erreur" => false, "id" => $idFavorite));
+
+			}
+
+			else{
+				echo json_encode(array("erreur" => true));
+			}
+
+			$reponse->closeCursor();
+
+		}
+
+	}
+
+	function removeFavSpot(){
+		global $PDO;
+
+		$currentUserId = (int)$_SESSION['membre_id'];
+
+		if(isset($_POST['spotId']) && !empty($_POST['spotId'])){
+			$idFavorite = ((int)$_POST['spotId'] == 0 ) ? 0 : (int)$_POST['spotId'];
+		}
+		else{
+			echo json_encode(
+				array(
+					"erreur" => true,
+					"msg" => "Une erreur est survenue lors de la suppression de données"
+			));
+		}
+
+		if($idFavorite != 0){
+
+			$reponse = $PDO->prepare('SELECT id_utilisateur, id_spot FROM spots_favoris WHERE id_utilisateur = :userId AND id_spot = :idFavorite');
+			$reponse->bindValue('userId', $currentUserId);
+			$reponse->bindValue('idFavorite', $idFavorite); 
+			$reponse->execute();
+
+			if ($reponse->fetchColumn() > 0) {
+
+				$requete = $PDO->prepare("DELETE FROM spots_favoris WHERE id_utilisateur = :userId AND id_spot = :idFavorite");
+				$requete->execute(array(
+					':userId' 		=> $currentUserId,
+					':idFavorite' 	=> $idFavorite
+		  		));
+		  		$requete->closeCursor();
+
+		  		echo json_encode(array("erreur" => false, "id" => $idFavorite));
+			}
+
+			else{
+				echo json_encode(array("erreur" => true));
+			}
+
+			$reponse->closeCursor();
+
+		}
+
+	}
+
+
 
 	function editProfil(){
 

@@ -10,32 +10,47 @@ $( document ).ready(function() {
         yearRange: "-90:+0",
     });
 
-    $('#materiel').on('click', function(){
-        console.log($(this).is(':checked'));
+
+
+    $('body').on('click', '#profil.edition .infos img', function(){
+        console.log("clicked");
+        $('#uploadForm input[type=file]').trigger('click');
+
+    });
+    $('body').on('change', '#profil.edition input[type=file]', function(){
+        if($(this).length == 1){
+            $('#uploadForm #submitButton').trigger('click');
+        }
     });
 
-
-    $('#UploadForm').on('submit', function(e) {
+    $('#uploadForm').on('submit', function(e) {
         e.preventDefault();
-        $('#SubmitButton').attr('disabled', ''); // disable upload button
+        $('#submitButton').attr('disabled', ''); // disable upload button
         //show uploading message
-        $("#output").html('<div style="padding:10px"><img src="img/loading.gif" alt="Please Wait"/> <span>Uploading...</span></div>');
+        $("#profil figure img").after('<span class="loader"></span>');
         $(this).ajaxSubmit({
-            target: '#output',
             success:  afterSuccess //call function after success
         });
     });
 
     function afterSuccess(data)  { 
-        $('#UploadForm').resetForm();  // reset form
-        $('#SubmitButton').removeAttr('disabled'); //enable submit button
+        $('#uploadForm').resetForm();  // reset form
+        $('#submitButton').removeAttr('disabled'); //enable submit button
+        $('.loader').remove();
 
         if(data.erreur === true){
-            // appelle fonction affichage message d'erreur ?
+            // erreur 
+            var msg = '<p class="text-error">'+data.msg+'</p>';
+            $("#profil .infos img").after( msg );
         }
         else{
-            // appelle fonction affichage succès !
+            // succès !
+            $('.text-error').slideUp(1000 , function(){
+                $(this).remove();
+            });
 
+            d = new Date();
+            $("#profil .infos img").attr("src", siteUrl+"upload/"+id+".jpg?" );
         }
 
     } 
@@ -194,10 +209,14 @@ $( document ).ready(function() {
 
     // Afficher la liste des spots
 
+    /*
+    A SUPPRIMER
 
     $('#spotsLists').on('click', function(){
         request.actionGet( 'getSpotList', afficherSpots );
     });
+
+    */
     
     var afficherSpots = function(data){
 
@@ -225,22 +244,49 @@ $( document ).ready(function() {
     };
 
 
-    /* Afficher les Spots Favoris */
+    /* Afficher les Spots Favoris
 
     $('#favoriteSpots').on('click', function(){
 
-        request.actionGet('getFavSpots', afficherSpotsFavoris )
+        request.actionGet('getFavSpots', afficherSpotsFavoris );
 
     });
 
+     */
+
+
     var afficherSpotsFavoris = function(data){
+        $resultSpots = $('#resultSpots');
 
-        $.each(data, function( key, value ) {
+        if(data.length != 0){
+            
+            $resultSpots.empty();
 
-            $('body').append('Spot : '+value.titre+' Note : '+value.note+'<br/>');
-            console.log( "key : "+key+" value : "+value);
+            $.each(data, function( key, value ) {
 
-        });
+                //console.log( "key : "+key+" value : "+value);
+
+                var wrap    = $('<div>').addClass('show');
+                var button  = $('<button>').addClass('removeFavSpot animate').attr('data-id', value.id_spot).html('Supprimer des spots favoris');
+                var span1   = $('<span>').html( value.titre +" - ");
+                var span2   = $('<span>').html( value.adresse );
+
+                wrap.append( button, span1, span2 );
+                $resultSpots.append( wrap );
+
+            });
+            
+            $resultSpots.mCustomScrollbar({
+                advanced:{
+                    updateOnContentResize: true
+                }
+            });
+        }
+
+        else{
+            var msg = $('<div>').addClass('show').html('Vous n\'avez aucun spot en favoris');
+            $resultSpots.empty().append( msg );
+        }
     };
 
     /* Afficher les Slackers Favoris */
@@ -253,6 +299,45 @@ $( document ).ready(function() {
 
     var afficherSlackersFavoris = function(data){
 
+        $resultSlackers = $('#resultUsers');
+
+        if(data.length != 0){
+            
+            $resultSlackers.empty();
+
+            $.each(data, function( key, value ) {
+
+                var photo_default = siteUrl+'upload/default.jpg';
+                var photo   =  $('<img>').attr('src', siteUrl+'upload/'+value.id+'.jpg');
+                photo.error(function(){
+                    $(this).attr('src', photo_default);
+                });
+
+                var wrap    = $('<div>').addClass('show');
+                var button  = $('<button>').addClass('removeFavSlacker animate').attr('data-id', value.id).html('Supprimer des slackers favoris');
+                var span1   = $('<span>').html( value.prenom + " "+ value.nom.substring(0,1) + "." );
+                var span2   = $('<span>').html( value.niveau );
+
+                wrap.append( button, photo , span1, span2 );
+                $resultSlackers.append( wrap );
+
+
+
+            });
+
+            $resultSlackers.mCustomScrollbar({
+                advanced:{
+                    updateOnContentResize: true
+                }
+            });
+        }
+
+        else{
+            var msg = $('<div>').addClass('show').html('Vous n\'avez aucun slackers en favoris');
+            $resultSlackers.empty().append( msg );
+        }
+        /*
+
         if(data.length == 0){
             $('body').append('Aucun slackers en favoris <br/>');
         }
@@ -264,6 +349,7 @@ $( document ).ready(function() {
             //console.log( "key : "+key+" value : "+value);
 
         });
+        */
     };
 
 
@@ -281,10 +367,13 @@ $( document ).ready(function() {
                 cache: false,
                 success: function(data) {
                     $("#resultUsers").html(data).show();
+                    $('#resultUsers').mCustomScrollbar();
                 }
             });
         }
-        return false;    
+        else{
+            request.actionGet('getFavSlackers', afficherSlackersFavoris );
+        }   
     });
 
     $("#resultUsers").on("click",function(e){ 
@@ -321,10 +410,14 @@ $( document ).ready(function() {
                 cache: false,
                 success: function(data) {
                     $("#resultSpots").html(data).show();
+                    $('#resultSpots').mCustomScrollbar();
                 }
             });
         }
-        return false;    
+        else{
+            request.actionGet('getFavSpots', afficherSpotsFavoris );
+        }
+
     });
 
     $("#resultSpots").on("click",function(e){ 
@@ -358,31 +451,47 @@ $( document ).ready(function() {
     $('body').on('click', '.removeFavSlacker', function(){
 
         params = {action: 'removeFavSlacker' , userId: $(this).data('id')};
-        request.actionPost ( params , slackerRemoved );
+        request.actionPost ( params , afficherSlackers );
 
     });
 
     $('body').on('click', '.addFavSlacker', function(){
 
         params = {action: 'addFavSlacker' , userId: $(this).data('id')};
-        request.actionPost ( params );
+        request.actionPost ( params , afficherSlackers);
     });
 	
+    var afficherSlackers = function(data){
 
-    var slackerRemoved = function(data){
+        var res = $('#resultUsers button');
 
-        console.log(data);
-
-        if( data.erreur === false){
-            console.log("Data  : "+data);
-            //$('.removeFavSlacker[data-id="'+data.removedId+'"]').hide('slow');
+        if(res.hasClass('animate')){
+            res.filter('[data-id='+data.id+']').parents('.show').slideUp(600, function(){
+                $(this).remove();
+                if($('#resultUsers').is(':empty')){
+                    request.actionGet ( 'getFavSlackers', afficherSlackersFavoris );
+                }
+            });
         }
-
-        if(data.length == 0){
-            $('body').append('Aucun slackers en favoris <br/>');
+        else{
+            res.filter('[data-id='+data.id+']').toggleClass('addFavSlacker removeFavSlacker');
         }
+        
+    }
 
-    };
+    function getAge(dateString) {
+      var today = new Date();
+      var birthDate = new Date(dateString);
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      return age;
+    }
+
+
+
 
     $('body').on('click', '#getProfil' , function(){
 
@@ -413,9 +522,9 @@ $( document ).ready(function() {
 
             $('#profil .infos img').attr('src', data[0].picture);
             $('#profil .infos figcaption').text( data[0].nom + " " + data[0].prenom );
-            $('#profil .infos span:nth-of-type(1)').text ( data[0].date_naissance ).data('value',data[0].date_naissance);
+            $('#profil .infos span:nth-of-type(1)').text ( getAge(data[0].date_naissance)+" ANS" ).data('value',data[0].date_naissance);
             $('#profil .infos span:nth-of-type(2)').text ( data[0].niveau ).data('value', data[0].niveau );
-            $('#profil .infos div:nth-of-type(2)').text( data[0].description ).data('value', data[0].description );
+            $('#profil .infos div:nth-of-type(2)').html( data[0].description ).data('value', data[0].description );
 
             // Boucle sur les catégories pratiquées
 
@@ -460,38 +569,21 @@ $( document ).ready(function() {
 
     });
 
-
-    var afficherSkills = function(data){
-
-        if(data.erreur === false){
-            $('.skills > div').isotope({ filter: '.active' });
-            //$('body').off('click', 'input[name="editSkills"]');
-            $('input[name=editSkills]').toggleClass('hidden');
-            $('#profil').toggleClass('edition');
-        }
-
-    }
+    $('body').on('click', '#profil.edition .skill', function(){
+        $(this).toggleClass('active');
+    })
 
 
-
-
-    var edit = function(){
+    var edition = function(){
 
         console.log('enabled');
         $('#profil').toggleClass('edition');
         $('#profil .editable').editable('enable');
 
-        $('.editProfilImage, input[name=editSkills]').toggleClass('hidden');
+        $('input[name=editSkills]').toggleClass('hidden');
 
         // on affiche toutes les catégories pratiquées
         $('.skills > div').isotope({ filter: '*' });
-
-        $('#profil.edition').on('click', '.skill', function(){
-            console.log('click');
-            $(this).toggleClass('active');
-        })
-
-
 
         $('#profil .infos span:nth-of-type(1)').editable({
             name: 'date_naissance',
@@ -504,7 +596,11 @@ $( document ).ready(function() {
                 minYear: 1920,
                 maxYear: 2013,
                 minuteStep: 1
-            }
+            },
+            display: function(value) {
+                $(this).text(getAge(value)+" ANS");
+            } 
+
         });
 
 
@@ -542,21 +638,26 @@ $( document ).ready(function() {
         });
 
     }
+    // Désactive l'édition du profil
+    var editionCompleted = function(){
 
-    // Appelle la fonction d'édition du profil
-    $('body').on('click', '#editProfil',  edit );
-
-    // Désactive la possibilité de modifier les champs
-    $('body').on('click', '#disableEditProfil',  function(){
+        $('#profil').toggleClass('edition');
         $('#profil .editable').editable('disable');
+        $('input[name=editSkills]').toggleClass('hidden');
+        $('.skills > div').isotope({ filter: '.active' });
 
+    }
 
+    // Appelle les fonctions d'édition du profil
+    $('body').on('click', '#editProfil',  function(){
+        if($('#profil').hasClass('edition')){
+            editionCompleted();
+        }
+        else{
+            edition();
+        }
     });
 
-    // 
-    $('body').on('click', '#profil .infos img',  function(){
-
-    });
 
     // Enregistrer les catégories pratiquées
     $('body').on('click', 'input[name="editSkills"]', function(){
@@ -570,8 +671,56 @@ $( document ).ready(function() {
         request.actionPost ( params , afficherSkills );
     })
 
-	
+
+
+    var afficherSkills = function(data){
+
+        if(data.erreur == false){
+            editionCompleted();
+        }
+
+    }
+
+	// REQUETES GET DE BASE - AFFICHAGE PROFIL 
     request.actionGet ( 'getUserProfil' , afficherProfil);
+    request.actionGet ( 'getFavSpots', afficherSpotsFavoris );
+    request.actionGet ( 'getFavSlackers', afficherSlackersFavoris );
+
+
+    /* AJOUTER / SUPPRIMER SPOTS DES FAVORIS */
+
+    $('body').on('click', '.addFavSpot', function(){
+
+        params = {action: 'addFavSpot' , spotId: $(this).data('id')};
+        request.actionPost ( params , afficherSpots);
+
+    });
+
+    $('body').on('click', '.removeFavSpot', function(){
+
+        params = {action: 'removeFavSpot' , spotId: $(this).data('id')};
+        request.actionPost ( params , afficherSpots);
+
+    });
+
+    var afficherSpots = function(data){
+
+        var res = $('#resultSpots button');
+
+        if(res.hasClass('animate')){
+            res.filter('[data-id='+data.id+']').parents('.show').slideUp(600, function(){
+                $(this).remove();
+                if($('#resultSpots').is(':empty')){
+                    request.actionGet ( 'getFavSpots', afficherSpotsFavoris );
+                }
+            });
+        }
+        else{
+            res.filter('[data-id='+data.id+']').toggleClass('addFavSpot removeFavSpot');
+        }
+        
+
+    }
 
 
 

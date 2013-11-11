@@ -5,8 +5,8 @@ header('Content-type: text/html; charset=utf-8');
 include('includes/config.php'); 
 
 
-// ini_set('display_errors', 1);
-// error_reporting(E_ALL);
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 
 if(isset($_SESSION['membre_logged_in'])){
 	if(isset($_POST))
@@ -25,9 +25,6 @@ if(isset($_SESSION['membre_logged_in'])){
 				die('Something went wrong with Upload!'); // output error when above checks fail.
 		}
 		
-		// Random number for both file, will be added after image name
-		$RandomNumber 	= rand(0, 9999999999); 
-
 		// Elements (values) of $_FILES['ImageFile'] array
 		//let's access these values by using their index position
 		$ImageName 		= str_replace(' ','-',strtolower($_FILES['ImageFile']['name'])); 
@@ -137,12 +134,12 @@ function resizeImage($CurWidth,$CurHeight,$MaxSize,$DestFolder,$SrcImage,$Qualit
 	{
 		switch(strtolower($ImageType))
 		{
-			case 'image/png':
+			/*case 'image/png':
 				imagepng($NewCanves,$DestFolder);
 				break;
 			case 'image/gif':
 				imagegif($NewCanves,$DestFolder);
-				break;			
+				break;		*/	
 			case 'image/jpeg':
 			case 'image/pjpeg':
 				imagejpeg($NewCanves,$DestFolder,$Quality);
@@ -184,12 +181,12 @@ function cropImage($CurWidth,$CurHeight,$iSize,$DestFolder,$SrcImage,$Quality,$I
 	{
 		switch(strtolower($ImageType))
 		{
-			case 'image/png':
+			/*case 'image/png':
 				imagepng($NewCanves,$DestFolder);
 				break;
 			case 'image/gif':
 				imagegif($NewCanves,$DestFolder);
-				break;			
+				break;			*/
 			case 'image/jpeg':
 			case 'image/pjpeg':
 				imagejpeg($NewCanves,$DestFolder,$Quality);

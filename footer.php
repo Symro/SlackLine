@@ -9,6 +9,7 @@
 		    jQuery(function($){ $.datepicker.setDefaults($.datepicker.regional['fr']); });
             
             var id = <?php echo $userId; ?>;
+            var siteUrl = "<?php echo ROOTPATH; ?>";
 		</script>
 
         <script type="text/javascript" src="js/bootstrap.min.js"></script>
@@ -16,6 +17,7 @@
         <script type="text/javascript" src="js/moment-with-langs.min.js"></script>
         <script type="text/javascript" src="js/jquery.form.js"></script>
         <script type="text/javascript" src="js/jquery.isotope.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>
         <?php if (isset($custom_class) && $custom_class == 'inscription'): ?>
         <script type="text/javascript" src="js/fb_connect.js"></script>
         <?php endif; ?>
