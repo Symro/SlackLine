@@ -24,7 +24,8 @@
 
     <body>
         <button id="maPosition">Me localiser</button>
-        <div id="answer">Reponse AJAXs :</div>
+        <div id="answer">
+        </div>
         <div id="map">
         </div>
 

@@ -22,8 +22,6 @@ function initialize() {
     // Initialisation de la map
     map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
 
-    
-
     // Preparation du geocoding
     geocoder = new google.maps.Geocoder();
 
@@ -105,8 +103,6 @@ function placeMarker(location,map){
         }
     });
 }
-
-
 
 // Function de geolocalisation
 function trouve(){
