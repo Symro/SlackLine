@@ -525,6 +525,8 @@ $( document ).ready(function() {
             $('#profil .infos span:nth-of-type(1)').text ( getAge(data[0].date_naissance)+" ANS" ).data('value',data[0].date_naissance);
             $('#profil .infos span:nth-of-type(2)').text ( data[0].niveau ).data('value', data[0].niveau );
             $('#profil .infos div:nth-of-type(2)').html( data[0].description ).data('value', data[0].description );
+            $('#profil .infos input[name=phone]').val( data[0].telephone ).data('value', data[0].telephone );
+            $('#profil .infos input[name=email]').val( data[0].email );
 
             // Boucle sur les catégories pratiquées
 
@@ -585,6 +587,8 @@ $( document ).ready(function() {
         // on affiche toutes les catégories pratiquées
         $('.skills > div').isotope({ filter: '*' });
 
+        $('#profil .infos input[type=tel]').prop('disabled',false).prop('readonly', true);
+
         $('#profil .infos span:nth-of-type(1)').editable({
             name: 'date_naissance',
             type: 'combodate',
@@ -630,6 +634,17 @@ $( document ).ready(function() {
 
         });
 
+        $('#profil .infos > input[type=tel]').editable({
+            name : 'telephone',
+            url: './includes/actions.php',
+            type: 'text',
+            success: function(data) {
+                $(this).val(data.value).attr('value', data.value );
+            }
+
+
+        });
+
         $('#profil p:nth-child(9) span:nth-child(2)').editable({
             name: 'telephone',
             url: './includes/actions.php',
@@ -645,6 +660,7 @@ $( document ).ready(function() {
         $('#profil .editable').editable('disable');
         $('input[name=editSkills]').toggleClass('hidden');
         $('.skills > div').isotope({ filter: '.active' });
+        $('#profil .infos input[type=tel]').prop('disabled',true).prop('readonly', false);
 
     }
 

@@ -62,8 +62,13 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 				<span></span>
 			</div>
 			<div></div>
+			<label for="phone">Téléphone :</label>
+			<input type="tel" name="phone" id="phone" class="uneditable" placeholder="Téléphone" pattern='^[0-9]{10}$' disabled />
 
-			<button id="editProfil" class=" " >Modifier mon profil</button>
+			<label for="email">Email :</label>
+			<input type="email" name="email" id="email" class="uneditable" disabled />
+
+			<button id="editProfil" class="" >Modifier mon profil</button>
 
 			<div align="center" class="editProfilImage hidden">
 				<form action="processupload.php" method="post" enctype="multipart/form-data" id="uploadForm">
@@ -83,6 +88,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 				<li class="skill longline" data-type="longline">Longline</li>
 				<li class="skill highline" data-type="highline">Highline</li>
 				<li class="skill blindline" data-type="blindline">Blindline</li>
+				<li class="skill waterline" data-type="waterline">Waterline</li>
 			</div>
 			<input type="submit" name="editSkills" class="hidden" value="Enregistrer les modifications" />
 		</section>
