@@ -46,6 +46,9 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	<div id="affichageProfil" style="position:absolute; right:10%; top:10%;">
 
 	</div>
+	
+	<?php $img_profil = imageExists(); ?>
+	<img src="<?php if($img_profil){ echo $img_profil; } ?>" id="profilDisplay" alt="Accéder à mon profil"/>
 
 	<aside id="profil">
 
@@ -90,13 +93,13 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 				<li class="skill blindline" data-type="blindline">Blindline</li>
 				<li class="skill waterline" data-type="waterline">Waterline</li>
 			</div>
-			<input type="submit" name="editSkills" class="hidden" value="Enregistrer les modifications" />
+			<button name="editSkills" class="hidden">Enregistrer les modifications</button>
 		</section>
 
 		<section class="spotsFav">
 			<h2><strong>Spots</strong> favoris</h2>
 			<input type="text" class="searchSpot" id="searchSpot" placeholder="Rechercher des spots" />
-			<button type='button' class='btn-search'>Rechercher</button>
+			<label for="searchSpot" class='btn-search'/>Rechercher</label>
 			<div id="resultSpots"></div>
 
 		</section>
@@ -105,7 +108,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 			<h2><strong>Slackers</strong> favoris</h2>
 
 			<input type="text" class="searchUser" id="searchUser" placeholder="Rechercher des slackers" />
-			<button type='button' class='btn-search'>Rechercher</button>
+			<label for='searchUser' class='btn-search'>Rechercher</label>
 			<div id="resultUsers"></div>
 		</section>
 

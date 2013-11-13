@@ -5,8 +5,6 @@
         <script src="http://jquery-ui.googlecode.com/svn/tags/latest/ui/minified/i18n/jquery-ui-i18n.min.js" type="text/javascript"></script>
 		<script type="text/javascript">
             <?php $userId = (!empty($_SESSION['membre_id'])) ? $_SESSION['membre_id'] : 0 ?>
-
-		    jQuery(function($){ $.datepicker.setDefaults($.datepicker.regional['fr']); });
             
             var id = <?php echo $userId; ?>;
             var siteUrl = "<?php echo ROOTPATH; ?>";

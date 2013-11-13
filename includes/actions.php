@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-//header('Content-type: text/html; charset=utf-8');
 header('Content-type: application/json; charset=utf-8');
 include('config.php'); 
 
@@ -493,7 +492,7 @@ else{
 
 		if(isset($_POST['skills']) && !empty($_POST['skills'])){
 
-			$real_skills = array("shortline", "trickline", "jumpline", "longline", "highline", "blindline");
+			$real_skills = array("shortline", "trickline", "jumpline", "longline", "highline", "blindline", "waterline");
 			$skills = $_POST['skills'];
 			// On fait la différence entre les valeurs reçues par l'utilistaur et les 'vraies valeurs'
 			$difference = array_intersect($skills, $real_skills);

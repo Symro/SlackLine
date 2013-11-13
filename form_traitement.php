@@ -1,14 +1,5 @@
 <?php
 
-/*
-
-TODO : 
-- salage mdp
-- sécurité
-
-
-*/
-
 if(isset($_POST['submit'])){
 
     // initialise un tableau pour les éventuelles erreurs du formulaire
@@ -185,17 +176,7 @@ if(isset($_POST['submit'])){
                      echo $msg; 
 
                 }   
-
-                    
-           
-            // Affichage message d'erreur
-            /*
-            foreach ($form_error as $i => $value) {
-                echo $i . " => " .$value ." <br/> ";
-            }
-            */
-            
-            
+      
 
         }
 
@@ -209,82 +190,7 @@ if(isset($_POST['submit'])){
 }
 
 
-function isChecked($chkname,$value)
-{
-    if(!empty($_POST[$chkname]))
-    {
-        foreach($_POST[$chkname] as $chkval)
-        {
-            if($chkval == $value)
-            {
-                return true;
-            }
-        }
-    }
-    return false;
-}
 
 
-
-		/*
-
-		// Récupération des variables du formulaire 
-	    $lastname 		= mysql_escape_string($_POST['lastname']);
-	    $firstname 		= mysql_escape_string($_POST['firstname']);
-	    $email 			= mysql_escape_string($_POST['email']); 	
-	    $password 		= hash('sha256', $_POST['password']);
-
-
-	    // Conversion du format facebook (02/19/1988) au format SQL Date (1988-02-19)
-	    $birthdayDate 	= DateTime::createFromFormat('d/m/Y', $_POST['birthday']);
-	    $birthdayFormat = $birthdayDate->format('Y-m-d');
-
-	    $skill 			= mysql_escape_string($_POST['skill']); 
-	    $practice 		= mysql_escape_string($_POST['practice']); 
-	    $description 	= mysql_escape_string($_POST['description']); 
-	    $phone 			= int($_POST['phone']);
-
-	    */
-
-
-
-
-/*
-	$id_fb = intval($_POST['id_fb']);
-
-
-
-   	// Vérification de la présence du compte fb dans la BDD
-	$selectFbId = $PDO->query("SELECT id_fb FROM utilisateurs WHERE id_fb = $id_fb");
-	$selectFbId->execute();
-
-	if($selectFbId->rowCount() == 0){
-
-		$response = $PDO->prepare("INSERT INTO utilisateurs VALUES(NULL, :nom , :prenom , :email , :date_naissance, ':mdp'  , :niveau , '' , '', '', '') ") or die(print_r($PDO->errorInfo()));
-
-		$response->execute(
-			array(
-				'id_fb' 			=> $id_fb,
-				'nom' 				=> $_POST['last_name'],
-				'prenom' 			=> $_POST['first_name'],
-				'email' 			=> $_POST['email'],
-				'date_naissance' 	=> $birthdayFormat,
-				'mdp'				=> $_POST['password'],
-				'niveau'			=> $_POST['niveau'],
-				'genre' 			=> $_POST['gender']
-			)
-		);
-
-		echo json_encode( array( 'adding_data' => true , 'redirect_profile' => false ) );
-
-	}
-	else{
-
-		echo json_encode( array( 'adding_data' => false , 'redirect_profile' => false) );
-
-	}
-
-
-*/
 
 ?>

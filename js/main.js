@@ -57,8 +57,7 @@ $( document ).ready(function() {
 
 
 
-    //turn to inline mode
-    //$.fn.editable.defaults.mode = 'inline';
+    // Valeur par défaut pour X-Editable
     $.fn.editable.defaults.params = { action : "editProfil" };
     $.fn.editable.defaults.pk = id;
 
@@ -147,12 +146,10 @@ $( document ).ready(function() {
 
 	$( "#form-inscription" ).on( "submit", function( event ) {
 
-
-        var ajout_bdd = $.ajax({
+        $.ajax({
             type: "POST",
             dataType: 'JSON',
             url: "form_traitement.php",
-            //isLocal:true,
             data: {
                 first_name: info.first_name,
                 last_name: info.last_name,
@@ -162,15 +159,9 @@ $( document ).ready(function() {
             },
 
             success: function( data ){
-                // Redirection vers le profil
-                //if(data.redirect_profile){
-                //    document.location.href="edit_profile.php";
-                //}
                 console.log("return : "+data);
             }
 
-		//event.preventDefault();
-		//console.log( $( this ).serialize() );
 
 	   });
     });
@@ -207,53 +198,6 @@ $( document ).ready(function() {
         request.logout();
     });
 
-    // Afficher la liste des spots
-
-    /*
-    A SUPPRIMER
-
-    $('#spotsLists').on('click', function(){
-        request.actionGet( 'getSpotList', afficherSpots );
-    });
-
-    */
-    
-    var afficherSpots = function(data){
-
-        $.each(data, function( key, value ) {
-
-            console.log( "key : "+key+" value : "+value);
-
-            // value.id
-            // value.id_utilisateur
-            // value.latitude
-            // value.longitude
-            // value.titre
-            // value.description
-            // value.adresse
-            // value.materiel
-            // value.note
-            // value.categorie
-
-            // // Afficher toutes les datas
-            // $.each(this, function(k, v) {
-            //     $('body').append( k + " : " + v + " " );
-            // });
-
-        });
-    };
-
-
-    /* Afficher les Spots Favoris
-
-    $('#favoriteSpots').on('click', function(){
-
-        request.actionGet('getFavSpots', afficherSpotsFavoris );
-
-    });
-
-     */
-
 
     var afficherSpotsFavoris = function(data){
         $resultSpots = $('#resultSpots');
@@ -263,8 +207,6 @@ $( document ).ready(function() {
             $resultSpots.empty();
 
             $.each(data, function( key, value ) {
-
-                //console.log( "key : "+key+" value : "+value);
 
                 var wrap    = $('<div>').addClass('show');
                 var button  = $('<button>').addClass('removeFavSpot animate').attr('data-id', value.id_spot).html('Supprimer des spots favoris');
@@ -336,24 +278,11 @@ $( document ).ready(function() {
             var msg = $('<div>').addClass('show').html('Vous n\'avez aucun slackers en favoris');
             $resultSlackers.empty().append( msg );
         }
-        /*
 
-        if(data.length == 0){
-            $('body').append('Aucun slackers en favoris <br/>');
-        }
-
-        $.each(data, function( key, value ) {
-
-            $('body').append('- <button class="removeFavSlacker" data-id="'+value.id+'"> Supprimer des favoris </button> > '+value.prenom+' '+value.nom+' ----  Niveau : '+value.niveau+' <br/>');
-
-            //console.log( "key : "+key+" value : "+value);
-
-        });
-        */
     };
 
 
-    /* RECHERCHE + Affichage résultats */
+    /* Rrecherche + Affichage des résultats */
 
     $(".searchUser").keyup(function() { 
         var searchid = $(this).val();
@@ -382,13 +311,6 @@ $( document ).ready(function() {
         var decoded = $("<div/>").html($name).text();
         $('#searchUser').val(decoded);
     });
-
-    // $(document).on("click", function(e) { 
-    //     var $clicked = $(e.target);
-    //     if (! $clicked.hasClass("searchUser")){
-    //         $("#resultUsers").fadeOut(); 
-    //     }
-    // });
 
     $('#searchUser').click(function(){
         $("#resultUsers").fadeIn();
@@ -427,13 +349,6 @@ $( document ).ready(function() {
         $('#searchid').val(decoded);
     });
 
-    // $(document).on("click", function(e) { 
-    //     var $clicked = $(e.target);
-    //     if (! $clicked.hasClass("searchSpot")){
-    //         $("#resultSpots").fadeOut(); 
-    //     }
-    // });
-
     $('#searchid').click(function(){
         $("#resultSpots").fadeIn();
     });
@@ -468,7 +383,7 @@ $( document ).ready(function() {
         if(res.hasClass('animate')){
             res.filter('[data-id='+data.id+']').parents('.show').slideUp(600, function(){
                 $(this).remove();
-                if($('#resultUsers').is(':empty')){
+                if($('#resultUsers .mCSB_container').is(':empty')){
                     request.actionGet ( 'getFavSlackers', afficherSlackersFavoris );
                 }
             });
@@ -507,19 +422,6 @@ $( document ).ready(function() {
         }
         else{
 
-            /*var profil = "<img src="+data[0].picture+" alt=\"Picture\" />";
-            profil+= "<p><span> Nom :       </span><span>"+data[0].nom+"</span></p>";
-            profil+= "<p><span> Prénom :        </span><span>"+data[0].prenom+"</span></p>";
-            profil+= "<p><span> Email :         </span><span>"+data[0].email+"</span></p>";
-            profil+= "<p><span> Date naissance :</span><span data-value="+data[0].date_naissance+">"+data[0].date_naissance+"</span></p>";
-            profil+= "<p><span> Niveau :        </span><span>"+data[0].niveau+"</span></p>";
-            profil+= "<p><span> Technique :     </span><span>"+data[0].technique+"</span></p>";
-            profil+= "<p><span> Description :   </span><span>"+data[0].description+"</span></p>";
-            profil+= "<p><span> Matériel :      </span><span>"+data[0].materiel+"</span></p>";
-            profil+= "<label class=\"switch-button small\" for=\"material\"><input type=\"checkbox\" id=\"material\" name=\"material\" value="+data[0].materiel+"  ><span>Matériel<span>Non</span><span>Oui</span></span><a class=\"btn btn-primary\"></a></label>";
-            profil+= "<p><span> Téléphone :     </span><span>"+data[0].telephone+"</span></p>";
-            */
-
             $('#profil .infos img').attr('src', data[0].picture);
             $('#profil .infos figcaption').text( data[0].nom + " " + data[0].prenom );
             $('#profil .infos span:nth-of-type(1)').text ( getAge(data[0].date_naissance)+" ANS" ).data('value',data[0].date_naissance);
@@ -550,19 +452,15 @@ $( document ).ready(function() {
             }
 
             $('.skills > div').isotope({ filter: '.active' });
-            //$('#profil .skills div').html( skills );
 
-
-
-            $('#profil').append('<button id="disableEditProfil">Désactiver Modifs</button>');
 
             if(parseInt(data[0].materiel) == 1){
                 $('#material').prop('checked','checked');
             }
+
         }
 
     };
-
 
     $('.skills > div').isotope({
       // options
@@ -575,6 +473,10 @@ $( document ).ready(function() {
         $(this).toggleClass('active');
     })
 
+    $('body').on('click', '#profilDisplay' , function(){
+        $(this).fadeOut('slow');
+        $('#profil').fadeTo('slow',1);
+    })
 
     var edition = function(){
 
@@ -582,12 +484,13 @@ $( document ).ready(function() {
         $('#profil').toggleClass('edition');
         $('#profil .editable').editable('enable');
 
-        $('input[name=editSkills]').toggleClass('hidden');
+        $('button[name=editSkills]').toggleClass('hidden');
 
         // on affiche toutes les catégories pratiquées
         $('.skills > div').isotope({ filter: '*' });
 
         $('#profil .infos input[type=tel]').prop('disabled',false).prop('readonly', true);
+        $('#editProfil').text('Enregister les modifications');
 
         $('#profil .infos span:nth-of-type(1)').editable({
             name: 'date_naissance',
@@ -655,17 +558,27 @@ $( document ).ready(function() {
     }
     // Désactive l'édition du profil
     var editionCompleted = function(){
+        var skills = new Array();
+        // on récupère toutes les catégories de slackline actives
+        $(".skills .skill.active").each(function(i) {
+            skills[i] = $(this).data('type');
+        });
+
+        params = {action: 'saveSkills' , skills: skills };
+        request.actionPost ( params , afficherSkills );
 
         $('#profil').toggleClass('edition');
         $('#profil .editable').editable('disable');
-        $('input[name=editSkills]').toggleClass('hidden');
+        $('button[name=editSkills]').toggleClass('hidden');
         $('.skills > div').isotope({ filter: '.active' });
         $('#profil .infos input[type=tel]').prop('disabled',true).prop('readonly', false);
+        $('#editProfil').text('Modifier mon profil');
 
     }
 
     // Appelle les fonctions d'édition du profil
-    $('body').on('click', '#editProfil',  function(){
+    $('body').on('click', '#editProfil, button[name="editSkills"]',  function(){
+        $this = $(this);
         if($('#profil').hasClass('edition')){
             editionCompleted();
         }
@@ -675,26 +588,9 @@ $( document ).ready(function() {
     });
 
 
-    // Enregistrer les catégories pratiquées
-    $('body').on('click', 'input[name="editSkills"]', function(){
-        var skills = new Array();
-        // on récupère toutes les catégories de slackline actives
-        $(".skills .skill.active").each(function(i) {
-            skills[i] = $(this).data('type');
-        });
-
-        params = {action: 'saveSkills' , skills: skills };
-        request.actionPost ( params , afficherSkills );
-    })
-
-
 
     var afficherSkills = function(data){
-
-        if(data.erreur == false){
-            editionCompleted();
-        }
-
+        console.log("Modification Ok !");
     }
 
 	// REQUETES GET DE BASE - AFFICHAGE PROFIL 
@@ -726,7 +622,7 @@ $( document ).ready(function() {
         if(res.hasClass('animate')){
             res.filter('[data-id='+data.id+']').parents('.show').slideUp(600, function(){
                 $(this).remove();
-                if($('#resultSpots').is(':empty')){
+                if($('#resultSpots .mCSB_container').is(':empty')){
                     request.actionGet ( 'getFavSpots', afficherSpotsFavoris );
                 }
             });
@@ -737,6 +633,7 @@ $( document ).ready(function() {
         
 
     }
+
 
 
 

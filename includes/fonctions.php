@@ -1,7 +1,6 @@
 <?php
 
 // Déconnexion basique
-
 if(isset($_GET['logout'])){
 
     if(isset($_SESSION)){
@@ -22,6 +21,37 @@ function deep_in_array($needle, $haystack) {
     foreach($haystack as $element) {
         if(is_array($element) && deep_in_array($needle, $element))
             return true;
+    }
+    return false;
+}
+
+// Recherche si l'utilisateur a uploadé une image dans son profil
+function imageExists(){
+    if(isset($_SESSION['membre_id'])){
+        if (file_exists('./upload/'.$_SESSION['membre_id'].'.jpg')) {
+            return ROOTPATH.'upload/'.$_SESSION['membre_id'].'.jpg?';
+            }
+        else{
+            return ROOTPATH.'upload/default.jpg';
+        }
+    }
+    else{
+        return false;
+    }
+}
+
+// Regarde si une checkbox était cochée
+function isChecked($chkname,$value)
+{
+    if(!empty($_POST[$chkname]))
+    {
+        foreach($_POST[$chkname] as $chkval)
+        {
+            if($chkval == $value)
+            {
+                return true;
+            }
+        }
     }
     return false;
 }
