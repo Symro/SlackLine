@@ -3,6 +3,7 @@
 session_start();
 header('Content-type: application/json; charset=utf-8');
 include('config.php'); 
+include('fonctions.php'); 
 
 
 if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in']) && $_SESSION['membre_logged_in'] === true ){
@@ -108,10 +109,11 @@ else{
 	        ));
 
 			if( $reponse ) {
-				$donnees = $reponse->fetchAll(PDO::FETCH_ASSOC);
 
+				$donnees = $reponse->fetchAll(PDO::FETCH_ASSOC);
 				echo json_encode($donnees);
 				$reponse->closeCursor();
+
 			}
 			else{
 				echo json_encode(
@@ -505,13 +507,13 @@ else{
 			$reponse->execute();
 
 
-			echo json_encode(array("erreur" => false, 
-				"msg" => "Catégories pratiquées modifiées !",
-				"value" => $final_skills
+			echo json_encode(array(
+				"erreur" => false, 
+				"msg" => "Catégories pratiquées modifiées !"
 			));
 		}
 		else{
-			die( json_encode(array("erreur" => true, "msg" => "Aucune catégorie?" )));
+			die( json_encode(array("erreur" => true, "msg" => "Veuillez sélectionner au moins une catégorie :" )));
 		}
 
 

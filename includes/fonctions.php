@@ -26,11 +26,20 @@ function deep_in_array($needle, $haystack) {
 }
 
 // Recherche si l'utilisateur a uploadé une image dans son profil
-function imageExists(){
-    if(isset($_SESSION['membre_id'])){
+
+function imageExists($id = null){
+    if(isset($_SESSION['membre_id']) && $id == null){
         if (file_exists('./upload/'.$_SESSION['membre_id'].'.jpg')) {
             return ROOTPATH.'upload/'.$_SESSION['membre_id'].'.jpg?';
             }
+        else{
+            return ROOTPATH.'upload/default.jpg';
+        }
+    }
+    elseif( $id ){
+        if (file_exists('./upload/'.intval($id).'.jpg')) {
+            return ROOTPATH.'upload/'.intval($id).'.jpg?';
+        }
         else{
             return ROOTPATH.'upload/default.jpg';
         }

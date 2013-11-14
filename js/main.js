@@ -50,7 +50,7 @@ $( document ).ready(function() {
             });
 
             d = new Date();
-            $("#profil .infos img").attr("src", siteUrl+"upload/"+id+".jpg?" );
+            $("#profil .infos img").attr("src", siteUrl+"upload/"+id+".jpg?"+ new Date().getTime() );
         }
 
     } 
@@ -490,15 +490,17 @@ $( document ).ready(function() {
         $('.skills > div').isotope({ filter: '*' });
 
         $('#profil .infos input[type=tel]').prop('disabled',false).prop('readonly', true);
-        $('#editProfil').text('Enregister les modifications');
+        $('#editProfil').text('Enregistrer mes modifications');
 
         $('#profil .infos span:nth-of-type(1)').editable({
             name: 'date_naissance',
             type: 'combodate',
             url: './includes/actions.php',
+            title: 'Âge : ',
             format: 'YYYY-MM-DD',
             viewformat: 'DD/MM/YYYY',
             template: 'D / MM / YYYY',
+            inputclass: 'combodate',
             combodate: {
                 minYear: 1920,
                 maxYear: 2013,
@@ -532,6 +534,7 @@ $( document ).ready(function() {
         $('#profil .infos > div:nth-of-type(2)').editable({
             name : 'description',
             url: './includes/actions.php',
+            title: 'Description : ',
             type: 'textarea',
             rows : 5
 
@@ -540,6 +543,7 @@ $( document ).ready(function() {
         $('#profil .infos > input[type=tel]').editable({
             name : 'telephone',
             url: './includes/actions.php',
+            title: 'Téléphone : ',
             type: 'text',
             success: function(data) {
                 $(this).val(data.value).attr('value', data.value );
@@ -572,6 +576,7 @@ $( document ).ready(function() {
         $('button[name=editSkills]').toggleClass('hidden');
         $('.skills > div').isotope({ filter: '.active' });
         $('#profil .infos input[type=tel]').prop('disabled',true).prop('readonly', false);
+        $('.text-error').slideUp('slow', function(){$(this).remove();});
         $('#editProfil').text('Modifier mon profil');
 
     }
@@ -590,7 +595,11 @@ $( document ).ready(function() {
 
 
     var afficherSkills = function(data){
-        console.log("Modification Ok !");
+        if(data.erreur == true){
+            var msg = $('<p>').addClass('text-error').text( data.msg );
+            msg.insertBefore('.skills .isotope');
+            $('#editProfil').trigger('click');
+        }
     }
 
 	// REQUETES GET DE BASE - AFFICHAGE PROFIL 

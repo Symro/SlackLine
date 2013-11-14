@@ -67,6 +67,9 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	margin-bottom: 18px;
 	padding: 8px 12px;
 	*/
+	padding:3px 6px;
+	height:27px;
+
 	line-height: 20px;
 	vertical-align: middle;
 }
@@ -481,6 +484,7 @@ div>input[type='checkbox']{
 
 .editable-click, a.editable-click, a.editable-click:hover{
 	border-bottom: 1px dashed #629C42;
+	cursor:pointer;
 }
 
 /* ________ ISOTOPE ________ */
@@ -571,6 +575,7 @@ div>input[type='checkbox']{
 	clear:both;
 }
 #profil section h2{
+	color:#434a54;
 	text-transform: uppercase;
 	font-weight:normal;
 	font-size:1.1rem;
@@ -610,6 +615,10 @@ div>input[type='checkbox']{
 	margin-left:5px;
 	vertical-align:text-bottom;
 }
+#profil .infos > div:nth-of-type(1) span.combodate{
+	display:block;
+	width:210px;
+}
 
 #profil .infos > div:nth-of-type(1){
 	text-align: center;
@@ -617,7 +626,7 @@ div>input[type='checkbox']{
 }
 
 #profil .infos > div:nth-of-type(2){
-	color:#828282;
+	color:#585858;
 	margin:10px 0;
 	background:url('../img/editDescription.svg') no-repeat 0px 2px;
 	background-size:14px 14px;
@@ -663,7 +672,6 @@ div>input[type='checkbox']{
 	float:left;
 }
 
-
 #profil .uneditable{
 	transition:none;
 	background:none;
@@ -676,6 +684,8 @@ div>input[type='checkbox']{
 
 #profil .skills div{
 	clear:both;
+	width:180px;
+	margin:0 auto;
 }
 
 #profil .skills li{
@@ -733,6 +743,9 @@ div>input[type='checkbox']{
 	background:#94cb68;
 	border:solid 5px #c2c1bf;
 }
+#profil.edition .skills li.active:hover:before{
+	background:#CC6868;
+}
 #profil.edition .skills li:not(.active):after{
 	content:'+';
 	font-size:3rem;
@@ -788,6 +801,7 @@ div>input[type='checkbox']{
 	border-bottom:none;
 }
 #resultSpots .show:hover,
+#resultUsers .show:hover,
 .btn-search:hover{
 	background:rgba(166, 165, 163,0.15);
 }
@@ -808,10 +822,9 @@ div>input[type='checkbox']{
 
 .btn-search,
 .btn-search:hover{
-	width:40px;
-	height:32px;
-	background:#a6a5a3 url('../img/loupe.svg') 6px 1px no-repeat;
-	background-size: 32px 32px;
+	width:35px;
+	height:27px;
+	background:#a6a5a3 url('../img/loupe.svg') 6px 1px / 26px 26px no-repeat;
 	padding:0;
 	margin:0;
 	text-indent:-9999px;
@@ -824,7 +837,7 @@ div>input[type='checkbox']{
 .btn-search:hover{
 	cursor:inherit;
 	background-color:#a6a5a3;
-	background-size: 32px 32px;
+	background-size:26px 26px;
 }
 input[id^='search'] + .btn-search{
 	position:absolute;
@@ -858,14 +871,14 @@ button.removeFavSlacker{
 
 }
 button.removeFavSpot{
-	background:transparent url('../img/removeFavSpot.svg') 6px -2px no-repeat;
+	background:#fff url('../img/removeFavSpot.svg') 6px -2px no-repeat;
 	background-size: 32px 32px;
 }
 button.addFavSlacker{
-	background:transparent url('../img/addFavSlacker.svg') 6px -2px no-repeat;
+	background:#fff url('../img/addFavSlacker.svg') 4px -1px no-repeat;
 	background-size: 32px 32px;
 }
 button.removeFavSlacker{
-	background:transparent url('../img/removeFavSlacker.svg') 6px -2px no-repeat;
+	background:#fff url('../img/removeFavSlacker.svg') 4px -2px no-repeat;
 	background-size: 32px 32px;
 }
