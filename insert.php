@@ -1,8 +1,6 @@
 <?php 
 
-	header('Content-type:text/html;charset=UTF-8');
-
-	if (isset($_POST['latitude'])&&isset($_POST['longitude'])&&isset($_POST['titre'])&&isset($_POST['description'])) {
+	if (isset($_POST['latitude'])&&isset($_POST['longitude'])) {
 		// On assigne aux variables les valeurs récupérée
 		$latitude=floatval($_POST['latitude']);
 		$longitude=floatval($_POST['longitude']);
@@ -21,9 +19,19 @@
 
 		$stmt->execute();
 
-		echo "Coordonnées enregistrées";
+		header('Content-type:application/json;charset=UTF-8');
+
+		echo json_encode(
+			array(
+				"error"=>false,
+				"msg"=>"Coordonnées enregistrées"
+		));
 	}else{
-		echo "Problème sur les valeurs entrées";
+		echo json_encode(
+			array(
+				"error"=>true,
+				"msg"=>"Valeurs entrées incorrectes"
+		));
 	}
 
  ?>

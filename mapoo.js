@@ -1,4 +1,4 @@
-var map={
+var mapObject={
     defaults:{
         map:'',
         zoom:13,
@@ -9,16 +9,18 @@ var map={
 
     init:function(options){
         this.params=$.extend(this.defaults,options);
-    },
+    },  
 
     // Recupréation de la position de l'user
     getUserLocation:function(){
         navigator.geolocation.getCurrentPosition(
             function(position){
-                map.params.localized.call(this,position.coords);
+                console.log('userlocation');
+                console.dir(mapObject.params);
+                mapObject.params.localized.call(this,position.coords);
             },
             function(){
-                map.params.localized.call(this,null);
+                mapObject.params.localized.call(this,null);
             },
             {enableHighAccuracy:true}
         );
@@ -43,15 +45,23 @@ var map={
 
         // On crée la carte
         this.map=new google.maps.Map(document.querySelector(this.params.map),settings);
-
         // On charge les markers de la BDD sur la carte
         $.getJSON("markers.json", function(data){
             $.each(data,function(key,val){
                 var posMarker=new google.maps.LatLng(parseFloat(val.latitude),parseFloat(val.longitude));
-                new google.maps.Marker({
+                console.log(val);
+                var contentMarker=val.adresse;
+                var marker=new google.maps.Marker({
                     position:posMarker,
-                    map:map.map,
+                    map:mapObject.map,
                     icon:iconePerso
+                });
+                var infowindow=new google.maps.InfoWindow({
+                    content:contentMarker
+                });
+                google.maps.event.addListener(marker,'click',function(data){
+                    infowindow.open(mapObject.map,marker);
+                    console.log('affichage infowindow');
                 });
             });
         });
@@ -76,21 +86,25 @@ var map={
                 // Appel Ajax pour insertion dans la BDD
                 var sendAjax=$.ajax({
                     url: 'insert.php',
+                    dataType:'json',
                     type: 'POST',
                     data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description,
                     success:handleResponse
                 });
-                function handleResponse(){
-                    $('#answer').get(0).innerHTML=sendAjax.responseText;
+                function handleResponse(data){
+                    $('#answer').get(0).innerHTML=data.msg;
+                    console.log(data);
+                    if (data.error==false) {      
+                        var marker=new google.maps.Marker({
+                            position:pos,
+                            map:mapObject.map,
+                            icon:iconePerso
+                        });
+                        console.dir(marker);
+                        mapObject.params.markerAdded.call(this,pos);
+                    };
                 }
-                new google.maps.Marker({
-                    position:pos,
-                    map:this.map
-                });
                 $(this).dialog("close");
-                map.panTo(pos);
-                console.log(map);
-                // map.addMarker.call(this,pos);
             },
             Cancel:function(){
                 $(this).dialog("close");
