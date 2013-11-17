@@ -34,10 +34,12 @@
 
             <form>
                 <fieldset>
-                    <label for="name">Nom du spot : </label>
-                    <input type="text" name="name" class="text ui-widget-content ui-corner-all" id="name" />
+                    <label for="titre">Nom du spot : </label>
+                    <input type="text" name="titre" class="text ui-widget-content ui-corner-all" id="name" />
                     <label for="description">Description du spot : </label>
                     <input type="text" name="description" class="text ui-widget-content ui-corner-all" />
+                    <label for="adresse">Adresse du spot :</label>
+                    <input type="text" name="adresse" class="text ui-widget-content ui-corner-all">
                     <!-- <input type="checkbox" name="categorie" value="shortline"><label>shortline</label>
                     <input type="checkbox" name="categorie" value="longline"><label>longline</label> -->
                 </fieldset>
