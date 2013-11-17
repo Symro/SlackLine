@@ -43,9 +43,8 @@
 
 <div class="section" id="section0">
   <div class="container">
-    <div class="row">
-      <div class="span7"></div>
-      <div class="span3">
+    <div class="row-fluid">
+      <div class="span3 offset7">
         <div class="greyBox" >
           <div class="headerBox">
             <h1>Connecte-toi</h1><br/>
@@ -56,7 +55,7 @@
                 <input type="text" id="login" name="login" placeholder="LOGIN" required>
                 <input type="text" id="password" name="password" placeholder="PASSWORD" required>
                 <input type="submit" id="okLog" value="OK">
-                <div class="iphone"></div></br></br>
+                <div class="iphone hidden-phone"></div></br></br>
                 <p>Ou se connecter avec:</p>
                 <a href="#" id="fb-connect">Completer avec Facebook</a>
                 <a href="#" id="google-connect">Completer avec Google+</a>
@@ -69,19 +68,43 @@
       </div>
     </div>
   </div>
-    <a class="arrows-down" href="#slide1" title="La pratique de la slackline"></a>
+    <a class="arrows-down" href="pariSlack#section1" title="La pratique de la slackline"></a>
 </div>
+
+
+
+
 <!-- <section id="section">a revoir -->
 <div class="section" id="section1">
   <div class="container ">      
     <div class="row">
-      <div class="span6">
-        <h1><strong>LA PRATIQUE DU SLACKLINE </strong>CONSISTE A AVANCER SUR UNE SANGLE ELASTIQUE SANS AUCUN ACCESSOIRE</h1>
-        <p>La sangle, d'une largeur variant de 19 mm à 50 mm, est tendue entre deux poteaux,arbres, ou même via des ancrages au niveau du sol.
-        Les figures pouvant être réalisées sont innombrables.Ce sport est également indiqué comme préparation à l'escalade, au surf, au snowboard, au longboard,aux agrès de gymnastique ou encore comme moyen de concentration.</p>
+      <div id="owl-section1" class="owl-carousel">
+        <div class="item">
+          <div class="">
+            <img src="img/anim/anim1.png" alt="HighLine">
+          </div>
+          <p>Parislack est une association créée en 2011 visant à promouvoir l'activité de la slackline sur Paris et toute sa région. Son but est de fédérer les pratiquants, organiser des événements et faire découvrir cette discipline.</p>
+        </div>
+        <div class="item">
+          <div class="">
+            <img src="img/anim/anim1.png" alt="HighLine">
+          </div>
+          <p>Le but principal de la slackline est de progresser sur une corde plus ou moins tendue (et placée plus ou moins haut) à la manière d'un funambule</p>
+        </div>
       </div>
-      <div class="span6">
-        <div id="owl-demo" class="owl-carousel">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<div class="section" id="section2">
+  <div class="container ">      
+    <div class="row">
+
+        <div id="owl-section2" class="owl-carousel">
           <div class="item">
             <div class="">
               <img src="img/anim/anim1.png" alt="HighLine">
@@ -137,12 +160,10 @@
             </div>
           </div>
         </div>                
-      </div>
     </div>
   </div>
 </div>
-
-<div class="section" id="section3">
+<div class="section" id="section4">
   <div class="container">
     <div class="row">
        <h1><strong>DECOUVREZ </strong>NOTRE SERVICE</h1>
@@ -163,9 +184,21 @@
     <span class="progress"></span>
     <span class="buffer"></span>
   </div>
+  <footer class="hidden-desktop">
+  <div class="container">
+    <div class="row">
+      <ul>
+        <li><a href="#">Abouts</a></li>
+        <li><a href="#">Credits</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <p>Copyright 2013 - PariSlack</p>
+  </footer>
 </div>
 
-<div class="section" id="section2">
+<div class="section hidden-phone" id="section3">
   <div class="container">
     <div class="row">
       <h1><strong>CE QU'ILS </strong>EN PENSENT</h1></br></br></br>
@@ -210,22 +243,30 @@
 
     <script>
     $(document).ready(function() {
-
-
-
-      $("#owl-demo").owlCarousel({
+      $("#owl-section1").owlCarousel({
         navigation: true,
-      slideSpeed : 300,
-      paginationSpeed : 400,
-      singleItem : true,
+        slideSpeed : 300,
+        paginationSpeed : 400,
+        singleItem : true,
         navigationText: [
-        "<i class='icon-chevron-left icon-white'></i>",
-        "<i class='icon-chevron-right icon-white'></i>"
+        "<i class='icon-chevron-left'></i>",
+        "<i class='icon-chevron-right'></i>"
         ],
         //Call beforeInit callback, elem parameter point to $("#owl-demo")
 
       });
+      $("#owl-section2").owlCarousel({
+        navigation: true,
+        slideSpeed : 300,
+        paginationSpeed : 400,
+        singleItem : true,
+        navigationText: [
+        "<i class='icon-chevron-left-white'></i>",
+        "<i class='icon-chevron-right-white'></i>"
+        ],
+        //Call beforeInit callback, elem parameter point to $("#owl-demo")
 
+      });
     });
     </script>
   <script type="text/javascript" src="js/video_jq.js"></script>
