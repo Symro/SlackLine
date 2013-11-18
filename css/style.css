@@ -924,3 +924,338 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 #map img{max-width:none;}
 #dialog-form{display:none;}
 
+
+
+
+/* CODE INTÉ AUDREY */
+
+/* Accueil Carte */
+#accueilCarteDisplay{
+	position:absolute;
+	display: block;
+	top:45px;
+	left:125px;
+	z-index:1;
+	border: 5px solid #97CE68;
+	border-radius: 50%;
+	height: 100px;
+	width: 100px;
+	cursor:pointer;
+}
+
+#accueilCarte, #detailSpot, #placerMarqueur{
+	position:absolute;
+	left:0;
+	top:0;
+	background:#f4f3f0;
+	padding:45px 55px;
+	width:350px;
+	box-shadow: 1px 0px 6px #a5a39f;
+}
+#accueilCarte section, #detailSpot section, #placerMarqueur section{
+	position:relative;
+	margin:0 0 45px 0;
+	clear:both;
+}
+
+#accueilCarte img, #placerMarqueur image{
+margin-left: 10px;
+}
+
+#accueilCarte section h2, #detailSpot section h2, #placerMarqueur section h2{
+	color:#38475e;
+	text-transform: uppercase;
+	font-weight:normal;
+	font-size:1.1rem;
+	line-height:1.5rem;
+	margin-bottom:16px;
+	letter-spacing: -0.03em;
+}
+strong{
+	font-weight: 600;
+}
+#accueilCarte input[id^='search'] + .btn-search{
+	top: 40px;
+}
+/* detailSpot */
+nav{
+	position: absolute;
+	top: 10px;
+	width: 100%;
+	left: 0;
+}
+nav ul li:first-child{
+	float: left;
+	text-align: center;
+	left: 0;
+	position: absolute;
+}
+nav ul li:last-child{
+	text-align: center;
+	float: right;
+}
+nav img{
+	width: 40%;
+}
+nav li{
+	display: inline-block;
+}
+.lieu h3{
+	text-transform: uppercase;
+	font-weight: 200;
+}
+
+.lieu h3, .lieu p{
+	color: #97ce68;
+	text-align: center;
+	font-weight: 200;
+	line-height: 0.8em;
+}
+.noteDepart p{
+	text-transform:uppercase;
+	color:#828282;
+}
+
+.description textarea{
+	height: auto;
+	padding: 6px 8px;
+	width: 100%;
+}
+.quand .selectJour select option{
+	text-transform: uppercase;
+}
+.quand .switch-button > span{
+	text-transform: none;
+}
+
+/*Bouton Aujourd'hui*/
+.selectJour select {
+   background: transparent;
+   width: 268px;
+   padding: 10px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   height: 35px;
+   -webkit-appearance: none;
+   text-transform: uppercase;
+   font-size: 12px;
+   color: #7d7d7b;
+}
+.selectJour {
+   width: 240px;
+   height: 35px;
+   overflow: hidden;
+   background: url(../img/selectJour.png) no-repeat right;
+   background-size: 119%;
+   background-position-x: -35px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   margin-bottom: 5px;
+}
+.matos .switch-button.small{
+	width: 66%;
+}
+/*BoutonHeureDepart*/
+.selectHeureDepart select {
+   background: transparent;
+   width: 134px;
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   height: 35px;
+   -webkit-appearance: none;
+   font-size: 12px;
+   margin-left: 5px;
+   color: #7d7d7b;
+}
+.selectHeureDepart {
+   width: 117px;
+   height: 35px;
+   overflow: hidden;
+   background: url(../img/selectJour.png) no-repeat right;
+  /* background-size: 119%;*/
+   background-position-x: -87px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   float: left;
+   margin-right: 5px;
+}
+/*BoutonHeureArrivee*/
+.selectHeureArrivee select {
+   background: transparent;
+   width: 134px;
+   padding: 5px;
+   font-size: 16px;
+   line-height: 1;
+   border: 0;
+   height: 35px;
+   -webkit-appearance: none;
+   font-size: 12px;
+   margin-left: 5px;
+   color: #7d7d7b;
+}
+.selectHeureArrivee {
+   width: 117px;
+   height: 35px;
+   overflow: hidden;
+   background: url(../img/selectJour.png) no-repeat right;
+  /* background-size: 119%;*/
+   background-position-x: -87px;
+   border: 1px solid #ccc;
+   border-radius: 4px;
+   float: left;
+   margin-bottom: 5px;
+}
+.matos{
+	clear: both;
+	margin-top: 5px;
+}
+.initiation span{
+	line-height: 1.2em;
+}
+.initiation p{
+	font-size: 11px;
+	color: #7d7d7b;
+}
+.reseauxSociaux{
+	position: fixed;
+	bottom: 10px;
+	width: auto;
+	left: 50%;
+	height: 50px;
+	border-radius: 0px 5px 5px 0px;
+}
+.reseauxSociaux ul{
+	background-color: #f3f2ef;
+	overflow:auto;
+	padding:0;
+	margin:0;
+}
+.reseauxSociaux li{
+	display:block;
+	float:left;
+
+}
+.reseauxSociaux li a{
+	display: block;
+	width:100%;
+	height:100%;
+	padding: 30px;
+}
+.reseauxSociaux .fb,
+.reseauxSociaux .twitter,
+.reseauxSociaux .google{
+	-webkit-transition:background-position 250ms ease-in-out;
+	-moz-transition:background-position 250ms ease-in-out;
+	transition:background-position 250ms ease-in-out;
+}
+
+.reseauxSociaux .fb{
+	display: inline-block;
+	border: 1px solid #c1c1c1;
+	border-radius: 5px 0px 0px 0px;
+	background:url("../img/iconSprite_FB.svg") 50% 15px no-repeat;
+}
+.reseauxSociaux .fb:hover{
+	background-color: #a5a4a2 !important;
+	background:url("../img/iconSprite_FB.svg") 50% -35px no-repeat;
+}
+.reseauxSociaux .twitter{
+	display: inline-block;
+	border: 1px solid #c1c1c1;
+	border-radius: 0px 0px 0px 0px;
+	background:url("../img/iconSprite_Twitter.svg") 50% 15px no-repeat;
+}
+.reseauxSociaux .twitter:hover{
+	background-color: #a5a4a2 !important;
+	background:url("../img/iconSprite_Twitter.svg") 50% -35px no-repeat;
+}
+.reseauxSociaux .google{
+	display: inline-block;
+	border: 1px solid #c1c1c1;
+	border-radius: 0px 5px 5px 0px;
+	background:url("../img/iconSprite_Google.svg") 50% 15px no-repeat;
+}
+.reseauxSociaux .google:hover{
+	background-color: #a5a4a2 !important;
+	background:url("../img/iconSprite_Google.svg") 50% -35px no-repeat;
+}
+	/* A modifier ou à rajouter dans ton code déjà existant */
+select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
+	border-radius: 4px 4px 4px 4px;
+	color: #555555;
+	font-family:'Open Sans', sans-serif;
+	display: inline-block;
+	font-size: 0.8rem;
+	height: 35px;
+	padding:6px 10px;
+	line-height: 20px;
+	vertical-align: middle;
+}
+.placerLieu input[id^='search'] + .btn-search {
+	top: 90px;
+}
+
+.btn-search{
+	width:35px;
+	height:27px;
+	background:url('../img/loupeGris.svg') 5px 5px / 26px 26px no-repeat;
+	padding:0;
+	margin:0;
+	text-indent:-9999px;
+	box-shadow:none;
+	opacity: 0.7;
+}
+button.large,
+.btn.large {
+	height: 35px;
+	width: 100%;
+	font-family: 'Open Sans', sans-serif;
+	border-color: rgba(110, 149, 75, 1);
+}
+
+#resultSpots .show:hover,
+#resultUsers .show:hover,
+{
+	background:rgba(151, 206, 104, 1);
+}
+
+#profil .skills div, #detailSpot .categories div{
+	clear:both;
+	width:180px;
+	margin:0 auto;
+}
+
+#profil .skills li, #detailSpot .categories li{
+	list-style:none;
+	float:left;
+	width:70px;
+	height:90px;
+	text-align:center;
+	text-transform:uppercase;
+	font-size:0.75rem;
+	margin-right:20px;
+	margin-top:15px;
+	margin-bottom:5px;
+	color:#828282;
+	display:block;
+}
+
+#profil .skills li:before, #detailSpot .categories li:before{
+	content:'';
+	display:block;
+	width:60px;
+	height:60px;
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	background:#858585;
+	border:solid 5px #97ce68;	
+	margin-bottom:5px;
+}
+
+#profil .skills li.active, #detailSpot .categories li.active{
+	display:block;
+	
+}

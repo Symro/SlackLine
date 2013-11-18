@@ -72,6 +72,3 @@ if($_POST)
 }
 
 ?>
-<script type='text/javascript'>
-    $('.rateit-rated').rateit();
-</script>

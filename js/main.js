@@ -337,6 +337,7 @@ $( document ).ready(function() {
                 success: function(data) {
                     $("#resultSpots").html(data).show();
                     $('#resultSpots').mCustomScrollbar();
+                    $('.rateit-rated').rateit();
                 }
             });
         }
@@ -674,6 +675,19 @@ $( document ).ready(function() {
         // récuperer les spots 'ouverts' toutes les 3 minutes
         request.actionGet ( 'getSpotOpen', afficherSpotsOuverts );
     }, 18000);
+
+
+    $('#spotStep2').on('click', function(){
+
+        $('#accueilCarte, #placerMarqueur').toggleClass('hidden');
+
+    });
+
+    $('#spotStep3').on('click', function(){
+
+        $('#placerMarqueur, #detailSpot').toggleClass('hidden');
+
+    });
 
 
     
