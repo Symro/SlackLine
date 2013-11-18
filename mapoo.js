@@ -1,10 +1,10 @@
-var geocoder=new google.maps.Geocoder();
 var mapObject={
     defaults:{
         map:'',
         zoom:13,
         center:{latitude:48.856614,longitude:2.352221},
-        mapTypeId:google.maps.MapTypeId.ROADMAP
+        mapTypeId:google.maps.MapTypeId.ROADMAP,
+        geocoder:new google.maps.Geocoder()
     },
 
     init:function(options){
@@ -73,7 +73,7 @@ var mapObject={
         // console.log('latitude du marker : '+lat);
         // console.log('longitude du marker : '+lng);
         // var address=pos;
-        geocoder.geocode({'latLng':pos},function(results,status){
+        mapObject.params.geocoder.geocode({'latLng':pos},function(results,status){
             if (status==google.maps.GeocoderStatus.OK) {
                 if (results[1]) {
                     // var address=results[1].formatted_address;
