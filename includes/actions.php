@@ -19,6 +19,8 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	        case 'getFavSpots' : getFavSpots(); break;
 	        case 'getFavSlackers' : getFavSlackers(); break;
 	        case 'getUserProfil' : getUserProfil(); break;
+	        case 'getSpotOpen' : getSpotOpen(); break;
+	        case 'getSpot' : getSpot(); break;
 	        //case 'blah' : blah();break;
 	        // ...etc...
 	    }
@@ -65,7 +67,12 @@ else{
 
 		try {
 
-			$reponse = $PDO->prepare('SELECT spots_favoris.id_spot, spots.titre, spots.description, spots.adresse, spots.categorie, spots.note
+			$reponse = $PDO->prepare('SELECT spots_favoris.id_spot, spots.titre, spots.description, spots.adresse, spots.categorie, spots.note, 
+				(
+					SELECT ROUND(AVG(NULLIF(note ,0)) ,1)
+					FROM spots_favoris
+					WHERE spots_favoris.id_spot = spots.id
+				) note_moyenne_utilisateurs
 				FROM spots_favoris
 				INNER JOIN spots
 				ON spots_favoris.id_spot = spots.id
@@ -74,6 +81,8 @@ else{
 			$reponse->execute(array(
 	            ':currentUser' => $_SESSION['membre_id']
 	        ));
+
+
 			 
 			if( $reponse ) {
 				$donnees = $reponse->fetchAll(PDO::FETCH_ASSOC);
@@ -170,6 +179,64 @@ else{
 		}
 
 	}
+
+
+
+	function getSpotOpen(){
+		global $PDO;
+
+		try {
+
+			$reponse = $PDO->prepare('SELECT id, id_spot, id_utilisateur, COUNT(id_utilisateur) AS nb_utilisateur, CURRENT_TIMESTAMP AS date_actuelle_ts , UNIX_TIMESTAMP(date_ouverture) AS date_ouverture_ts , UNIX_TIMESTAMP(date_fermeture) as date_fermeture_ts, etat
+							FROM spots_ouvert
+							WHERE date_ouverture < CURRENT_TIMESTAMP 
+							AND date_fermeture > CURRENT_TIMESTAMP');
+
+			$reponse->execute();
+			/*
+			$reponse->execute(array(
+	  		    ':currentUser' => $_SESSION['membre_id']
+	  		));
+			*/
+			if( $reponse ) {
+
+				$donnees = $reponse->fetchAll(PDO::FETCH_ASSOC);
+				echo json_encode($donnees);
+				$reponse->closeCursor();
+
+			}
+			else{
+				echo json_encode(
+					array(
+						"erreur" => true,
+						"msg" => "Une erreur est survenue lors de la récupération des données"
+				));
+			}
+
+		}catch ( Exception $e ) {
+			echo "Une erreur est survenue lors de la récupération des données";
+		}
+
+	}
+
+	function getSpot(){
+
+			global $PDO;
+
+		    // Obtenir la liste des points
+            $result = $PDO->query('SELECT latitude,longitude,titre,description,adresse,materiel,note,categorie FROM spots');
+            // On récupère la liste des markers dans un tableau
+            $markers=json_encode($result->fetchAll(PDO::FETCH_ASSOC));
+            // Fermeture de la connexion
+            $result->closeCursor();
+            // On crée un fichier JSON
+            $createJson=fopen("../markers.json", 'w+');
+            // On écrit dans le fichier JSON les markers enregistrés dans la BDD
+            fputs($createJson,$markers);
+
+	}
+
+
 
 	/* ____________________ POST ____________________ */
 	/* ______________________________________________ */

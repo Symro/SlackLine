@@ -65,5 +65,18 @@ function isChecked($chkname,$value)
     return false;
 }
 
+// Affiche les 5 prochains jours
+function nextDays($nb = 5){
+    
+    echo "<select>";
+
+    for ($i = 1; $i <= $nb; $i++){
+        echo "<option data-date=".date("Y-m-d", time() + 86400 * $i) .">" .date("d/m/Y", time() + 86400 * $i) . "</option>";
+    }
+
+    echo "</select>";
+}
+
+
 
 ?>

@@ -13,7 +13,12 @@ if($_POST)
 
     $q = preg_replace("/[^A-Za-z0-9]/", " ", $_POST['search']);
 
-    $reponse = $PDO->query("SELECT id,latitude, longitude, titre, description, adresse, materiel, note, categorie
+    $reponse = $PDO->query("SELECT id,latitude, longitude, titre, description, adresse, materiel, note, categorie,
+        (
+            SELECT ROUND(AVG(NULLIF(note ,0)) ,1)
+            FROM spots_favoris
+            WHERE spots_favoris.id_spot = spots.id
+        ) note_moyenne_utilisateurs
         FROM spots
         WHERE titre LIKE '%$q%' 
         OR adresse LIKE '%$q%'
@@ -36,6 +41,7 @@ if($_POST)
     // Affichage des résultats
     while($donnee = $reponse->fetch(PDO::FETCH_ASSOC))
     {
+        $note       = $donnee['note_moyenne_utilisateurs'];
         $id         = $donnee['id'];
         $username   = $donnee['titre'];
         $email      = $donnee['adresse'];
@@ -55,10 +61,17 @@ if($_POST)
                 <button class="<?php echo $class; ?>" data-id="<?php echo $id; ?>"><?php echo $text; ?></button>
                 <span><?php echo $final_username; ?> - </span>
                 <span><?php echo $final_email; ?></span>
+                <div>
+                    <div class="rateit-rated" data-rateit-value="<?php echo $note; ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                </div>
             </div>
+            
         <?php
     }
 
 }
 
 ?>
+<script type='text/javascript'>
+    $('.rateit-rated').rateit();
+</script>

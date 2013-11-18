@@ -542,7 +542,7 @@ div>input[type='checkbox']{
 
 
 /* ____________________ PARTIE CARTE _______________________ */
-/* _________________________________________________________ */
+/* ________________________PROFIL___________________________ */
 
 
 
@@ -635,7 +635,6 @@ div>input[type='checkbox']{
 	white-space:normal;
 }
 
-
 #profil .infos > input[type='tel'],
 #profil .infos > input[type='email']{
 	float:left;
@@ -670,6 +669,10 @@ div>input[type='checkbox']{
 	background-size:20px 20px;
 	clear:left;
 	float:left;
+}
+#profil .infos #editProfil{
+	display:block;
+	clear:left;
 }
 
 #profil .uneditable{
@@ -811,6 +814,15 @@ div>input[type='checkbox']{
 #resultUsers .show span:nth-of-type(1){
 	margin-top:4px;
 }
+#resultSpots .show span,
+#resultUsers .show span{
+	display:block; 
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	overflow:hidden; 
+	width:160px;
+
+}
 #resultUsers img{
 	width:50px;
 	height:50px;
@@ -882,3 +894,33 @@ button.removeFavSlacker{
 	background:#fff url('../img/removeFavSlacker.svg') 4px -2px no-repeat;
 	background-size: 32px 32px;
 }
+
+/* jQuery RateIt Plugin */
+
+.rateit{display:block;width:85px;position:relative;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-o-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none;}
+.rateit .rateit-range{position:relative;display:inline-block;background:url(../img/star.gif);height:16px;outline:none;}
+.rateit .rateit-range *{display:block;}
+.rateit .rateit-hover,.rateit .rateit-selected{position:absolute;left:0;}
+.rateit .rateit-hover-rtl,.rateit .rateit-selected-rtl{left:auto;right:0;}
+.rateit .rateit-hover{background:url(../img/star.gif) left -32px;}
+.rateit .rateit-hover-rtl{background-position:right -32px;}
+.rateit .rateit-selected{background:url(../img/star.gif) left -16px;}
+.rateit .rateit-selected-rtl{background-position:right -16px;}
+.rateit button.rateit-reset{background:url(../img/delete.gif) 0 0;width:16px;height:16px;display:inline-block;float:left;outline:none;border:none;padding:0;}
+.rateit button.rateit-reset:hover,.rateit button.rateit-reset:focus{background-position:0 -16px;}
+* html .rateit,* html .rateit .rateit-range,* + html .rateit,* + html .rateit .rateit-range{display:inline;}
+.rateit .rateit-preset,.rateit .rateit-preset-rtl{background:url(../img/star.gif) left -48px;}
+
+
+
+/* FUSION CODE SYLVAIN */
+
+div#users-contain { width: 350px; margin: 20px 0; }
+div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%; }
+div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
+.ui-dialog .ui-state-error { padding: .3em; }
+.validateTips { border: 1px solid transparent; padding: 0.3em; }
+#map{position:absolute;left:0;width:100%;height:768px;background-color:#fff;margin:1em 0 0 0 ;box-shadow: 0 5px 10px rgba(255,255,255,.4);}
+#map img{max-width:none;}
+#dialog-form{display:none;}
+

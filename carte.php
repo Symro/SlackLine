@@ -13,29 +13,23 @@ include('header.php');
 // Si l'utilisateur est identifié 
 if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in']) && $_SESSION['membre_logged_in'] === true ){
 
-
-	echo "BIENTOT ICI : AFFICHAGE DE LA CARTE <br/>";
-
 	//var_dump($_SESSION);
-
-	echo " <br/> BDD Email  : ".$_SESSION['membre_email'];
-
-	echo " <br/> BDD Identifiant  : ".$_SESSION['membre_id'];
-
-	echo " <br/> BDD Mdp  : ".$_SESSION['membre_mdp']." <br/><br/>";
+	// echo " <br/> BDD Email  : ".$_SESSION['membre_email'];
+	// echo " <br/> BDD Identifiant  : ".$_SESSION['membre_id'];
+	// echo " <br/> BDD Mdp  : ".$_SESSION['membre_mdp']." <br/><br/>";
 
 	?>
 
 
-	<button id="getProfil"> Mon profil </button>
+	<button class="temp"> SPOTS OUVERT </button>
 
-	<a href="#" id="logout">Déconnexion</a>
+	<!--<button id="getProfil"> Mon profil </button>-->
 
 	<div class="content">
 
-
-
 	</div>
+
+	<?php //nextDays(5); ?>
 
 	<div id="content">
 
@@ -43,9 +37,34 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	<div id="slackers">
 	
 	</div>
-	<div id="affichageProfil" style="position:absolute; right:10%; top:10%;">
+	
+	
+	<!-- CODE SYLVAIN FUSION -->
+	
+		<button id="maPosition">Me localiser</button>
+        <div id="answer">
+        </div>
+        <div id="map">
+        </div>
 
-	</div>
+        <div id="dialog-form" title="Ajouter un spot">
+            <p class="validateTips">All form fields are required.</p>
+
+            <form>
+                <fieldset>
+                    <label for="titre">Nom du spot : </label>
+                    <input type="text" name="titre" class="text ui-widget-content ui-corner-all" id="name" />
+                    <label for="description">Description du spot : </label>
+                    <input type="text" name="description" class="text ui-widget-content ui-corner-all" />
+                    <label for="adresse">Adresse du spot :</label>
+                    <input type="text" name="adresse" class="text ui-widget-content ui-corner-all">
+                    <!-- <input type="checkbox" name="categorie" value="shortline"><label>shortline</label>
+                    <input type="checkbox" name="categorie" value="longline"><label>longline</label> -->
+                </fieldset>
+            </form>
+        </div>
+	
+	<!-- FIN CODE SYLVAIN FUSION -->
 	
 	<?php $img_profil = imageExists(); ?>
 	<img src="<?php if($img_profil){ echo $img_profil; } ?>" id="profilDisplay" alt="Accéder à mon profil"/>
@@ -112,10 +131,10 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 			<div id="resultUsers"></div>
 		</section>
 
+		<a href="#" id="logout">Déconnexion</a>
+
 
 	</aside>
-
-
 
 
 <?php

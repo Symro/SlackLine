@@ -11,7 +11,6 @@ $( document ).ready(function() {
     });
 
 
-
     $('body').on('click', '#profil.edition .infos img', function(){
         console.log("clicked");
         $('#uploadForm input[type=file]').trigger('click');
@@ -210,11 +209,16 @@ $( document ).ready(function() {
 
                 var wrap    = $('<div>').addClass('show');
                 var button  = $('<button>').addClass('removeFavSpot animate').attr('data-id', value.id_spot).html('Supprimer des spots favoris');
+                //value.note_moyenne_utilisateurs
                 var span1   = $('<span>').html( value.titre +" - ");
                 var span2   = $('<span>').html( value.adresse );
+                var note    = '<div class="rateit-rated" data-rateit-value="'+value.note_moyenne_utilisateurs+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div>';
 
-                wrap.append( button, span1, span2 );
+
+                wrap.append( button, span1, span2, note);
                 $resultSpots.append( wrap );
+
+                $('div.rateit-rated').rateit();
 
             });
             
@@ -606,6 +610,7 @@ $( document ).ready(function() {
     request.actionGet ( 'getUserProfil' , afficherProfil);
     request.actionGet ( 'getFavSpots', afficherSpotsFavoris );
     request.actionGet ( 'getFavSlackers', afficherSlackersFavoris );
+    request.actionGet ( 'getSpot' , afficherSpots);
 
 
     /* AJOUTER / SUPPRIMER SPOTS DES FAVORIS */
@@ -644,7 +649,34 @@ $( document ).ready(function() {
     }
 
 
+    /* TEMP */
 
+    //$('#profil').prev().trigger("click");
+
+
+    var afficherSpotsOuverts = function(data){
+        // $('.content').html("Spot Ouvert : "+data[0].id_spot+" Id Utilisateur : "+data[0].id_utilisateur+" Fermeture le : "+data[0].date_fermeture);
+        //console.log(data);
+
+        $.each(data, function( key, value ) {
+            console.log("clé : "+key+" valeur : ID SPOT"+value.id_spot+" USER "+value.id_utilisateur+" DATE FERM. "+value.date_fermeture);
+        });
+
+    }
+
+    $('body').on('click', '.temp', function(){
+
+        request.actionGet ( 'getSpotOpen', afficherSpotsOuverts );
+
+    });
+
+    setTimeout(function(){ 
+        // récuperer les spots 'ouverts' toutes les 3 minutes
+        request.actionGet ( 'getSpotOpen', afficherSpotsOuverts );
+    }, 18000);
+
+
+    
 
 });
 
