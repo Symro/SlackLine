@@ -69,7 +69,7 @@ include('form_traitement.php');
             </select> 
 
             <label class="switch-button small" for="material">
-                <input type="checkbox" id="material" name="material" value="yes" <?php if(isset($_POST['material'])) echo "checked='checked'"; ?> >
+                <input type="checkbox" id="material" class="switch" name="material" value="yes" <?php if(isset($_POST['material'])) echo "checked='checked'"; ?> >
                 <span>
                     Matériel
                     <span>Non</span>

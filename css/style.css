@@ -26,6 +26,11 @@ body{
 	display:none;
 }
 
+footer{
+	background:none;
+	height:auto;
+}
+
 body.inscription {
 	width:100%;
 	height:100%;
@@ -381,6 +386,19 @@ div>input[type='checkbox']{
     width:120px;
     font-size:12px;
 }
+.switch-button.large{
+    width:120px;
+    font-size:12px;
+	margin-left:120px;
+}
+.switch-button.large > span{
+	padding-right:40px;
+	left:-120px;
+}
+.switch-button.large > span span{
+	margin-left:120px;
+}
+
 
 .switch-button span span {
 	display: none; 
@@ -438,16 +456,16 @@ div>input[type='checkbox']{
 	margin-left: 80px;
 	text-align: center;
 	text-transform: uppercase;
+	line-height:34px;
 	color:#FFF;
 }
-
-#material:checked + span span:first-child{
+.switch:checked + span span:first-child{
 	color:#7d7d7b;
 }
-#material:not(:checked) + span span:last-child{
+.switch:not(:checked) + span span:last-child{
 	color:#7d7d7b;
 }
-#material:checked + a{
+.switch:checked + a{
 	border-radius: 0 4px 4px 0;
 }
 
@@ -713,7 +731,7 @@ div>input[type='checkbox']{
 	height:60px;
 	-webkit-border-radius:50%;
 	border-radius:50%;
-	background:#858585;
+	/*background:#858585;*/
 	border:solid 5px #97ce68;	
 	margin-bottom:5px;
 }
@@ -740,11 +758,13 @@ div>input[type='checkbox']{
 }
 #profil.edition .skills li:not(.active):before{
 	border:solid 5px #c5c4c2;
+	background:#97CE68;
 }
 #profil.edition .skills li.active:hover:before,
 #profil.edition .skills li:not(.active):hover:before{
 	background:#94cb68;
 	border:solid 5px #c2c1bf;
+	cursor:pointer;
 }
 #profil.edition .skills li.active:hover:before{
 	background:#CC6868;
@@ -759,6 +779,29 @@ div>input[type='checkbox']{
 	top:26%;
 	cursor:pointer;
 }
+#profil .skills li.active.shortline{
+	background:url("../img/shortline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
+}
+#profil .skills li.active.longline{
+	background:url("../img/longline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
+}
+#profil .skills li.active.trickline{
+	background:url("../img/trickline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
+}
+#profil .skills li.active.jumpline{
+	background:url("../img/jumpline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
+}
+#profil .skills li.active.highline{
+	background:url("../img/highline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
+}
+#profil .skills li.active.blindline{
+	background:url("../img/blindline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
+}
+#profil .skills li.active.waterline{
+	background:url("../img/waterline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
+}
+
+
 #profil.edition .infos img{
 	cursor:pointer;
 }
@@ -930,6 +973,9 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 /* CODE INTÉ AUDREY */
 
 /* Accueil Carte */
+
+
+
 #accueilCarteDisplay{
 	position:absolute;
 	display: block;
@@ -952,7 +998,7 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	width:350px;
 	box-shadow: 1px 0px 6px #a5a39f;
 }
-#accueilCarte section, #detailSpot section, #placerMarqueur section{
+#accueilCarte > div, #detailSpot > div, #placerMarqueur > div{
 	position:relative;
 	margin:0 0 45px 0;
 	clear:both;
@@ -962,7 +1008,7 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 margin-left: 10px;
 }
 
-#accueilCarte section h2, #detailSpot section h2, #placerMarqueur section h2{
+#accueilCarte div h2, #detailSpot div h2, #placerMarqueur div h2{
 	color:#38475e;
 	text-transform: uppercase;
 	font-weight:normal;
@@ -1053,9 +1099,8 @@ nav li{
    border-radius: 4px;
    margin-bottom: 5px;
 }
-.matos .switch-button.small{
-	width: 66%;
-}
+
+
 /*BoutonHeureDepart*/
 .selectHeureDepart select {
    background: transparent;
@@ -1182,7 +1227,8 @@ nav li{
 	background-color: #a5a4a2 !important;
 	background:url("../img/iconSprite_Google.svg") 50% -35px no-repeat;
 }
-	/* A modifier ou à rajouter dans ton code déjà existant */
+
+/* A modifier ou à rajouter dans ton code déjà existant */
 select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input {
 	border-radius: 4px 4px 4px 4px;
 	color: #555555;
@@ -1242,7 +1288,7 @@ button.large,
 	color:#828282;
 	display:block;
 }
-
+/*
 #profil .skills li:before, #detailSpot .categories li:before{
 	content:'';
 	display:block;
@@ -1259,3 +1305,4 @@ button.large,
 	display:block;
 	
 }
+*/
