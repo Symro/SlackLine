@@ -45,7 +45,6 @@ mapObject.init({
 		mapObject.map.panTo(pos);
 	}
 });
-
 // On change le style des markers
 var iconePerso=new google.maps.MarkerImage(siteUrl+"/img/locationNonOccupe.svg",
     // Dimensions
@@ -61,12 +60,18 @@ $(window).load(mapObject.render());
 
 // Ecouteur pour le boutton de geolocalisation
 $('#maPosition').on('click',function(e){
-	e.preventDefault();
+	event.preventDefault();
 	mapObject.getUserLocation();
 });
 // Ecouteur itinéraire
 $('#map').on('click','.itineraryButton',function(e){
-    e.preventDefault();
+    event.preventDefault();
     var userLoc=mapObject.getInstantLoc();
     console.log(userLoc);
 });
+// Ecouteur placer un marker à partir de l'adresse
+$('#addMarker').submit(function(e){
+    event.preventDefault();
+    address=$('input[name=addSpot]').val();
+    mapObject.addMarkerByAddress(address);
+}); 
