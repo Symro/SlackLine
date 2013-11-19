@@ -104,7 +104,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	
 		<nav>
 			<ul>
-				<li><a href="accueilCarte.php"><img src="img/precedent.svg" alt="Page précédente" /></a></li>
+				<li><a href="carte.php"><img src="img/precedent.svg" alt="Page précédente" /></a></li>
 				<li><a href="#"><img src="img/close.svg" alt="fermer" /></a></li>
 			</ul>
 		</nav>
@@ -185,7 +185,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	<aside id="detailSpot" class="hidden">
 		<nav>
 			<ul>
-				<li><a href="accueilCarte.php"><img src="img/precedent.svg" alt="Page précédente" /></a></li>
+				<li><a href="carte.php"><img src="img/precedent.svg" alt="Page précédente" /></a></li>
 				<li><a href="#"><img src="img/close.svg" alt="fermer" /></a></li>
 			</ul>
 		</nav>
