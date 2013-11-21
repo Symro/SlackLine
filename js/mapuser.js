@@ -7,7 +7,7 @@ mapObject.init({
 		$.getJSON(siteUrl+"markers.json", function(data){
             $.each(data,function(key,val){
                 var posMarker=new google.maps.LatLng(parseFloat(val.latitude),parseFloat(val.longitude));
-                var contentMarker='<div class="markerInfo"><p>Nom : '+val.titre+'<br/>Description : '+val.description+'<br/>Adresse : '+val.adresse+'<p><a href="" class="itineraryButton">itinéraire</a></div>';
+                var contentMarker='<div class="markerInfo"><p>Nom : '+val.titre+'<br/>Description : '+val.description+'<br/>Adresse : '+val.adresse+'<p><a href="" class="itineraryButton" data-lng="'+val.longitude+'" data-lat="'+val.latitude+'">itinéraire</a></div>';
                 var marker=new google.maps.Marker({
                     position:posMarker,
                     map:mapObject.map,
@@ -63,11 +63,14 @@ $('#maPosition').on('click',function(e){
 	event.preventDefault();
 	mapObject.getUserLocation();
 });
+// google.maps.event.addListener(mapObject.map, 'rightclick',function(event){
+        //     mapObject.addMarker(event.latLng,mapObject.map);
+        // });
 // Ecouteur itinéraire
 $('#map').on('click','.itineraryButton',function(e){
     event.preventDefault();
-    var userLoc=mapObject.getInstantLoc();
-    console.log(userLoc);
+    var pos=new google.maps.LatLng(parseFloat($(this).data('lat')),parseFloat($(this).data('lng')));
+    mapObject.itinerary(pos);
 });
 // Ecouteur placer un marker à partir de l'adresse
 $('#addMarker').submit(function(e){
