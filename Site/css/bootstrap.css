@@ -176,6 +176,9 @@ video.play{opacity:1;}
     margin: auto;
     padding-bottom: 5%;
 }
+#owl-section1 span{
+  background-color: white;
+}
 #owl-section2 .item img{
     display: block;
     margin: auto;
@@ -276,6 +279,7 @@ input[type="submit"]{
   color:#FFF;
   text-shadow:none;
   background-image:linear-gradient(to bottom, #8BC052, #6DA546);
+  background: #8BC052;#8BC052
   border:solid 1px #629c42;
   border-radius: 5px;
   -webkit-box-shadow: inset 0px 0px 2px 0px #629c42, inset 0px 1px 0px 1px #a8d17d, inset 0px -1px 0px 0px #62933F;
@@ -283,42 +287,43 @@ input[type="submit"]{
   
 
 }
-
+.btn-submit:hover,
+input[type="submit"]
+  background: #8bc052;}
 .btn-submit:hover,
 input[type="submit"]:hover{
+  background: #6da546;
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#8bc052), to(#6da546));
   background-image: -webkit-linear-gradient(to top, #8bc052, #6da546);
   background-image: -moz-linear-gradient(to top, #8bc052, #6da546);
   background-image: -o-linear-gradient(to top, #8bc052, #6da546);
-  background-image: linear-gradient(to top, #8bc052, #6da546);}
+  background-image: -ms-linear-gradient(to top, #8bc052, #6da546);}
 
 #okLog {
   height: 50px;
+  background: #2e3a4c;
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#2e3a4c), to(#404d60));
   background-image: -webkit-linear-gradient(to top, #2e3a4c, #404d60);
   background-image: -moz-linear-gradient(to top, #2e3a4c, #404d60);
   background-image: -o-linear-gradient(to top, #2e3a4c, #404d60);
-  background-image: linear-gradient(to top, #2e3a4c, #404d60);
+  background-image: -ms-linear-gradient(to top, #2e3a4c, #404d60);
   border:solid 1px #303030;
    -webkit-box-shadow: inset 0px 0px 2px 0px #303030, inset 0px 1px 0px 1px #707a89, inset 0px -1px 0px 0px #303030;
   box-shadow: inset 0px 0px 2px 0px #303030, inset 0px 1px 0px 1px #404d60, inset 0px -1px 0px 0px #303030;
 }
 #okLog:hover {
+  background: #404d60;
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#404d60), to(#2e3a4c));
   background-image: -webkit-linear-gradient(to top, #404d60, #2e3a4c);
   background-image: -moz-linear-gradient(to top, #404d60, #2e3a4c);
   background-image: -o-linear-gradient(to top, #404d60, #2e3a4c);
-  background-image: linear-gradient(to top, #404d60, #2e3a4c);
+  background-image: -ms-linear-gradient(to top, #404d60, #2e3a4c);7
   border:solid 1px #303030;
    -webkit-box-shadow: inset 0px 0px 2px 0px #303030, inset 0px 1px 0px 1px #404d60, inset 0px -1px 0px 0px #303030;
   box-shadow: inset 0px 0px 2px 0px #303030, inset 0px 1px 0px 1px #404d60, inset 0px -1px 0px 0px #303030;
 }
 
 
-/*h2{
-  background-image: url(../img/user.png);
-  background-repeat: no-repeat;: 
-}*/
 /* Sections
  * --------------------------------------- */
  #section0,
@@ -328,9 +333,7 @@ input[type="submit"]:hover{
   background-size: cover;
  }
  #section0{
-  background-image: url(../img/bg.jpg);
-  padding: 0 0 0 0;
-  margin:0 0 0 0;
+  background-image: url(../img/ImgFullSize2.jpg);
  }
  
  /*Creatin a ull height slide */
@@ -340,6 +343,7 @@ input[type="submit"]:hover{
   color:#FFF;
   height: 100%;
   padding-top:14%; 
+  back
 
  }
  #section1 p{
@@ -364,7 +368,7 @@ input[type="submit"]:hover{
   background-image: url('../img/bubble.png');
   background-repeat: no-repeat;
   background-position: left;
-  padding-left: 45px;
+  padding: 60px 45px;
   color: #FFF;
 }
 
@@ -417,7 +421,7 @@ margin-left: -50px;
   height: 60px;
   margin-top: 15px;
   
-  margin-left: 2%;
+  margin-left: 1%;
 
 }
 .headerConnect{
@@ -443,16 +447,35 @@ margin-left: -50px;
   background-color: #f7f4eb;
 }
 @media (max-width: 767px) {
+
+  .formulaire{
+    padding:0;
+    margin:0;
+  }
+   #login{
+    height:25px;
+  }
+  .header{
+    height:75px;
+  }
+  .inHeader{
+    margin-top: 10px;
+  }
   .greyBox {
-    margin-top:100px;
+/*    height:500px;
+    overflow: scroll;*/
+    margin-top:75px;
     left: 50%;
     margin-left: -175px;
   }
-  .formulaire{
-    height:100%;
-  }
   .headerBox{
-    height:50%;
+    height:50px;
+  }
+  #section2{
+    padding-top:30%;
+  }
+  #section1{
+    padding-top:35%;
   }
 }
 
@@ -483,23 +506,26 @@ margin-left: -50px;
 
 }
 .formulaire{
-  padding: 45px 60px 25px 0px;
-  width: 50%;
+  display: table;
+  padding: 45px 0 45px;
+  width: 72%;
   margin: auto;
 }
 
 #password {  
   height:50px;
+  width:100%;
+  text-indent: 15%;
   background-image: url('../img/icons/logConnexion.svg');
   background-repeat: no-repeat;
   background-position: 9px 15px;
-  padding-left: 30px;
 }
 
 
 #login {
   height:50px;
-  padding-left: 30px;
+  width:100%;
+  text-indent: 15%;
   display: block;
   background-image: url('../img/icons/userConnexion.svg');
   background-repeat: no-repeat;
@@ -507,6 +533,7 @@ margin-left: -50px;
   left:20px;
   background-position: 6px 14px;
 }
+
 /* Facebook */
 /* Inscription - Bouton Facebook */
 
@@ -627,9 +654,6 @@ text-decoration: none;
   background: #354f88;
 }
 
-
-
-
 .arrows-down{
   z-index: 101;
   content:'';
@@ -661,13 +685,14 @@ text-decoration: none;
 }
 
 .iphone{
-  background-image:url('../img/iphone.png');
-  width:150px;
-  height:300px;
-  background-repeat: no-repeat;
-  position:absolute;
-  right: 88%;
-  top: 54%;
+background-image: url('../img/iphone.png');
+background-size: 100%;
+width: 78%;
+height: 55%;
+background-repeat: no-repeat;
+position: absolute;
+right: 75%;
+top: 45%;;
 }
 .tableau{
   width:500px;
@@ -1688,10 +1713,11 @@ abbr.initialism {
 blockquote {
   font-family: 'Open Sans',sans-serif;
   font-weight: normal;
+
   font-size: 1.3em;
   line-height: 1.2em;
   padding: 0 0 0 15px;
-  margin: 0 0 20px;
+  margin: 0 0 20px 20px;
 }
 
 
@@ -1810,7 +1836,7 @@ pre code {
 }
 
 form {
-  margin: 0 0 20px;
+  margin: 0 0 0px;
 }
 
 fieldset {
