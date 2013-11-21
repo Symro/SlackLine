@@ -1075,10 +1075,10 @@ nav li{
 }
 
 /*Bouton Aujourd'hui*/
-.selectJour select {
+.selectJour select,
+.combodate select {
    background: transparent;
    width: 268px;
-   padding: 10px;
    font-size: 16px;
    line-height: 1;
    border: 0;
@@ -1088,71 +1088,64 @@ nav li{
    font-size: 12px;
    color: #7d7d7b;
 }
-.selectJour {
+
+
+.selectJour,
+.selectHeureDepart .combodate b,
+.selectHeureArrivee .combodate b {
    width: 240px;
    height: 35px;
    overflow: hidden;
-   background: url(../img/selectJour.png) no-repeat right;
-   background-size: 119%;
-   background-position-x: -35px;
+   background: url("../img/selectJour.png") no-repeat scroll right center / 100% auto rgba(0, 0, 0, 0);
    border: 1px solid #ccc;
    border-radius: 4px;
    margin-bottom: 5px;
 }
 
 
-/*BoutonHeureDepart*/
-.selectHeureDepart select {
-   background: transparent;
-   width: 134px;
-   padding: 5px;
-   font-size: 16px;
-   line-height: 1;
-   border: 0;
-   height: 35px;
-   -webkit-appearance: none;
-   font-size: 12px;
-   margin-left: 5px;
-   color: #7d7d7b;
+/* BoutonHeureDepart */
+.selectHeureDepart .combodate b,
+.selectHeureArrivee .combodate b{
+	float:left;
+	display:inline-block;
+	height:35px;
+	width:85px;
+	background: url("../img/selectHeure.png") no-repeat scroll right center / 100% auto rgba(0, 0, 0, 0);
 }
-.selectHeureDepart {
-   width: 117px;
-   height: 35px;
-   overflow: hidden;
-   background: url(../img/selectJour.png) no-repeat right;
-  /* background-size: 119%;*/
-   background-position-x: -87px;
-   border: 1px solid #ccc;
-   border-radius: 4px;
-   float: left;
-   margin-right: 5px;
+.combodate i{
+	float:left;
+	display:inline-block;
+	line-height:34px;
+	font-style:normal;
+	margin:0 6px;
+
 }
-/*BoutonHeureArrivee*/
-.selectHeureArrivee select {
-   background: transparent;
-   width: 134px;
-   padding: 5px;
-   font-size: 16px;
-   line-height: 1;
-   border: 0;
-   height: 35px;
-   -webkit-appearance: none;
-   font-size: 12px;
-   margin-left: 5px;
-   color: #7d7d7b;
+.combodate select{
+	position:relative;
+	width:115px !important;
+	top:-20px;
 }
+
+
+.selectHeureDepart,
 .selectHeureArrivee {
-   width: 117px;
-   height: 35px;
-   overflow: hidden;
-   background: url(../img/selectJour.png) no-repeat right;
-  /* background-size: 119%;*/
-   background-position-x: -87px;
-   border: 1px solid #ccc;
-   border-radius: 4px;
-   float: left;
-   margin-bottom: 5px;
+   width:auto;
+   height: 36px;
 }
+.selectHeureDepart span:first-child,
+.selectHeureArrivee span:first-child{
+	display:inline-block;
+	float:left;
+	width:48px;
+	line-height:34px;
+
+}
+.selectHeureDepart .combodate,
+.selectHeureArrivee .combodate{
+	width:200px;
+}
+
+
 .matos{
 	clear: both;
 	margin-top: 5px;

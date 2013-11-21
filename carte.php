@@ -128,30 +128,17 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 				<h2><strong>Quand</strong> irez-vous à<br />ce spot ?</h2>
 				
 				<div class="selectJour">
-				<select>
-	              <option value="aujourd">Aujourd'hui</option>
-	              <option value="demain">Demain</option>
-	              <option value="demain">Dans une semaine</option> 
-	            </select> 
+				<?php nextDays(5); ?>
 				</div>
 				
 				<div class="selectHeureDepart">
-					<select>
-						<option value="9">9h00</option>
-						<option value="915">9h15</option>
-						<option value="930">9h30</option>
-						<option value="945">9h45</option>
-						<option value="10">10h00</option> 
-					</select> 
+					<span>DE : </span>
+					<input id="timeStart" data-format="HH:mm"  name="timeStart" type="text">
+
 				</div>
 				<div class="selectHeureArrivee">
-					<select>
-						<option value="9">9h00</option>
-						<option value="915">9h15</option>
-						<option value="930">9h30</option>
-						<option value="945">9h45</option>
-						<option value="10">10h00</option> 
-					</select> 
+					<span>À : </span>
+					<input id="timeEnd" data-format="HH:mm"  name="timeEnd" type="text">
 				</div>
 				
 				<div class="matos">
