@@ -1,46 +1,18 @@
+var directionsDisplay=new google.maps.DirectionsRenderer();
+var directionsService=new google.maps.DirectionsService();
+
 var mapObject={
     defaults:{
         map:'',
         zoom:13,
         center:{latitude:48.856614,longitude:2.352221},
         mapTypeId:google.maps.MapTypeId.ROADMAP,
-        geocoder:new google.maps.Geocoder()
+        geocoder:new google.maps.Geocoder(),
     },
 
     init:function(options){
         this.params=$.extend(this.defaults,options);
     },  
-
-    // Recupréation de la position de l'user
-    getUserLocation:function(){
-        navigator.geolocation.getCurrentPosition(
-            function(position){
-                console.log('userlocation');
-                // Callback
-                console.dir(position.coords);
-                var userLoc=position.coords;
-                mapObject.params.localized.call(this,userLoc);
-            },
-            function(){
-                // Callback
-                mapObject.params.localized.call(this,null);
-            },
-            {enableHighAccuracy:true}
-        );
-    },
-
-    getInstantLoc:function(userLoc){
-        navigator.geolocation.getCurrentPosition(
-            function(position){
-                var userLoc=position.coords;
-                return userLoc;
-            },
-            function(){
-                console.log('recup de la geoloc impossible');
-            },
-            {enableHighAccuracy:true}
-        );
-    },
 
     // Affichage de la carte
     render:function(pos){
@@ -62,8 +34,60 @@ var mapObject={
         // On crée la carte
         this.map=new google.maps.Map(document.querySelector(this.params.map),settings);
 
+        console.log(directionsDisplay);
+        
+
         // callback
         mapObject.params.rendered.call(this);
+    },
+
+    // Recupréation de la position de l'user
+    getUserLocation:function(){
+        navigator.geolocation.getCurrentPosition(
+            function(position){
+                console.log('userlocation');
+                // Callback
+                console.dir(position.coords);
+                var userLoc=position.coords;
+                mapObject.params.localized.call(this,userLoc);
+            },
+            function(){
+                // Callback
+                mapObject.params.localized.call(this,null);
+            },
+            {enableHighAccuracy:true}
+        );
+    },
+
+    itinerary:function(pos){
+        console.log('itinerary');
+
+        navigator.geolocation.getCurrentPosition(
+            function(position){
+                var start=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+                var end=pos;
+                console.dir(end);
+                console.dir(start);
+
+                var itineraryRequest={
+                    origin:start,
+                    destination:end,
+                    travelMode:google.maps.TravelMode.TRANSIT
+                };
+
+                directionsService.route(itineraryRequest,function(response,status){
+                    if (status==google.maps.DirectionsStatus.OK) {
+                        directionsDisplay.setDirections(response);
+                        directionsDisplay.setMap(mapObject.map);
+                    }
+                });
+
+            },
+            function(){
+                console.log('recup de la geoloc impossible');
+            },
+            {enableHighAccuracy:true}
+        );
     },
 
     // Ajout d'un marker
