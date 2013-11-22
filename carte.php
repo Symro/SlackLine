@@ -47,7 +47,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
         <div id="map">
         </div>
 
-        <div id="dialog-form" title="Ajouter un spot">
+        <div id="markerForm" title="Ajouter un spot">
             <p class="validateTips">All form fields are required.</p>
 
             <form>
@@ -58,8 +58,24 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
                     <input type="text" name="description" class="text ui-widget-content ui-corner-all" />
                     <label for="adresse">Adresse du spot :</label>
                     <input type="text" name="adresse" class="text ui-widget-content ui-corner-all">
-                    <!-- <input type="checkbox" name="categorie" value="shortline"><label>shortline</label>
-                    <input type="checkbox" name="categorie" value="longline"><label>longline</label> -->
+                </fieldset>
+            </form>
+        </div>
+
+        <div id="itineraryForm" title="Calculer un intinéraire">
+            <p class="validateTips">All form fields are required.</p>
+
+            <form>
+                <fieldset>
+                	<p>Selectionnez votre type de transport : </p>
+                	<span id="car">Voiture</span>
+                	<span id="walk">A pied</span>
+                	<span id="transit">Transports</span>
+                	<span id="bike">A bicyclette</span>
+                    <label for="depart">Départ : </label>
+                    <input type="text" name="depart" class="text ui-widget-content ui-corner-all" id="depart" />
+                    <label for="arrivee">Arrivée : </label>
+                    <input type="text" name="arrivee" class="text ui-widget-content ui-corner-all" />
                 </fieldset>
             </form>
         </div>
@@ -313,7 +329,7 @@ else{
 
 
 ?>
-
+	
 
 
 <?php include('footer.php'); ?>
