@@ -12,7 +12,7 @@
   <link rel="stylesheet" type="text/css" href="js/jquery.fullPage.css" />
 
   <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
 
 
   <!--[if IE]>
@@ -26,19 +26,30 @@
   <script type="text/javascript" src="js/jquery.fullPage.js"></script>
 
   <script type="text/javascript">
-    $(document).ready(function() {
-      $.fn.fullpage({
-        'verticalCentered': false
-      });
+
+
+$(document).ready(function(){
+  var current_width = $(window).width();
+  if(current_width >770){
+    $.fn.fullpage({
+    autoScrolling: true,
+    verticalCentered: false,
     });
-  </script>
+  }else{
+    $.fn.fullpage({
+    verticalCentered: false,
+    autoScrolling: false,
+    });
+  }  
+});
+
+</script>
 
 </head>
 <body>
 
 <div class="header">
-  <div class="inHeader">
-  </div>
+  <div class="inHeader"></div>
 </div>
 
 <div class="section" id="section0">
@@ -205,7 +216,7 @@
   
   <!-- <a href="" id="controls"></a> -->
   <video id="video">
-    <source src="assets/ParislackH.mp4" type='video/mp4' >
+    <source src="assets/ParislackHD.mp4" type='video/mp4' >
     <p>Your user agent does not support the HTML5 Video element.</p>
   </video>
   
@@ -256,18 +267,20 @@
       </div><!-- /.span4 -->
     </div>
   </div>
+
   <footer>
-  <div class="container">
-    <div class="row">
-      <ul>
-        <li><a href="#">Abouts</a></li>
-        <li><a href="#">Credits</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
+    <div class="container">
+      <div class="row">
+        <ul>
+          <li><a href="#">Abouts</a></li>
+          <li><a href="#">Credits</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
     </div>
-  </div>
   <p>Copyright 2013 - PariSlack</p>
   </footer>
+
 </div>
 
     <script>

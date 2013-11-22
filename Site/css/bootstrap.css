@@ -446,7 +446,7 @@ margin-left: -50px;
   color: #a6a5a3;
   background-color: #f7f4eb;
 }
-@media (max-width: 767px) {
+@media (max-width: 770px) {
 
   .formulaire{
     padding:0;
@@ -455,27 +455,42 @@ margin-left: -50px;
    #login{
     height:25px;
   }
-  .header{
-    height:75px;
-  }
   .inHeader{
     margin-top: 10px;
   }
   .greyBox {
-/*    height:500px;
-    overflow: scroll;*/
-    margin-top:75px;
+    margin-top:100px;
     left: 50%;
     margin-left: -175px;
   }
   .headerBox{
     height:50px;
   }
-  #section2{
-    padding-top:30%;
+  .inHeader{
+    background-size: 100%;
+  }
+  #section0{
+    background-image:none;
+    background-color: #f7f4eb;
+    height: 780px !important;
+  }
+  #section0::before{
+    display: none;
   }
   #section1{
-    padding-top:35%;
+    min-height:280px;
+  }
+  #section2{
+    min-height:530px;
+  }
+  .arrows-down{
+    visibility:hidden;
+  }
+  .tableau{
+    width:70% !important;
+  }
+  footer p{
+    text-align: right;
   }
 }
 
@@ -516,7 +531,7 @@ margin-left: -50px;
   height:50px;
   width:100%;
   text-indent: 15%;
-  background-image: url('../img/icons/logConnexion.svg');
+  background-image: url('../img/icons/LogConnexion.svg');
   background-repeat: no-repeat;
   background-position: 9px 15px;
 }
@@ -533,6 +548,7 @@ margin-left: -50px;
   left:20px;
   background-position: 6px 14px;
 }
+
 
 /* Facebook */
 /* Inscription - Bouton Facebook */
@@ -695,7 +711,7 @@ right: 75%;
 top: 45%;;
 }
 .tableau{
-  width:500px;
+  width:45%;
   margin: auto;
 }
 .tableau h1{
