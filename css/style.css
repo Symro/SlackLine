@@ -702,14 +702,16 @@ div>input[type='checkbox']{
 	cursor:pointer;
 }
 
-
+#spot .skills div,
 #profil .skills div{
 	clear:both;
 	width:180px;
 	margin:0 auto;
 }
-
-#profil .skills li{
+#spot .skills li,
+#profil .skills li,
+#slacker .skills li{
+	position:relative;
 	list-style:none;
 	float:left;
 	width:70px;
@@ -723,8 +725,12 @@ div>input[type='checkbox']{
 	color:#828282;
 	display:block;
 }
+#spot .skills li{
+	cursor:pointer;
+}
 
-#profil .skills li:before{
+
+.skills li:before{
 	content:'';
 	display:block;
 	width:60px;
@@ -736,17 +742,19 @@ div>input[type='checkbox']{
 	margin-bottom:5px;
 }
 
-#profil .skills li.active{
+.skills li.active{
 	display:block;
 	
 }
 #profil button[name='editSkills']{
 	margin:10px 0 0 0;
 }
-#profil.edition .infos img{
+#profil.edition .infos img,
+#spot.edition .infos img{
 	border:5px double #97CE68;
 }
-#profil.edition .skills li.active:hover:after{
+#profil.edition .skills li.active:hover:after,
+#spot.edition .skills li.active:hover:after{
 	content:'-';
 	font-size:3rem;
 	font-weight:bold;
@@ -756,20 +764,23 @@ div>input[type='checkbox']{
 	top:22%;
 	cursor:pointer;
 }
-#profil.edition .skills li:not(.active):before{
+#profil.edition .skills li:not(.active):before,
+#spot.edition .skills li:not(.active):before{
 	border:solid 5px #c5c4c2;
 	background:#97CE68;
 }
 #profil.edition .skills li.active:hover:before,
-#profil.edition .skills li:not(.active):hover:before{
+#spot.edition .skills li.active:hover:before{
 	background:#94cb68;
 	border:solid 5px #c2c1bf;
 	cursor:pointer;
 }
-#profil.edition .skills li.active:hover:before{
+#profil.edition .skills li.active:hover:before,
+#spot.edition .skills li.active:hover:before{
 	background:#CC6868;
 }
-#profil.edition .skills li:not(.active):after{
+#profil.edition .skills li:not(.active):after,
+#spot.edition .skills li:not(.active):after{
 	content:'+';
 	font-size:3rem;
 	font-weight:bold;
@@ -779,25 +790,26 @@ div>input[type='checkbox']{
 	top:26%;
 	cursor:pointer;
 }
-#profil .skills li.active.shortline{
+
+.skills li.active.shortline{
 	background:url("../img/shortline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
 }
-#profil .skills li.active.longline{
+.skills li.active.longline{
 	background:url("../img/longline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
 }
-#profil .skills li.active.trickline{
+.skills li.active.trickline{
 	background:url("../img/trickline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
 }
-#profil .skills li.active.jumpline{
+.skills li.active.jumpline{
 	background:url("../img/jumpline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
 }
-#profil .skills li.active.highline{
+.skills li.active.highline{
 	background:url("../img/highline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
 }
-#profil .skills li.active.blindline{
+.skills li.active.blindline{
 	background:url("../img/blindline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
 }
-#profil .skills li.active.waterline{
+.skills li.active.waterline{
 	background:url("../img/waterline.svg") no-repeat scroll 50% 10% / 65px 65px rgba(0, 0, 0, 0);
 }
 
@@ -819,6 +831,140 @@ div>input[type='checkbox']{
 	width:16px;
 	height:16px;
 }
+
+
+
+/* ____________________ PROFIL SLACKER _______________________ */
+/* ___________________________________________________________ */
+
+
+
+
+#slacker{
+	opacity:1;
+	position:absolute;
+	left:360px;
+	top:0;
+	background:#f4f3f0;
+	padding:45px 55px;
+	width:350px;
+}
+#slacker section{
+	position:relative;
+	margin:0 0 45px 0;
+	clear:both;
+	overflow:auto;
+}
+#slacker section h2{
+	color:#434a54;
+	text-transform: uppercase;
+	font-weight:normal;
+	font-size:1.1rem;
+	line-height:1rem;
+	margin-bottom:16px;
+}
+#slacker .infos figure{
+	position:relative;
+	margin:0 0 10px 0;
+}
+
+#slacker .infos img{
+	display:block;
+	margin:0 auto 15px;
+	width:100px;height:100px;
+
+	-webkit-border-radius:50%;
+	border-radius:50%;
+	border:solid 5px #97ce68;
+
+}
+#slacker .infos figcaption,
+#slacker .infos div:nth-of-type(1) span{
+	font-size:1.2em;
+	text-transform:uppercase;
+	text-align:center;
+	color:#97ce68;
+
+}
+#slacker .infos > div:nth-of-type(1) span{
+	font-size:1.1em;
+	color:#2d394b;
+}
+#slacker .infos > div:nth-of-type(1) span:first-child:after{
+	content:"·";
+	font-size:1.2em;
+	margin-left:5px;
+	vertical-align:text-bottom;
+}
+#slacker .infos > div:nth-of-type(1) span.combodate{
+	display:block;
+	width:210px;
+}
+
+#slacker .infos > div:nth-of-type(1){
+	text-align: center;
+	margin:10px 0;
+}
+
+#slacker .infos > div:nth-of-type(2){
+	color:#585858;
+	margin:10px 0;
+	background:url('../img/editDescription.svg') no-repeat 0px 2px;
+	background-size:14px 14px;
+	text-indent: 22px;
+	text-align:justify;
+	white-space:normal;
+}
+
+#slacker .infos > input[type='tel'],
+#slacker .infos > input[type='email']{
+	float:left;
+	width:77px;
+	height:24px;
+	padding:0;
+	margin-bottom:0;
+	border:solid 1px transparent;
+	background:none;
+	box-shadow:none;
+}
+#slacker .infos > input[type='email']{
+	width:200px;
+	margin-bottom:10px;
+}
+
+#slacker .infos > input[type='tel']:not([disabled]){
+	border-bottom:1px dashed #629C42;
+}
+
+#slacker .infos > label[for='phone'],
+#slacker .infos > label[for='email']{
+	display:block;
+	float:left;
+	text-indent:-9999px;
+	background:url('../img/telephone.svg') no-repeat -5px 2px;
+	background-size:20px 20px;
+	width:20px;
+	height:25px;
+	vertical-align:text-bottom;
+}
+#slacker .infos > label[for='email']{
+	background:url('../img/contact.svg') no-repeat -3px 4px;
+	background-size:20px 20px;
+	clear:left;
+	float:left;
+}
+#slacker .infos #editProfil{
+	display:block;
+	clear:left;
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -1026,6 +1172,61 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 
 /* Accueil Carte */
 
+#spot{
+	position:absolute;
+	left:0;
+	top:0;
+	background:#f4f3f0;
+	/*padding:45px 55px;*/
+	width:350px;
+	height:100%;
+	box-shadow: 1px 0px 6px #a5a39f;
+}
+#spot footer.suivant > div{
+	margin-top:10px;
+}
+#spot footer.suivant > div a:first-child{
+	float:left;
+}
+#spot footer.suivant > div a:last-child{
+	float:right;
+}
+
+
+/* Animation CSS 3 - Panel */
+
+
+.panel{
+	min-height: 100%;
+	width:350px;
+	position: absolute;
+	padding:45px 55px;
+	top:0px;
+	background-color: #b1e583;
+	margin-left: -102%;
+	z-index:2;
+	-webkit-transition: all .6s ease-in-out;
+	-moz-transition: all .6s ease-in-out;
+	-o-transition: all .6s ease-in-out;
+	-ms-transition: all .6s ease-in-out;
+	transition: all .6s ease-in-out;
+}
+.panel:target{
+	margin-left: 0%;
+	background-color: #F4F3F0;
+}
+
+.content {
+	width:350px;
+	padding:45px 55px;
+	position: absolute;
+	left: 0px;
+	top: 0;
+	opacity:1;
+}
+.content:target{
+	opacity:1;
+}
 
 
 #accueilCarteDisplay{
@@ -1041,15 +1242,6 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	cursor:pointer;
 }
 
-#accueilCarte, #catSpot, #infoSpot, #detailSpot{
-	position:absolute;
-	left:0;
-	top:0;
-	background:#f4f3f0;
-	padding:45px 55px;
-	width:350px;
-	box-shadow: 1px 0px 6px #a5a39f;
-}
 #accueilCarte > div, #catSpot > div, #infoSpot > div, #detailSpot > div{
 	position:relative;
 	margin:0 0 45px 0;
@@ -1058,11 +1250,7 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 #infoSpot input{
 	width:100%;
 }
-/*
-#accueilCarte img, #infoSpot image{
-margin-left: 10px;
-}
-*/
+
 #accueilCarte div h2, #catSpot div h2, #infoSpot div h2, #detailSpot div h2{
 	color:#38475e;
 	text-transform: uppercase;
@@ -1307,41 +1495,3 @@ button.large,
 	background:rgba(151, 206, 104, 1);
 }
 
-#profil .skills div, #catSpot .categories div{
-	clear:both;
-	width:180px;
-	margin:0 auto;
-}
-
-#profil .skills li, #catSpot .categories li{
-	list-style:none;
-	float:left;
-	width:70px;
-	height:90px;
-	text-align:center;
-	text-transform:uppercase;
-	font-size:0.75rem;
-	margin-right:20px;
-	margin-top:15px;
-	margin-bottom:5px;
-	color:#828282;
-	display:block;
-}
-/*
-#profil .skills li:before, #catSpot .categories li:before{
-	content:'';
-	display:block;
-	width:60px;
-	height:60px;
-	-webkit-border-radius:50%;
-	border-radius:50%;
-	background:#858585;
-	border:solid 5px #97ce68;	
-	margin-bottom:5px;
-}
-
-#profil .skills li.active, #catSpot .categories li.active{
-	display:block;
-	
-}
-*/

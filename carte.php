@@ -47,7 +47,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
         <div id="map">
         </div>
 
-        <div id="markerForm" title="Ajouter un spot">
+        <div id="dialog-form" title="Ajouter un spot">
             <p class="validateTips">All form fields are required.</p>
 
             <form>
@@ -58,68 +58,11 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
                     <input type="text" name="description" class="text ui-widget-content ui-corner-all" />
                     <label for="adresse">Adresse du spot :</label>
                     <input type="text" name="adresse" class="text ui-widget-content ui-corner-all">
+                    <!-- <input type="checkbox" name="categorie" value="shortline"><label>shortline</label>
+                    <input type="checkbox" name="categorie" value="longline"><label>longline</label> -->
                 </fieldset>
             </form>
         </div>
-
-        <div id="itineraryForm" title="Calculer un intinéraire">
-            <p class="validateTips">All form fields are required.</p>
-
-            <form>
-                <fieldset>
-                	<p>Selectionnez votre type de transport : </p>
-                	<span id="car">Voiture</span>
-                	<span id="walk">A pied</span>
-                	<span id="transit">Transports</span>
-                	<span id="bike">A bicyclette</span>
-                    <label for="depart">Départ : </label>
-                    <input type="text" name="depart" class="text ui-widget-content ui-corner-all" id="depart" />
-                    <label for="arrivee">Arrivée : </label>
-                    <input type="text" name="arrivee" class="text ui-widget-content ui-corner-all" />
-                </fieldset>
-            </form>
-        </div>
-
-        <div class="subscribeSpot">
-				<h2><strong>Quand</strong> irez-vous à<br />ce spot ?</h2>
-				
-				<div class="selectJour">
-				<?php nextDays(5); ?>
-				</div>
-				
-				<div class="selectHeureDepart">
-					<span>DE : </span>
-					<input id="timeStart" data-format="HH:mm"  name="timeStart" type="text">
-
-				</div>
-				<div class="selectHeureArrivee">
-					<span>À : </span>
-					<input id="timeEnd" data-format="HH:mm"  name="timeEnd" type="text">
-				</div>
-				
-				<div class="matos">
-				 <label class="switch-button large" for="material">
-	                <input type="checkbox" id="material" class="switch" name="material" value="yes" <?php if(isset($_POST['material'])) echo "checked='checked'"; ?> >
-	                <span>Matériel           
-	                    <span>Non</span>
-	                    <span>Oui</span>
-	                </span>
-	                <a class="btn btn-primary"></a>
-	              </label>
-				</div>
-				
-				<div class="initiation">
-				 <label class="switch-button large" for="initiation">
-	                <input type="checkbox" id="initiation" class="switch" name="initiation" value="yes" <?php if(isset($_POST['initiation'])) echo "checked='checked'"; ?> >
-	                <span>Proposer une initiation ? 
-	                    <span>Non</span>
-	                    <span>Oui</span>
-	                </span>
-	                <a class="btn btn-primary"></a>
-	              </label>
-	              <p>(Votre statut deviendra "professeur")</p>
-				</div>
-			</div>
 	
 	<!-- FIN CODE SYLVAIN FUSION -->
 
@@ -129,7 +72,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 	<aside id="spot">
 		<!-- HOME -->
-		<section id="accueilCarte">
+		<section id="accueilCarte" class="content">
 
 			<header class="logo">
 				<img src="img/logo.svg" alt="Logo" />
@@ -144,7 +87,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 			<div class="marquerSpot">
 				<h2><strong>Marquer</strong> un spot</h2>
-				<button id="spotStep1" class="btn large">Marquer un spot</button>
+				<a href="#infoSpot" id="newSpot" class="btn large">Marquer un spot</a>
 				<!-- <a href="infoSpot.php"></a> -->
 			</div>
 
@@ -158,12 +101,12 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 		</section>
 
 		<!-- STEP 1 -->
-		<section id="infoSpot" class="hidden">
+		<section id="infoSpot" class="panel">
 		
 			<nav>
 				<ul>
-					<li><a href="carte.php"><img src="img/precedent.svg" alt="Page précédente" /></a></li>
-					<li><a href="#"><img src="img/close.svg" alt="fermer" /></a></li>
+					<li><a href="#accueilCarte"><img src="img/precedent.svg" alt="Page précédente" /></a></li>
+					<li><a href="#accueilCarte"><img src="img/close.svg" alt="fermer" /></a></li>
 				</ul>
 			</nav>
 
@@ -190,6 +133,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
                     <textarea placeholder="Quels sont les point positifs de ce spot ?" rows="5" class="description" id="description"></textarea>
                     <label for="adresse">Adresse du spot :</label>
                     <input type="text" name="adresse" id="adresse" />
+
                     <!-- <input type="checkbox" name="categorie" value="shortline"><label>shortline</label>
                     <input type="checkbox" name="categorie" value="longline"><label>longline</label> -->
                 </fieldset>
@@ -197,17 +141,18 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 			
 			
 	        <footer>
-	            <button id="spotStep2" class="btn" >Suivant</button>
+	            
+	            <a href="#catSpot" class="btn" >Suivant</a>
 			</footer>
 		</section>
 
 		<!-- STEP 2 -->
 
-		<section id="catSpot" class="hidden">
+		<section id="catSpot" class="panel">
 			<nav>
 				<ul>
-					<li><a href="carte.php"><img src="img/precedent.svg" alt="Page précédente" /></a></li>
-					<li><a href="#"><img src="img/close.svg" alt="fermer" /></a></li>
+					<li><a href="#infoSpot"><img src="img/precedent.svg" alt="Page précédente" /></a></li>
+					<li><a href="#accueilCarte"><img src="img/close.svg" alt="fermer" /></a></li>
 				</ul>
 			</nav>
 			
@@ -216,7 +161,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 				<p>26.10.2013 - 14h30.17h30</p>
 			</header>
 
-			<div class="categories">
+			<div class="skills">
 				<h2><strong>Catégories</strong> pratiquées</h2>
 				<div class="clearfix">
 					<li class="skill shortline" data-type="shortline">Shortline</li>
@@ -227,18 +172,28 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 					<li class="skill blindline" data-type="blindline">Blindline</li>
 					<li class="skill waterline" data-type="waterline">Waterline</li>
 				</div>
-				<button name="editSkills" class="hidden">Enregistrer les modifications</button>
 			</div>
 
 			<footer class="suivant">
-				<button id="spotStep3">Suivant</button>
+				<button id="saveSpot" class="btn large">Valider</button>
+				<div class="hidden">
+					<a href="#accueilCarte" class="btn" >J'ai terminé</a>
+					<a href="#detailSpot" class="btn" >Je m'y rend</a>
+				</div>
 			</footer>
 
 		</section>
 
 		<!-- STEP 3 -->
 
-		<section id="detailSpot" class="hidden">
+		<section id="detailSpot" class="panel">
+			<nav>
+				<ul>
+					<li><a href="#catSpot"><img src="img/precedent.svg" alt="Page précédente" /></a></li>
+					<li><a href="#accueilCarte"><img src="img/close.svg" alt="fermer" /></a></li>
+				</ul>
+			</nav>
+
 			<div>
 				<h2><strong>Calculer</strong> l'itinéraire</h2>
 
@@ -290,6 +245,52 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 		</section>
 
 	</aside>
+
+	<div id="slacker">
+		
+		<section class="infos">
+			<figure>
+				<img src="upload/default.jpg" alt="Photo de profil" />
+				<div></div>
+				<figcaption>
+					
+				</figcaption>
+			</figure>
+			<div>
+				<span></span>
+				<span></span>
+			</div>
+			<div></div>
+			<label for="phone">Téléphone :</label>
+			<input type="tel" name="phone" id="phone" class="uneditable" placeholder="Téléphone" pattern='^[0-9]{10}$' disabled />
+
+			<label for="email">Email :</label>
+			<input type="email" name="email" id="email" class="uneditable" disabled />
+
+		</section>
+
+		<section class="skills">
+			<h2><strong>Catégories</strong> pratiquées</h2>
+			<div class="clearfix">
+				<li class="skill shortline" data-type="shortline">Shortline</li>
+				<li class="skill trickline" data-type="trickline">Trickline</li>
+				<li class="skill jumpline" data-type="jumpline">Jumpline</li>
+				<li class="skill longline" data-type="longline">Longline</li>
+				<li class="skill highline" data-type="highline">Highline</li>
+				<li class="skill blindline" data-type="blindline">Blindline</li>
+				<li class="skill waterline" data-type="waterline">Waterline</li>
+			</div>
+			<button name="editSkills" class="hidden">Enregistrer les modifications</button>
+		</section>
+
+		<section class="spotsFav">
+			<h2><strong>Spots</strong> favoris</h2>
+			<div class="result"></div>
+
+		</section>
+
+
+	</div>
 
 	
 	<div class="reseauxSociaux">
@@ -386,7 +387,7 @@ else{
 
 
 ?>
-	
+
 
 
 <?php include('footer.php'); ?>
