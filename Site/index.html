@@ -7,8 +7,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" type="image/png" href="img/favicon.png" />
+    <!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" /><![endif]-->
   <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link rel="stylesheet" title="Design" href="css/style.css" type="text/css" media="screen">
   <link rel="stylesheet" type="text/css" href="js/jquery.fullPage.css" />
 
   <link href='http://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
@@ -22,7 +25,8 @@
   <![endif]-->
     
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>  
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script> 
   <script type="text/javascript" src="js/jquery.fullPage.js"></script>
 
   <script type="text/javascript">
@@ -30,8 +34,10 @@
 
 $(document).ready(function(){
   var current_width = $(window).width();
+  var pepe = $.fn.fullpage;
   if(current_width >770){
     $.fn.fullpage({
+    anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],
     autoScrolling: true,
     verticalCentered: false,
     });
@@ -49,7 +55,7 @@ $(document).ready(function(){
 <body>
 
 <div class="header">
-  <div class="inHeader"></div>
+
 </div>
 
 <div class="section" id="section0">
@@ -65,19 +71,22 @@ $(document).ready(function(){
               <input type="text" id="login" name="login" placeholder="LOGIN" required>
               <input type="text" id="password" name="password" placeholder="PASSWORD" required>
               <input type="submit" id="okLog" value="OK">
-              <div class="iphone hidden-phone"></div></br></br>
+<section class="section-right slideLeft">
+                 <div class="iphone hidden-phone"></div>
+</section>      
+              </br></br>
               <p>Ou se connecter avec:</p>
               <a href="#" id="fb-connect">Completer avec Facebook</a>
               <a href="#" id="google-connect">Completer avec Google+</a>
-              <hr>
-              <input type="submit" value="INSCRIS-TOI">
-            </form>
+              <hr></form>
+              <button class="btn-slack" >INSCRIS-TOI</button>
+            
           </div>
         </div>
       </div>
     </div>
   </div>
-    <a class="arrows-down" href="pariSlack#section1" title="La pratique de la slackline"></a>
+    <a class="arrows-down" href="#secondPage" title="Découvrez la slackline"></a>
 </div>
 
 
@@ -143,8 +152,7 @@ $(document).ready(function(){
 <div class="section" id="section2">
   <div class="container ">      
     <div class="row">
-
-        <div id="owl-section2" class="owl-carousel">
+      <div id="owl-section2" class="owl-carousel">
           <div class="item">
             <div class="">
               <img src="img/anim/anim1.png" alt="HighLine">
@@ -216,7 +224,7 @@ $(document).ready(function(){
   
   <!-- <a href="" id="controls"></a> -->
   <video id="video">
-    <source src="assets/ParislackHD.mp4" type='video/mp4' >
+    <source src="assets/ParislackH.mp4" type='video/mp4' >
     <p>Your user agent does not support the HTML5 Video element.</p>
   </video>
   
@@ -228,13 +236,13 @@ $(document).ready(function(){
   <div class="container">
     <div class="row">
       <ul>
-        <li><a href="#">Abouts</a></li>
+        <li><a href="#">Mentions légales</a></li>
         <li><a href="#">Credits</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="#">Copyright 2013 - PariSlack</a></li>
       </ul>
     </div>
   </div>
-  <p>Copyright 2013 - PariSlack</p>
+  
   </footer>
 </div>
 
@@ -272,13 +280,13 @@ $(document).ready(function(){
     <div class="container">
       <div class="row">
         <ul>
-          <li><a href="#">Abouts</a></li>
+          <li><a href="#">Mention légales</a></li>
           <li><a href="#">Credits</a></li>
-          <li><a href="#">Contact</a></li>
+         
         </ul>
       </div>
     </div>
-  <p>Copyright 2013 - PariSlack</p>
+    <p>Copyright 2013 - PariSlack</p>
   </footer>
 
 </div>
@@ -287,7 +295,7 @@ $(document).ready(function(){
     $(document).ready(function() {
       $("#owl-section1").owlCarousel({
         navigation: true,
-        slideSpeed : 300,
+        slideSpeed : 200,
         paginationSpeed : 400,
         singleItem : true,
         navigationText: [
@@ -299,7 +307,7 @@ $(document).ready(function(){
       });
       $("#owl-section2").owlCarousel({
         navigation: true,
-        slideSpeed : 300,
+        slideSpeed : 200,
         paginationSpeed : 400,
         singleItem : true,
         navigationText: [
