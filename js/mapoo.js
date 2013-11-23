@@ -35,7 +35,6 @@ var mapObject={
         this.map=new google.maps.Map(document.querySelector(this.params.map),settings);
 
         console.log(directionsDisplay);
-        
 
         // callback
         mapObject.params.rendered.call(this);
@@ -59,30 +58,80 @@ var mapObject={
         );
     },
 
-    itinerary:function(pos){
+    itinerary:function(pos,address){
         console.log('itinerary');
 
         navigator.geolocation.getCurrentPosition(
             function(position){
                 var start=new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+                $("input[name='depart']").val("Ma position");
                 var end=pos;
+                $("input[name='arrivee']").val(address);
                 console.dir(end);
                 console.dir(start);
 
-                var itineraryRequest={
-                    origin:start,
-                    destination:end,
-                    travelMode:google.maps.TravelMode.TRANSIT
-                };
+                // On récupère le type de transport
+                var selectMode="TRANSIT";
 
-                directionsService.route(itineraryRequest,function(response,status){
-                    if (status==google.maps.DirectionsStatus.OK) {
-                        directionsDisplay.setDirections(response);
-                        directionsDisplay.setMap(mapObject.map);
-                    }
+                $('#car').on('click',function(e){
+                    selectMode=google.maps.TravelMode.DRIVING;
+                    console.log(selectMode);
+                });
+                $('#walk').on('click',function(e){
+                    selectMode=google.maps.TravelMode.WALKING;
+                    console.log(selectMode);
+                });
+                $('#transit').on('click',function(e){
+                    selectMode=google.maps.TravelMode.TRANSIT;
+                    console.log(selectMode);
+                });
+                $('#bike').on('click',function(e){
+                    selectMode=google.maps.TravelMode.BICYCLING;
+                    console.log(selectMode);
                 });
 
+                $("#itineraryForm").dialog({
+                    autoOpen:true,
+                    height:300,
+                    width:350,
+                    modal:true,
+                    buttons:{
+                        "Calculer un itinéraire":function(){
+                            // On récupère l'adresse de départ si elle est saisie
+                            if ($("input[name='depart']").val()!="Ma position") {
+                                console.log('différent');
+                                var itineraryRequest={
+                                    origin:$("input[name='depart']").val(),
+                                    destination:end,
+                                    travelMode:selectMode
+                                };
+                            }else{
+                                console.log('ma loc');
+                                var itineraryRequest={
+                                    origin:start,
+                                    destination:end,
+                                    travelMode:selectMode
+                                };
+                            }
+
+                            mapObject.params.itineraryCalculated.call(this,itineraryRequest);
+
+                            function handleResponse(data){
+                                $('#answer').get(0).innerHTML=data.msg;
+
+                            }
+                            $(this).dialog("close");
+                        },
+                        Cancel:function(){
+                            $(this).dialog("close");
+                        }
+                    },
+                    close:function(){
+                        $(this).dialog("close");
+                    }
+                });
             },
+
             function(){
                 console.log('recup de la geoloc impossible');
             },
@@ -110,7 +159,7 @@ var mapObject={
             }
         });
 
-        $("#dialog-form").dialog({
+        $("#markerForm").dialog({
         autoOpen:true,
         height:300,
         width:350,
@@ -161,7 +210,7 @@ var mapObject={
                 var lng=results[0].geometry.location.lng();
                 $("input[name='adresse']").val(address);
 
-                $("#dialog-form").dialog({
+                $("#markerForm").dialog({
                     autoOpen:true,
                     height:300,
                     width:350,

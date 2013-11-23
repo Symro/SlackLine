@@ -7,7 +7,7 @@ mapObject.init({
 		$.getJSON(siteUrl+"markers.json", function(data){
             $.each(data,function(key,val){
                 var posMarker=new google.maps.LatLng(parseFloat(val.latitude),parseFloat(val.longitude));
-                var contentMarker='<div class="markerInfo"><p>Nom : '+val.titre+'<br/>Description : '+val.description+'<br/>Adresse : '+val.adresse+'<p><a href="" class="itineraryButton" data-lng="'+val.longitude+'" data-lat="'+val.latitude+'">itinéraire</a></div>';
+                var contentMarker='<div class="markerInfo"><p>Nom : '+val.titre+'<br/>Description : '+val.description+'<br/>Adresse : '+val.adresse+'<p><a href="" class="itineraryButton" data-address="'+val.adresse+'" data-lng="'+val.longitude+'" data-lat="'+val.latitude+'">itinéraire</a></br><a href="" class="inscription" >M\'inscrire à ce spot</a></p></div>';
                 var marker=new google.maps.Marker({
                     position:posMarker,
                     map:mapObject.map,
@@ -43,7 +43,17 @@ mapObject.init({
 	markerAdded:function(pos){
 		console.log('markerAdded');
 		mapObject.map.panTo(pos);
-	}
+	},
+
+    itineraryCalculated:function(request){
+        directionsService.route(request,function(response,status){
+            console.log(request);
+            if (status==google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+                directionsDisplay.setMap(mapObject.map);
+            }
+        });
+    }
 });
 // On change le style des markers
 var iconePerso=new google.maps.MarkerImage(siteUrl+"/img/locationNonOccupe.svg",
@@ -63,18 +73,19 @@ $('#maPosition').on('click',function(e){
 	event.preventDefault();
 	mapObject.getUserLocation();
 });
-// google.maps.event.addListener(mapObject.map, 'rightclick',function(event){
-        //     mapObject.addMarker(event.latLng,mapObject.map);
-        // });
-// Ecouteur itinéraire
+
+// Ecouteurs itinéraire
 $('#map').on('click','.itineraryButton',function(e){
     event.preventDefault();
     var pos=new google.maps.LatLng(parseFloat($(this).data('lat')),parseFloat($(this).data('lng')));
-    mapObject.itinerary(pos);
+    var address=String($(this).data('address'));
+    console.log(address);
+    mapObject.itinerary(pos,address);
 });
+
 // Ecouteur placer un marker à partir de l'adresse
 $('#addMarker').submit(function(e){
     event.preventDefault();
     address=$('input[name=addSpot]').val();
     mapObject.addMarkerByAddress(address);
-}); 
+});
