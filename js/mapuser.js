@@ -24,6 +24,7 @@ mapObject.init({
         });
         // Ecouteur pour l'ajout de marker
         google.maps.event.addListener(mapObject.map, 'rightclick',function(event){
+            $("input[name='validAddress']").prop('disabled',true);
             mapObject.addMarker(event.latLng,mapObject.map);
         });
 	},
@@ -42,7 +43,7 @@ mapObject.init({
 
 	markerAdded:function(pos){
 		console.log('markerAdded');
-		mapObject.map.panTo(pos);
+		mapObject.render();
 	},
 
     itineraryCalculated:function(request){
@@ -64,6 +65,14 @@ var iconePerso=new google.maps.MarkerImage(siteUrl+"/img/locationNonOccupe.svg",
     // Encre
     new google.maps.Point(25,40)	
 );
+var iconeTemp=new google.maps.MarkerImage(siteUrl+"/img/locationTemporaire.svg",
+    // Dimensions
+    new google.maps.Size(24.5,50),
+    // Origine
+    new google.maps.Point(0,0),
+    // Encre
+    new google.maps.Point(25,40)    
+);
 
 // On appelle l'affichage de la map
 $(window).load(mapObject.render());
@@ -84,8 +93,9 @@ $('#map').on('click','.itineraryButton',function(e){
 });
 
 // Ecouteur placer un marker à partir de l'adresse
-$('#addMarker').submit(function(e){
+$('#addAddress').submit(function(e){
     event.preventDefault();
-    address=$('input[name=addSpot]').val();
+    $("input[name='validAddress']").prop('disabled',true);
+    address=$('input[name=addressAdded]').val();
     mapObject.addMarkerByAddress(address);
 });

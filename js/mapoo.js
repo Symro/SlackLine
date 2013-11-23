@@ -7,7 +7,7 @@ var mapObject={
         zoom:13,
         center:{latitude:48.856614,longitude:2.352221},
         mapTypeId:google.maps.MapTypeId.ROADMAP,
-        geocoder:new google.maps.Geocoder(),
+        geocoder:new google.maps.Geocoder()
     },
 
     init:function(options){
@@ -141,6 +141,7 @@ var mapObject={
 
     // Ajout d'un marker
     addMarker:function(pos,map){
+        google.maps.event.clearInstanceListeners(mapObject.map);
         var lat=pos.lat();
         var lng=pos.lng();
         // console.log('latitude du marker : '+lat);
@@ -150,114 +151,139 @@ var mapObject={
             if (status==google.maps.GeocoderStatus.OK) {
                 if (results[1]) {
                     // var address=results[1].formatted_address;
-                    $("input[name='adresse']").val(results[1].formatted_address);
+                    $("input[name='spotAddress']").val(results[1].formatted_address);
+
+                    // Création du marker de prévisualisation
+                    var prevMarker=new google.maps.Marker({
+                        map:mapObject.map,
+                        position:pos,
+                        icon:iconeTemp,
+                        draggable:true,
+                    });
+
+                    // Centrage/zoom sur le marker
+                    mapObject.map.panTo(prevMarker.position);
+                    mapObject.map.setZoom(15);
+
+                    //Ecouteur pour récupérer les coords après un dragend 
+                    google.maps.event.addListener(prevMarker, 'dragend', function(e){
+                        console.log('dragend');
+                        lat=prevMarker.position.lat();
+                        lng=prevMarker.position.lng();
+                        console.dir(prevMarker);
+                    });
+
+                    // Insertion en bdd après validation
+                    $('#spotStep3').on('click',function(e){
+                        event.preventDefault();
+                        var titre=$("input[name='spotName']").val();
+                        var description=$("textarea[name='description']").val();
+                        var adresse=$("input[name='spotAddress']").val();   
+                        // Appel Ajax pour insertion dans la BDD
+                        $.ajax({
+                            url: 'insert.php',
+                            dataType:'json',
+                            type: 'POST',
+                            data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse,
+                            success:handleResponse
+                        });
+                    });
+
+                    // Création du marker suite à l'insertion en bdd
+                    function handleResponse(data){
+                        $('#answer').get(0).innerHTML=data.msg;
+                        if (data.error==false) {
+                            var marker=new google.maps.Marker({
+                                position:prevMarker.position,
+                                map:mapObject.map,
+                                icon:iconePerso
+                            });
+
+                            // On masque le marker de prévisualisation
+                            prevMarker.visible=false;
+
+                            // Callback
+                            mapObject.params.markerAdded.call(this,marker.position);
+                        }
+                    }
                 }else{
                     alert('Adresse non trouvée');
                 }
             }else{
-                alert('Erreur : '+GeocoderStatuss);
+                alert('Erreur : '+GeocoderStatus);
             }
         });
 
-        $("#markerForm").dialog({
-        autoOpen:true,
-        height:300,
-        width:350,
-        modal:true,
-        buttons:{
-            "Ajouter le spot":function(){
-                var titre=$("input[name='titre']").val();
-                var description=$("input[name='description']").val();
-                var adresse=$("input[name='adresse']").val();   
-                // Appel Ajax pour insertion dans la BDD
-                var sendAjax=$.ajax({
-                    url: 'insert.php',
-                    dataType:'json',
-                    type: 'POST',
-                    data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse,
-                    success:handleResponse
-                });
-                function handleResponse(data){
-                    $('#answer').get(0).innerHTML=data.msg;
-                    if (data.error==false) {
-                        var marker=new google.maps.Marker({
-                            position:pos,
-                            map:mapObject.map,
-                            icon:iconePerso
-                        });
-                        // Callback
-                        mapObject.params.markerAdded.call(this,pos);
-                    }
-                }
-                $(this).dialog("close");
-            },
-            Cancel:function(){
-                $(this).dialog("close");
-            }
-        },
-        close:function(){
-            $(this).dialog("close");
-        }
-        });
     },
 
     addMarkerByAddress:function(address){
         console.log('Ajout d\'un marker par une adresse : '+address);
+
+        google.maps.event.clearInstanceListeners(mapObject.map);
         mapObject.params.geocoder.geocode({'address':address},function(results,status){
             if (status==google.maps.GeocoderStatus.OK) {
                 console.log(results[0]);
                 var lat=results[0].geometry.location.lat();
                 var lng=results[0].geometry.location.lng();
-                $("input[name='adresse']").val(address);
+                $("input[name='spotAddress']").val(address);
 
-                $("#markerForm").dialog({
-                    autoOpen:true,
-                    height:300,
-                    width:350,
-                    modal:true,
-                    buttons:{
-                        "Ajouter le spot":function(){
-                            var titre=$("input[name='titre']").val();
-                            var description=$("input[name='description']").val();
-                            var adresse=$("input[name='adresse']").val();   
-                            // Appel Ajax pour insertion dans la BDD
-                            var sendAjax=$.ajax({
-                                url: 'insert.php',
-                                dataType:'json',
-                                type: 'POST',
-                                data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse,
-                                success:handleResponse
-                            });
-                            function handleResponse(data){
-                                $('#answer').get(0).innerHTML=data.msg;
-                                if (data.error==false) {
-                                    var marker=new google.maps.Marker({
-                                        position:results[0].geometry.location,
-                                        map:mapObject.map,
-                                        icon:iconePerso
-                                    });
-                                    // Callback
-                                    mapObject.params.markerAdded.call(this,results[0].geometry.location);
-                                }
-                            }
-                            $(this).dialog("close");
-                        },
-                        Cancel:function(){
-                            $(this).dialog("close");
-                        }
-                    },
-                    close:function(){
-                        $(this).dialog("close");
-                    }
-                    });
-
-                var marker=new google.maps.Marker({
+                var prevMarker=new google.maps.Marker({
                     map:mapObject.map,
                     position:results[0].geometry.location,
-                    icon:iconePerso
-                }); 
+                    icon:iconeTemp,
+                    draggable:true,
+                });
+
+                mapObject.map.panTo(prevMarker.position);
+                mapObject.map.setZoom(15);
+
+                google.maps.event.addListener(prevMarker, 'dragend', function(e){
+                    console.log('dragend');
+                    lat=prevMarker.position.lat();
+                    lng=prevMarker.position.lng();
+                    console.dir(prevMarker);
+                });
+
+                $('#spotStep3').on('click',function(e){
+                    event.preventDefault();
+
+                    var titre=$("input[name='spotName']").val();
+                    var description=$("textarea[name='description']").val();
+                    var adresse=$("input[name='spotAddress']").val();
+
+                    console.log(titre);
+
+                    // Appel Ajax pour insertion dans la BDD
+                    $.ajax({
+                        url: 'insert.php',  
+                        dataType:'json',
+                        type: 'POST',
+                        data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse,
+                        success:handleResponse
+                    });
+                });
+
+                function handleResponse(data){
+                    $('#answer').get(0).innerHTML=data.msg;
+                    console.log('callback');
+
+                    if (data.error==false) {
+                        var marker=new google.maps.Marker({
+                            position:prevMarker.position,
+                            map:mapObject.map,
+                            icon:iconePerso
+                        });
+                        prevMarker.visible=false;
+                        // Callback
+                        mapObject.params.markerAdded.call(this,results[0].geometry.location);
+                    }
+
+                    mapObject.map.panTo(marker.position);
+                    mapObject.map.setZoom(15);
+                }
+
             }else{
-                alert('Erreur : '+GeocoderStatuss);
+                alert('Erreur : '+GeocoderStatus);
             }
         });
     }
