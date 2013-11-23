@@ -43,7 +43,17 @@ mapObject.init({
 	markerAdded:function(pos){
 		console.log('markerAdded');
 		mapObject.map.panTo(pos);
-	}
+	},
+
+    itineraryCalculated:function(request){
+        directionsService.route(request,function(response,status){
+            console.log(request);
+            if (status==google.maps.DirectionsStatus.OK) {
+                directionsDisplay.setDirections(response);
+                directionsDisplay.setMap(mapObject.map);
+            }
+        });
+    }
 });
 // On change le style des markers
 var iconePerso=new google.maps.MarkerImage(siteUrl+"/img/locationNonOccupe.svg",

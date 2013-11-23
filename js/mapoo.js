@@ -114,13 +114,8 @@ var mapObject={
                                 };
                             }
 
-                            directionsService.route(itineraryRequest,function(response,status){
-                                console.log(itineraryRequest);
-                                if (status==google.maps.DirectionsStatus.OK) {
-                                        directionsDisplay.setDirections(response);
-                                        directionsDisplay.setMap(mapObject.map);
-                                }
-                            });
+                            mapObject.params.itineraryCalculated.call(this,itineraryRequest);
+
                             function handleResponse(data){
                                 $('#answer').get(0).innerHTML=data.msg;
 
