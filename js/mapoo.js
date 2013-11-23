@@ -174,7 +174,7 @@ var mapObject={
                     });
 
                     // Insertion en bdd après validation
-                    $('#spotStep3').on('click',function(e){
+                    $('#saveSpot').on('click',function(e){
                         event.preventDefault();
                         var titre=$("input[name='spotName']").val();
                         var description=$("textarea[name='description']").val();

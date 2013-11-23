@@ -579,7 +579,7 @@ $( document ).ready(function() {
 
                 if(technique_formated[i].length > 1){
 
-                    $(".skill").each(function() {
+                    $("#profil .skill").each(function() {
                         var type = $(this).data("type");
 
                         if(type == technique_formated[i]){
@@ -590,7 +590,7 @@ $( document ).ready(function() {
                 }
             }
 
-            $('.skills > div').isotope({ filter: '.active' });
+            $('#profil .skills > div').isotope({ filter: '.active' });
 
 
             if(parseInt(data[0].materiel) == 1){
@@ -601,7 +601,7 @@ $( document ).ready(function() {
 
     };
 
-    $('.skills > div').isotope({
+    $('#profil .skills > div').isotope({
       // options
       itemSelector : '.skill',
       layoutMode : 'fitRows'
@@ -617,7 +617,7 @@ $( document ).ready(function() {
         $('#profil').fadeTo('slow',1);
     })
 
-    var edition = function(){
+    var editionProfil = function(){
 
         console.log('enabled');
         $('#profil').toggleClass('edition');
@@ -626,7 +626,7 @@ $( document ).ready(function() {
         $('button[name=editSkills]').toggleClass('hidden');
 
         // on affiche toutes les catégories pratiquées
-        $('.skills > div').isotope({ filter: '*' });
+        $('#profil .skills > div').isotope({ filter: '*' });
 
         $('#profil .infos input[type=tel]').prop('disabled',false).prop('readonly', true);
         $('#editProfil').text('Enregistrer mes modifications');
@@ -700,20 +700,20 @@ $( document ).ready(function() {
 
     }
     // Désactive l'édition du profil
-    var editionCompleted = function(){
+    var editionProfilCompleted = function(){
         var skills = new Array();
         // on récupère toutes les catégories de slackline actives
-        $(".skills .skill.active").each(function(i) {
+        $("#profil .skills .skill.active").each(function(i) {
             skills[i] = $(this).data('type');
         });
 
         params = {action: 'saveSkills' , skills: skills };
-        request.actionPost ( params , afficherSkills );
+        request.actionPost ( params , afficherSkillsProfil );
 
         $('#profil').toggleClass('edition');
         $('#profil .editable').editable('disable');
         $('button[name=editSkills]').toggleClass('hidden');
-        $('.skills > div').isotope({ filter: '.active' });
+        $('#profil .skills > div').isotope({ filter: '.active' });
         $('#profil .infos input[type=tel]').prop('disabled',true).prop('readonly', false);
         $('.text-error').slideUp('slow', function(){$(this).remove();});
         $('#editProfil').text('Modifier mon profil');
@@ -724,19 +724,19 @@ $( document ).ready(function() {
     $('body').on('click', '#editProfil, button[name="editSkills"]',  function(){
         $this = $(this);
         if($('#profil').hasClass('edition')){
-            editionCompleted();
+            editionProfilCompleted();
         }
         else{
-            edition();
+            editionProfil();
         }
     });
 
 
 
-    var afficherSkills = function(data){
+    var afficherSkillsProfil = function(data){
         if(data.erreur == true){
             var msg = $('<p>').addClass('text-error').text( data.msg );
-            msg.insertBefore('.skills .isotope');
+            msg.insertBefore('#profil .skills .isotope');
             $('#editProfil').trigger('click');
         }
     }
@@ -787,7 +787,7 @@ $( document ).ready(function() {
 
     /* TEMP */
 
-    $('#profil').prev().trigger("click");
+    //$('#profil').prev().trigger("click");
 
 
     var afficherSpotsOuverts = function(data){
@@ -811,27 +811,119 @@ $( document ).ready(function() {
         request.actionGet ( 'getSpotOpen', afficherSpotsOuverts );
     }, 18000);
 
+    /* FIN TEMP */
 
-    $('#spotStep1').on('click', function(){
 
-        $('#accueilCarte, #infoSpot').toggleClass('hidden');
+    $('body').on('click', '#spot.edition .skill', function(){
+        $(this).toggleClass('active');
+    });
+
+    // Clic sur marquer un spot > passage en mode edition
+    $('#spot').on('click', '#newSpot', function(){
+        $('#spot').addClass('edition');
+    });
+
+   
+    /* CREATION D'UN SPOT */
+
+    var spotCreation = function(){
+        $('#saveSpot').text('Nouveau spot ajouté !').prop('disabled',true).next().removeClass('hidden');
+
+
+        var skills = new Array();
+        // on récupère toutes les catégories de slackline actives
+        $("#spot .skills .skill.active").each(function(i) {
+            skills[i] = $(this).data('type');
+        });
+        console.dir(skills);
+
+        $('#spot .skills > div').isotope({ filter: '.active' });
+
+        $('#spot').removeClass('edition');
+        
+
+
+    }
+
+    var spotCreationCompleted = function(){
+        $('#saveSpot').text('Valider').prop('disabled',false).next().addClass('hidden');
+
+
+        $('#spot').removeClass('edition');
+        $('#spot .skills > div').isotope({ filter: '*' }).children('li').removeClass('active');
+        
+    }
+
+
+    // Clic sur croix > fermeture mode edition
+    $('body').on('click', 'a[href=#accueilCarte]', spotCreationCompleted)
+    // Clic sur valider > enregistrement en BDD
+    $('#saveSpot').on('click', spotCreation);
+
+
+
+    /* CONSULTER UN PROFIL DE SLACKER */
+
+    $('body').on('click', '.rechercheSlacker .show.simple' , function(){
+
+        params = {action: 'getSlackerProfil' , userId: $(this).data('id')};
+        request.actionPost ( params , afficherProfilSlacker);
 
     });
 
-    $('#spotStep2').on('click', function(){
+    var afficherProfilSlacker = function(data){
 
-        $('#infoSpot, #catSpot').toggleClass('hidden');
+        if(data.length == 0){
+            $('body').append('Problème d\'affichage du profil <br/>');
+        }
+        else{
 
-    });
+            $('#slacker .infos img').attr('src', data[0].picture);
+            $('#slacker .infos figcaption').text( data[0].nom + " " + data[0].prenom );
+            $('#slacker .infos span:nth-of-type(1)').text ( getAge(data[0].date_naissance)+" ANS" );
+            $('#slacker .infos span:nth-of-type(2)').text ( data[0].niveau );
+            $('#slacker .infos div:nth-of-type(2)').html( data[0].description );
+            $('#slacker .infos input[name=phone]').val( data[0].telephone );
+            $('#slacker .infos input[name=email]').val( data[0].email );
+            $("#slacker .skill").removeClass('active');
+            
+            // Boucle sur les catégories pratiquées
+            
+            var slacker_skills = data[0].technique.replace(/\s/g,'');
+            slacker_skills = slacker_skills.split(",");
+            console.log(slacker_skills);
 
-    $('#spotStep3').on('click', function(){
+            var skills = "";
+            for (var i=0; i<slacker_skills.length; i++) {
 
-        $('#catSpot, #detailSpot').toggleClass('hidden');
+                if(slacker_skills[i].length > 1){
 
-    });
+                    $("#slacker .skill").each(function() {
+                        var type = $(this).data("type");
+
+                        if(type == slacker_skills[i]){
+                            $(this).addClass('active');
+                        }
+
+                    });
+                }
+            }
+
+            $('#slacker .skills > div').isotope({ filter: '.active' });
 
 
-    
+            if(parseInt(data[0].materiel) == 1){
+                $('#material').prop('checked','checked');
+            }
+
+        }
+
+
+
+
+    }
+
+
 
 });
 

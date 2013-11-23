@@ -238,6 +238,8 @@ else{
 
 
 
+
+
 	/* ____________________ POST ____________________ */
 	/* ______________________________________________ */
 	
@@ -251,6 +253,8 @@ else{
 	        case 'removeFavSpot' 	: removeFavSpot(); break;
 	        case 'editProfil' 		: editProfil(); break;
 	        case 'saveSkills' 		: saveSkills(); break;
+
+	        case 'getSlackerProfil' : getSlackerProfil(); break;
 
 	        //case 'blah' : blah();break;
 	        // ...etc...
@@ -588,7 +592,87 @@ else{
 
 
 
+	function getSlackerProfil(){
+		global $PDO;
 
+		try {
+
+			if(isset($_POST['userId']) && !empty($_POST['userId'])){
+				$userId = ((int)$_POST['userId'] == 0 ) ? 0 : (int)$_POST['userId'];
+			}
+
+			$reponseProfil = $PDO->prepare('SELECT nom, prenom, email, date_naissance, niveau, technique, description, materiel, telephone
+							FROM utilisateurs
+							WHERE id = :userId');
+
+			$reponseProfil->execute(array(
+	            ':userId' => $userId
+	        ));
+
+
+			$reponseFav = $PDO->prepare('SELECT spots_favoris.id_spot, spots.titre, spots.description, spots.adresse, spots.categorie, spots.note, 
+				(
+					SELECT ROUND(AVG(NULLIF(note ,0)) ,1)
+					FROM spots_favoris
+					WHERE spots_favoris.id_spot = spots.id
+				) note_moyenne_utilisateurs
+				FROM spots_favoris
+				INNER JOIN spots
+				ON spots_favoris.id_spot = spots.id
+				WHERE spots_favoris.id_utilisateur = :currentUser');
+
+			$reponseFav->execute(array(
+	            ':currentUser' => $userId
+	        ));
+
+
+			if( $reponseProfil ) {
+
+				$donneesProfil 	= $reponseProfil->fetchAll(PDO::FETCH_ASSOC);
+				$donneesFav 	= $reponseFav->fetchAll(PDO::FETCH_ASSOC);
+
+				if($donneesProfil){
+
+					/* $donneesProfil[0]['picture'] = imageExists($userId); */
+
+					if($donneesFav){
+						$donneesProfil[1] = $donneesFav;
+					}
+					
+					
+					if (file_exists('../upload/'.$userId.'.jpg')) {
+						$donneesProfil[0]['picture'] = ROOTPATH.'upload/'.$userId.'.jpg?';
+					}
+					else{
+						$donneesProfil[0]['picture'] = ROOTPATH.'upload/default.jpg';
+					}
+					
+
+					echo json_encode($donneesProfil);
+					$reponseFav->closeCursor();
+					$reponseProfil->closeCursor();
+				}
+				else{
+					echo json_encode(
+						array(
+							"erreur" => true,
+							"msg" => "Ce profil n'existe pas"
+					));
+				}
+			}
+			else{
+				echo json_encode(
+					array(
+						"erreur" => true,
+						"msg" => "Une erreur est survenue lors de la récupération des données"
+				));
+			}
+
+		}catch ( Exception $e ) {
+			echo "Une erreur est survenue lors de la récupération des données";
+		}
+
+	}
 
 
 
