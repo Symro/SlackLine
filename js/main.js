@@ -255,7 +255,7 @@ $( document ).ready(function() {
 
 
     var afficherSpotsFavoris = function(data){
-        $resultSpots = $('.spotsFav .result');
+        $resultSpots = $('#profil .spotsFav .result');
 
         if(data.length != 0){
             
@@ -878,6 +878,8 @@ $( document ).ready(function() {
         }
         else{
 
+            // Affichage des infos du profil
+
             $('#slacker .infos img').attr('src', data[0].picture);
             $('#slacker .infos figcaption').text( data[0].nom + " " + data[0].prenom );
             $('#slacker .infos span:nth-of-type(1)').text ( getAge(data[0].date_naissance)+" ANS" );
@@ -886,12 +888,12 @@ $( document ).ready(function() {
             $('#slacker .infos input[name=phone]').val( data[0].telephone );
             $('#slacker .infos input[name=email]').val( data[0].email );
             $("#slacker .skill").removeClass('active');
-            
+            $('#slacker .favSlacker').attr('data-id', data[0].id).removeClass('removeFavSlacker addFavSlacker').addClass( data[0].favoris_class );
+
             // Boucle sur les catégories pratiquées
             
             var slacker_skills = data[0].technique.replace(/\s/g,'');
             slacker_skills = slacker_skills.split(",");
-            console.log(slacker_skills);
 
             var skills = "";
             for (var i=0; i<slacker_skills.length; i++) {
@@ -916,12 +918,50 @@ $( document ).ready(function() {
                 $('#material').prop('checked','checked');
             }
 
+            // Boucle sur les spots favoris 
+
+            $resultSpots = $('#slacker .spotsFav .result').empty();
+
+            if(data[1]){
+
+                $.each(data[1], function(i, data) {
+
+                        var wrap    = $('<div>').addClass('show').data('spotid', data.id_spot);
+                        var icon    = $('<span>').addClass('img');
+                        var span1   = $('<span>').html( data.titre +" - ");
+                        var span2   = $('<span>').html( data.adresse );
+                        var note    = '<div class="rateit-rated" min="0" max="5" data-rateit-value="'+data.note_moyenne_utilisateurs+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div>';
+
+                        wrap.append( icon, span1, span2, note);
+                        $resultSpots.append( wrap );
+
+                });
+
+                $('div.rateit-rated').rateit();
+            }
+            else{
+                var wrap    = $('<div>').addClass('show').text('Aucun Favoris');
+                $resultSpots.append( wrap );
+            }
+
+
+            $('#slacker').addClass('open').removeClass('close');
+
         }
 
-
-
-
     }
+
+
+    $('#closeSlacker').on('click', function(){
+        $('#slacker').addClass('close').removeClass('open');
+    });
+
+    /* TODO :
+    revoir ajout suppression slacker */
+
+    $('#slacker').on('click', '.favSlacker', function(){
+        $(this).toggleClass('addFavSlacker removeFavSlacker');
+    });
 
 
 

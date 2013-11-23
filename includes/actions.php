@@ -601,7 +601,7 @@ else{
 				$userId = ((int)$_POST['userId'] == 0 ) ? 0 : (int)$_POST['userId'];
 			}
 
-			$reponseProfil = $PDO->prepare('SELECT nom, prenom, email, date_naissance, niveau, technique, description, materiel, telephone
+			$reponseProfil = $PDO->prepare('SELECT id, nom, prenom, email, date_naissance, niveau, technique, description, materiel, telephone
 							FROM utilisateurs
 							WHERE id = :userId');
 
@@ -625,11 +625,24 @@ else{
 	            ':currentUser' => $userId
 	        ));
 
+	        $reponseInFav = $PDO->prepare('SELECT utilisateurs.id, nom, prenom, niveau
+							FROM utilisateurs_favoris
+							INNER JOIN utilisateurs
+							ON utilisateurs_favoris.id_favoris =  utilisateurs.id
+							WHERE utilisateurs_favoris.id_utilisateur = :currentUser
+							AND utilisateurs_favoris.id_favoris = :userId');
+
+			$reponseInFav->execute(array(
+	            ':currentUser' => $_SESSION['membre_id'],
+	            ':userId' => $userId
+	        ));
+
 
 			if( $reponseProfil ) {
 
 				$donneesProfil 	= $reponseProfil->fetchAll(PDO::FETCH_ASSOC);
 				$donneesFav 	= $reponseFav->fetchAll(PDO::FETCH_ASSOC);
+				$donneesInFav 	= $reponseInFav->fetchAll(PDO::FETCH_ASSOC);
 
 				if($donneesProfil){
 
@@ -638,6 +651,9 @@ else{
 					if($donneesFav){
 						$donneesProfil[1] = $donneesFav;
 					}
+
+					$donneesProfil[0]['favoris'] = empty($donneesInFav) ? false : true;
+					$donneesProfil[0]['favoris_class'] = empty($donneesInFav) ? 'addFavSlacker' : 'removeFavSlacker';
 					
 					
 					if (file_exists('../upload/'.$userId.'.jpg')) {
@@ -650,6 +666,7 @@ else{
 
 					echo json_encode($donneesProfil);
 					$reponseFav->closeCursor();
+					$reponseInFav->closeCursor();
 					$reponseProfil->closeCursor();
 				}
 				else{

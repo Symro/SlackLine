@@ -843,12 +843,26 @@ div>input[type='checkbox']{
 #slacker{
 	opacity:1;
 	position:absolute;
-	left:360px;
+	z-index:1;
+	left:350px;
 	top:0;
 	background:#f4f3f0;
 	padding:45px 55px;
 	width:350px;
+	-webkit-transition:all 500ms ease-in;
+	-moz-transition:all 500ms ease-in;
+	transition:all 500ms ease-in;
 }
+#slacker.close{
+	left:0px;
+}
+
+#slacker.open{
+	left:350px;
+}
+
+
+
 #slacker section{
 	position:relative;
 	margin:0 0 45px 0;
@@ -957,10 +971,34 @@ div>input[type='checkbox']{
 	display:block;
 	clear:left;
 }
+#slacker .skills > div{
+	width:180px;
+	margin:0 auto;
+}
 
-
-
-
+#slacker .show .img{
+	display:block;
+	float:left;
+	background:url("../img/spotFav.svg") no-repeat scroll 50% 0 / 36px 96px rgba(0, 0, 0, 0);
+	width:36px;
+	height:50px;
+	margin:5px 10px 0 0;
+}
+#slacker .show:hover .img{
+	background:url("../img/spotFav.svg") no-repeat scroll 50% 100% / 36px 96px rgba(151, 206, 104, 1);
+}
+#slacker .show:hover{
+	background:#97CE68;
+	color:#FFF;
+	cursor:pointer;
+}
+#slacker .show .rateit{
+	float:left;
+}
+#slacker nav .favSlacker{
+	margin-left:10px;
+	background-color:transparent;
+}
 
 
 
@@ -1174,6 +1212,7 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 
 #spot{
 	position:absolute;
+	z-index:2;
 	left:0;
 	top:0;
 	background:#f4f3f0;
