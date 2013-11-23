@@ -15,12 +15,12 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	if(isset($_GET['action']) && !empty($_GET['action'])) {
 	    $action = $_GET['action'];
 	    switch($action) {
-	        case 'getSpotList' : getSpotList(); break;
-	        case 'getFavSpots' : getFavSpots(); break;
-	        case 'getFavSlackers' : getFavSlackers(); break;
-	        case 'getUserProfil' : getUserProfil(); break;
-	        case 'getSpotOpen' : getSpotOpen(); break;
-	        case 'getSpot' : getSpot(); break;
+	        case 'getSpotList' 		: getSpotList(); break;
+	        case 'getFavSpots' 		: getFavSpots(); break;
+	        case 'getFavSlackers' 	: getFavSlackers(); break;
+	        case 'getUserProfil' 	: getUserProfil(); break;
+	        case 'getSpotOpen' 		: getSpotOpen(); break;
+	        case 'getSpot' 			: getSpot(); break;
 	        //case 'blah' : blah();break;
 	        // ...etc...
 	    }

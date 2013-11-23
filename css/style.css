@@ -824,8 +824,7 @@ div>input[type='checkbox']{
 
 /* Profil Recherche */
 
-#resultSpots,
-#resultUsers{
+.result{
 	background:#FFF;
 	border:solid 1px #cdcdcd;
 	border-radius:4px;
@@ -833,40 +832,7 @@ div>input[type='checkbox']{
 	height:185px;
 	overflow:auto;
 }
-#resultSpots .show,
-#resultUsers .show{
-	display:block; 
-	width:100%;
-	padding:5px 10px;
-	border-bottom:solid 1px #e1e1e1;
-	overflow:auto;
-	/*min-height:50px; Bug SlideUp() jquery */
-}
-#resultSpots .show:last-child,
-#resultUsers .show:last-child{
-	border-bottom:none;
-}
-#resultSpots .show:hover,
-#resultUsers .show:hover,
-.btn-search:hover{
-	background:rgba(166, 165, 163,0.15);
-}
-#resultUsers .show span{
-	display:inline-block;
-}
-#resultUsers .show span:nth-of-type(1){
-	margin-top:4px;
-}
-#resultSpots .show span,
-#resultUsers .show span{
-	display:block; 
-	text-overflow:ellipsis;
-	white-space: nowrap;
-	overflow:hidden; 
-	width:160px;
-
-}
-#resultUsers img{
+.result img{
 	width:50px;
 	height:50px;
 	border-radius:50%;
@@ -875,11 +841,97 @@ div>input[type='checkbox']{
 	margin-right:10px;
 }
 
+.result .show{
+	display:block; 
+	width:100%;
+	padding:5px 10px;
+	border-bottom:solid 1px #e1e1e1;
+	overflow:auto;
+	/*min-height:50px; Bug SlideUp() jquery */
+}
+
+.result .show:last-child{
+	border-bottom:none;
+}
+.result .show span{
+	display:block; 
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	overflow:hidden; 
+	width:160px;
+}
+
+.result .show.complet:hover,
+.btn-search:hover{
+	background:rgba(166, 165, 163,0.15);
+}
+.result .show.complet span{
+	/*display:inline-block;*/
+}
+
+.result.user .show.complet span{
+	width:100px;
+}
+
+.result .show.simple{
+	clear:both;
+}
+.result .show.simple span{
+	width:100%;
+}
+.result .show.simple img{
+	margin:10px 13px 0 5px;
+}
+.result .show.simple div:not(.rateit, .rateit-range){
+	width:130px;
+	float:left;
+	display: block;
+}
+.result .show.simple:hover{
+	background:#97ce68;
+	cursor:pointer;
+}
+.result .show.simple:hover p{
+	color:#fff;
+}
+.result .show.simple:hover img{
+	border:solid 3px #d5ebc3;
+}
+
+
+.btn-search:hover{
+	background:rgba(166, 165, 163,0.15);
+}
+.result .show.simple p{
+	margin:0;
+	width:130px;
+	color:#828282;
+	font-size:0.75rem;
+	height:1rem;
+	line-height:1.1;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.result .show.simple p:nth-of-type(1){
+	margin-top:4px;
+	text-transform:uppercase;
+	font-size:0.9rem;
+	font-weight:bold;
+}
+.result .show.simple p:nth-of-type(2){
+	text-transform:uppercase;
+	margin-bottom:5px;
+}
+
+
+
+
 .btn-search,
 .btn-search:hover{
 	width:35px;
-	height:27px;
-	background:#a6a5a3 url('../img/loupe.svg') 6px 1px / 26px 26px no-repeat;
+	height:34px;
+	background:#a6a5a3 url('../img/loupe.svg') 6px 6px / 26px 26px no-repeat;
 	padding:0;
 	margin:0;
 	text-indent:-9999px;
@@ -989,7 +1041,7 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	cursor:pointer;
 }
 
-#accueilCarte, #detailSpot, #placerMarqueur{
+#accueilCarte, #catSpot, #infoSpot, #detailSpot{
 	position:absolute;
 	left:0;
 	top:0;
@@ -998,17 +1050,20 @@ div#users-contain table td, div#users-contain table th { border: 1px solid #eee;
 	width:350px;
 	box-shadow: 1px 0px 6px #a5a39f;
 }
-#accueilCarte > div, #detailSpot > div, #placerMarqueur > div{
+#accueilCarte > div, #catSpot > div, #infoSpot > div, #detailSpot > div{
 	position:relative;
 	margin:0 0 45px 0;
 	clear:both;
 }
-
-#accueilCarte img, #placerMarqueur image{
+#infoSpot input{
+	width:100%;
+}
+/*
+#accueilCarte img, #infoSpot image{
 margin-left: 10px;
 }
-
-#accueilCarte div h2, #detailSpot div h2, #placerMarqueur div h2{
+*/
+#accueilCarte div h2, #catSpot div h2, #infoSpot div h2, #detailSpot div h2{
 	color:#38475e;
 	text-transform: uppercase;
 	font-weight:normal;
@@ -1023,7 +1078,7 @@ strong{
 #accueilCarte input[id^='search'] + .btn-search{
 	top: 40px;
 }
-/* detailSpot */
+/* catSpot */
 nav{
 	position: absolute;
 	top: 10px;
@@ -1062,7 +1117,7 @@ nav li{
 	color:#828282;
 }
 
-.description textarea{
+textarea.description {
 	height: auto;
 	padding: 6px 8px;
 	width: 100%;
@@ -1237,16 +1292,6 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	top: 90px;
 }
 
-.btn-search{
-	width:35px;
-	height:27px;
-	background:url('../img/loupeGris.svg') 5px 5px / 26px 26px no-repeat;
-	padding:0;
-	margin:0;
-	text-indent:-9999px;
-	box-shadow:none;
-	opacity: 0.7;
-}
 button.large,
 .btn.large {
 	height: 35px;
@@ -1257,17 +1302,18 @@ button.large,
 
 #resultSpots .show:hover,
 #resultUsers .show:hover,
+.result .show:hover,
 {
 	background:rgba(151, 206, 104, 1);
 }
 
-#profil .skills div, #detailSpot .categories div{
+#profil .skills div, #catSpot .categories div{
 	clear:both;
 	width:180px;
 	margin:0 auto;
 }
 
-#profil .skills li, #detailSpot .categories li{
+#profil .skills li, #catSpot .categories li{
 	list-style:none;
 	float:left;
 	width:70px;
@@ -1282,7 +1328,7 @@ button.large,
 	display:block;
 }
 /*
-#profil .skills li:before, #detailSpot .categories li:before{
+#profil .skills li:before, #catSpot .categories li:before{
 	content:'';
 	display:block;
 	width:60px;
@@ -1294,7 +1340,7 @@ button.large,
 	margin-bottom:5px;
 }
 
-#profil .skills li.active, #detailSpot .categories li.active{
+#profil .skills li.active, #catSpot .categories li.active{
 	display:block;
 	
 }

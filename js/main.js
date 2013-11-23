@@ -255,7 +255,7 @@ $( document ).ready(function() {
 
 
     var afficherSpotsFavoris = function(data){
-        $resultSpots = $('#resultSpots');
+        $resultSpots = $('.spotsFav .result');
 
         if(data.length != 0){
             
@@ -268,7 +268,7 @@ $( document ).ready(function() {
                 //value.note_moyenne_utilisateurs
                 var span1   = $('<span>').html( value.titre +" - ");
                 var span2   = $('<span>').html( value.adresse );
-                var note    = '<div class="rateit-rated" data-rateit-value="'+value.note_moyenne_utilisateurs+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div>';
+                var note    = '<div class="rateit-rated" min="0" max="5" data-rateit-value="'+value.note_moyenne_utilisateurs+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div>';
 
 
                 wrap.append( button, span1, span2, note);
@@ -301,7 +301,7 @@ $( document ).ready(function() {
 
     var afficherSlackersFavoris = function(data){
 
-        $resultSlackers = $('#resultUsers');
+        $resultSlackers = $('.result.user');
 
         if(data.length != 0){
             
@@ -315,7 +315,7 @@ $( document ).ready(function() {
                     $(this).attr('src', photo_default);
                 });
 
-                var wrap    = $('<div>').addClass('show');
+                var wrap    = $('<div>').addClass('show complet');
                 var button  = $('<button>').addClass('removeFavSlacker animate').attr('data-id', value.id).html('Supprimer des slackers favoris');
                 var span1   = $('<span>').html( value.prenom + " "+ value.nom.substring(0,1) + "." );
                 var span2   = $('<span>').html( value.niveau );
@@ -344,41 +344,120 @@ $( document ).ready(function() {
 
     /* Rrecherche + Affichage des résultats */
 
-    $(".searchUser").keyup(function() { 
-        var searchid = $(this).val();
-        var dataString = 'search='+ searchid;
-        if(searchid!='')
-        {
-            $.ajax({
-                type: "POST",
-                url: "includes/searchUser.php",
-                data: dataString,
-                cache: false,
-                success: function(data) {
-                    $("#resultUsers").html(data).show();
-                    $('#resultUsers').mCustomScrollbar();
-                }
-            });
+    $.fn.search = function(options) {
+
+        var params = {
+
+            result: "",             // jQuery Container of search results
+            rate: false,            // display Rating ?
+            url: "",                // url to file
+            simpleSearch: false,    // affichage simple ou complexe (ajout/retrait favoris)
+            onSuccess: null,
+            onEmptySearch: null
         }
-        else{
-            request.actionGet('getFavSlackers', afficherSlackersFavoris );
-        }   
+
+        var property = $.extend(this.params,options);
+        var _this = $(this);
+
+        return this.each(function()
+        {
+            var searchid = $(this).val();
+            var dataString = 'search='+ searchid;
+            if(property.simpleSearch){
+                dataString+= '&simpleSearch=true';
+            }
+
+            if(searchid!=''){
+                $.ajax({
+                    type: "POST",
+                    url: property.url,
+                    data: dataString,
+                    cache: false,
+                    success: function(data) {
+                        // paramètres : Résultat Recherche + jQuery Object du Container
+                        property.onSuccess.call(this, data, property.result);
+                        if(property.rate){
+                            $('.rateit-rated').rateit();
+                        }
+                    }
+                });
+            }
+            else{
+                property.onEmptySearch.call(this);
+            }   
+        });
+
+    };
+
+    $("#searchSpotInProfil").keyup(function() { 
+        $this = $(this);
+        $this.search({
+            result: $this.siblings('.result'),
+            rate: true,
+            url: "includes/searchSpot.php",
+            onSuccess: function(data, container){
+                $(container).html(data).show().mCustomScrollbar();
+            },
+            onEmptySearch: function(){
+                console.log("#searchSpotInProfil OnEmptySearch");
+                request.actionGet('getFavSpots', afficherSpotsFavoris );
+            }
+        });
     });
 
-    $("#resultUsers").on("click",function(e){ 
-        var $clicked = $(e.target);
-        var $name = $clicked.find('.name').html();
-        var decoded = $("<div/>").html($name).text();
-        $('#searchUser').val(decoded);
+    $("#searchUserInProfil").keyup(function() { 
+        $this = $(this);
+        $(this).search({
+            result: $this.siblings('.result'),
+            url: "includes/searchUser.php",
+            onSuccess: function(data, container){
+                $(container).html(data).show().mCustomScrollbar();
+            },
+            onEmptySearch: function(){
+                console.log("#searchUserInProfil OnEmptySearch");
+                request.actionGet('getFavSlackers', afficherSlackersFavoris );
+            }
+        });
     });
 
-    $('#searchUser').click(function(){
-        $("#resultUsers").fadeIn();
+    $("#searchUser").keyup(function() { 
+        $this = $(this);
+        $(this).search({
+            result: $this.siblings('.result'),
+            url: "includes/searchUser.php",
+            simpleSearch: true,
+
+            onSuccess: function(data, container){
+                $(container).html(data).slideDown('slow', function(){ $(this).mCustomScrollbar(); });
+            },
+            onEmptySearch: function(){
+                $this.siblings('.result').slideUp();
+                
+            }
+        });
+    });
+
+    $("#searchSpot").keyup(function() { 
+        $this = $(this);
+        $(this).search({
+            result: $this.siblings('.result'),
+            url: "includes/searchSpot.php",
+            simpleSearch: true,
+            rate: true,
+            onSuccess: function(data, container){
+                $(container).html(data).slideDown('slow', function(){ $(this).mCustomScrollbar(); });
+            },
+            onEmptySearch: function(){
+                $this.siblings('.result').slideUp();
+                
+            }
+        });
     });
 
 
 
 
+/*
 
     $(".searchSpot").keyup(function() { 
         var searchid = $(this).val();
@@ -416,7 +495,7 @@ $( document ).ready(function() {
 
 
 
-
+*/
 
 
 
@@ -438,13 +517,12 @@ $( document ).ready(function() {
     });
 	
     var afficherSlackers = function(data){
-
-        var res = $('#resultUsers button');
+        var res = $('.slackersFav .result.user button');
 
         if(res.hasClass('animate')){
             res.filter('[data-id='+data.id+']').parents('.show').slideUp(600, function(){
                 $(this).remove();
-                if($('#resultUsers .mCSB_container').is(':empty')){
+                if($('.result.user .mCSB_container').is(':empty')){
                     request.actionGet ( 'getFavSlackers', afficherSlackersFavoris );
                 }
             });
@@ -682,18 +760,20 @@ $( document ).ready(function() {
     $('body').on('click', '.removeFavSpot', function(){
 
         params = {action: 'removeFavSpot' , spotId: $(this).data('id')};
-        request.actionPost ( params , afficherSpots);
+        request.actionPost ( params , afficherSpots );
 
     });
 
     var afficherSpots = function(data){
 
-        var res = $('#resultSpots button');
+        var res = $('.spotsFav .result button');
+        console.log('This Afficher Spots ');
+
 
         if(res.hasClass('animate')){
             res.filter('[data-id='+data.id+']').parents('.show').slideUp(600, function(){
                 $(this).remove();
-                if($('#resultSpots .mCSB_container').is(':empty')){
+                if($('.spotsFav .result .mCSB_container').is(':empty')){
                     request.actionGet ( 'getFavSpots', afficherSpotsFavoris );
                 }
             });
@@ -701,14 +781,13 @@ $( document ).ready(function() {
         else{
             res.filter('[data-id='+data.id+']').toggleClass('addFavSpot removeFavSpot');
         }
-        
 
     }
 
 
     /* TEMP */
 
-    //$('#profil').prev().trigger("click");
+    $('#profil').prev().trigger("click");
 
 
     var afficherSpotsOuverts = function(data){
@@ -733,15 +812,21 @@ $( document ).ready(function() {
     }, 18000);
 
 
+    $('#spotStep1').on('click', function(){
+
+        $('#accueilCarte, #infoSpot').toggleClass('hidden');
+
+    });
+
     $('#spotStep2').on('click', function(){
 
-        $('#accueilCarte, #placerMarqueur').toggleClass('hidden');
+        $('#infoSpot, #catSpot').toggleClass('hidden');
 
     });
 
     $('#spotStep3').on('click', function(){
 
-        $('#placerMarqueur, #detailSpot').toggleClass('hidden');
+        $('#catSpot, #detailSpot').toggleClass('hidden');
 
     });
 

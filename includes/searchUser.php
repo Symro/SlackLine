@@ -13,9 +13,10 @@ if($_POST)
 
     $q = preg_replace("/[^A-Za-z0-9.@]/", " ", $_POST['search']);
 
-    $reponse = $PDO->query("SELECT id,nom, prenom, email, niveau, technique, description
+    $reponse = $PDO->query("SELECT id,nom, prenom, email, niveau, technique, description, telephone
         FROM utilisateurs
         WHERE nom LIKE '%$q%' 
+        OR prenom LIKE '%$q%'
         OR email LIKE '%$q%'
         LIMIT 0 , 10 ") or die( print_r( $PDO->errorInfo() ));
 
@@ -33,6 +34,9 @@ if($_POST)
         echo "<div class='show'>Aucun résultat</div>";
     }
 
+    // Classe CSS pour l'affichage
+    $class_show = isset($_POST['simpleSearch']) ? "simple" : "complet";
+
     // Affichage des résultats
     while($donnee = $reponse->fetch(PDO::FETCH_ASSOC))
     {
@@ -41,6 +45,7 @@ if($_POST)
         $username   = $donnee['prenom'].' '.$nom.'.';
         $email      = $donnee['email'];
         $niveau     = $donnee['niveau'];
+        $telephone  = $donnee['telephone'];
         $b_username = '<strong>'.$q.'</strong>';
         $b_email    = '<strong>'.$q.'</strong>';
         $final_username = str_ireplace($q, $b_username, $username);
@@ -60,11 +65,21 @@ if($_POST)
         }
 
         ?>
-            <div class="show">
-                <button class="<?php echo $class; ?>" data-id="<?php echo $id; ?>"><?php echo $text; ?></button>
-                <img src="<?php echo $photo; ?>" alt="Image utilisateur"/>
-                <span><?php echo $final_username; ?></span>
-                <span><?php echo $niveau; ?></span>
+            <div class="show <?php echo $class_show; ?>" data-id="<?php echo $id; ?>">
+                <?php if($class_show == "complet"){ ?>
+                    <button class="<?php echo $class; ?>" data-id="<?php echo $id; ?>"><?php echo $text; ?></button>
+                    <img src="<?php echo $photo; ?>" alt="Image utilisateur"/>
+                    <span><?php echo $final_username; ?></span>
+                    <span><?php echo $niveau; ?></span>
+                <?php } else{ ?>
+                    <img src="<?php echo $photo; ?>" alt="Image utilisateur"/>
+                    <div>
+                        <p><?php echo $final_username; ?></p>
+                        <p><?php echo $niveau; ?></p>
+                        <p><?php echo $telephone; ?></p>
+                        <p><?php echo $email; ?></p>
+                    </div>
+                <?php } ?>
             </div>
         <?php
     }

@@ -68,10 +68,10 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 	<!-- FUSION CODE AUDREY -->
 
-	<!-- STEP 1 -->
+	
 
 	<aside id="spot">
-
+		<!-- HOME -->
 		<section id="accueilCarte">
 
 			<header class="logo">
@@ -81,26 +81,27 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 			<div class="rechercheSpot">
 				<h2><strong>Rechercher</strong> un spot</h2>
 				<input type="text" class="searchSpot" id="searchSpot" placeholder="Vincennes, Ourcq…" />
+				<label for='searchSpot' class='btn-search'>Rechercher</label>
+				<div class="result" id="resultSpot"></div>
 			</div>
 
 			<div class="marquerSpot">
 				<h2><strong>Marquer</strong> un spot</h2>
-				<button id="spotStep2" class="btn large">Marquer un spot</button>
-				<!-- <a href="placerMarqueur.php"></a> -->
+				<button id="spotStep1" class="btn large">Marquer un spot</button>
+				<!-- <a href="infoSpot.php"></a> -->
 			</div>
 
 			<div class="rechercheSlacker">
 				<h2><strong>Rechercher</strong> un slacker</h2>
 				<input type="text" class="searchUser" id="searchUser" placeholder="Tapez un nom" />
 				<label for='searchUser' class='btn-search'>Rechercher</label>
-				<div id="resultUsers"></div>
+				<div class="result" id="resultUser"></div>
 			</div>
 
 		</section>
 
-		<!-- STEP 2 -->
-
-		<section id="placerMarqueur" class="hidden">
+		<!-- STEP 1 -->
+		<section id="infoSpot" class="hidden">
 		
 			<nav>
 				<ul>
@@ -123,6 +124,70 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	                </fieldset>
 	            </form>
 			</div>
+
+			<form>
+                <fieldset>
+                    <label for="titre">Nom du spot : </label>
+                    <input type="text" name="titre" id="titre" />
+                    <label for="description">Description du spot : </label>
+                    <textarea placeholder="Quels sont les point positifs de ce spot ?" rows="5" class="description" id="description"></textarea>
+                    <label for="adresse">Adresse du spot :</label>
+                    <input type="text" name="adresse" id="adresse" />
+                    <!-- <input type="checkbox" name="categorie" value="shortline"><label>shortline</label>
+                    <input type="checkbox" name="categorie" value="longline"><label>longline</label> -->
+                </fieldset>
+            </form>
+			
+			
+	        <footer>
+	            <button id="spotStep2" class="btn" >Suivant</button>
+			</footer>
+		</section>
+
+		<!-- STEP 2 -->
+
+		<section id="catSpot" class="hidden">
+			<nav>
+				<ul>
+					<li><a href="carte.php"><img src="img/precedent.svg" alt="Page précédente" /></a></li>
+					<li><a href="#"><img src="img/close.svg" alt="fermer" /></a></li>
+				</ul>
+			</nav>
+			
+			<header class="lieu">
+				<h3>Parc ML Kingk</h3>
+				<p>26.10.2013 - 14h30.17h30</p>
+			</header>
+
+			<div class="categories">
+				<h2><strong>Catégories</strong> pratiquées</h2>
+				<div class="clearfix">
+					<li class="skill shortline" data-type="shortline">Shortline</li>
+					<li class="skill trickline" data-type="trickline">Trickline</li>
+					<li class="skill jumpline" data-type="jumpline">Jumpline</li>
+					<li class="skill longline" data-type="longline">Longline</li>
+					<li class="skill highline" data-type="highline">Highline</li>
+					<li class="skill blindline" data-type="blindline">Blindline</li>
+					<li class="skill waterline" data-type="waterline">Waterline</li>
+				</div>
+				<button name="editSkills" class="hidden">Enregistrer les modifications</button>
+			</div>
+
+			<footer class="suivant">
+				<button id="spotStep3">Suivant</button>
+			</footer>
+
+		</section>
+
+		<!-- STEP 3 -->
+
+		<section id="detailSpot" class="hidden">
+			<div>
+				<h2><strong>Calculer</strong> l'itinéraire</h2>
+
+			</div>
+
+
 
 			<div class="quand">
 				<h2><strong>Quand</strong> irez-vous à<br />ce spot ?</h2>
@@ -164,55 +229,6 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	              <p>(Votre statut deviendra "professeur")</p>
 				</div>
 			</div>
-	        
-	        <footer>
-	            <button id="spotStep3" class="btn" ><a href="placerMarqueur2.php">Suivant</a></button>
-			</footer>
-		</section>
-
-		<!-- STEP 3 -->
-
-		<section id="detailSpot" class="hidden">
-			<nav>
-				<ul>
-					<li><a href="carte.php"><img src="img/precedent.svg" alt="Page précédente" /></a></li>
-					<li><a href="#"><img src="img/close.svg" alt="fermer" /></a></li>
-				</ul>
-			</nav>
-			
-			<header class="lieu">
-				<h3>Parc ML Kingk</h3>
-				<p>26.10.2013 - 14h30.17h30</p>
-			</header>
-
-			<div class="categories">
-				<h2><strong>Catégories</strong> pratiquées</h2>
-				<div class="clearfix">
-					<li class="skill shortline" data-type="shortline">Shortline</li>
-					<li class="skill trickline" data-type="trickline">Trickline</li>
-					<li class="skill jumpline" data-type="jumpline">Jumpline</li>
-					<li class="skill longline" data-type="longline">Longline</li>
-					<li class="skill highline" data-type="highline">Highline</li>
-					<li class="skill blindline" data-type="blindline">Blindline</li>
-					<li class="skill waterline" data-type="waterline">Waterline</li>
-				</div>
-				<button name="editSkills" class="hidden">Enregistrer les modifications</button>
-			</div>
-
-			<div class="noteDepart">
-				<h2><strong>Note</strong> de départ</h2>
-				<div class="etoile">[class="étoile"]</div>
-				<p>Votre note : [Note]</p>
-			</div>
-
-			<div class="description">
-				<h2><strong>Description</strong></h2>
-				<textarea placeholder="Quels sont les point positifs de ce spot ?" rows="5" class="descriptionSpot" id="descriptionSpot"></textarea>
-			</div>
-			
-			<footer class="suivant">
-				<button name="next" class="">Suivant</button>
-			</footer>
 
 		</section>
 
@@ -280,18 +296,18 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 		<section class="spotsFav">
 			<h2><strong>Spots</strong> favoris</h2>
-			<input type="text" class="searchSpot" id="searchSpot" placeholder="Rechercher des spots" />
-			<label for="searchSpot" class='btn-search'/>Rechercher</label>
-			<div id="resultSpots"></div>
+			<input type="text" class="searchSpot" id="searchSpotInProfil" placeholder="Rechercher des spots" />
+			<label for="searchSpotInProfil" class='btn-search'/>Rechercher</label>
+			<div class="result"></div>
 
 		</section>
 
 		<section class="slackersFav">
 			<h2><strong>Slackers</strong> favoris</h2>
 
-			<input type="text" class="searchUser" id="searchUser" placeholder="Rechercher des slackers" />
-			<label for='searchUser' class='btn-search'>Rechercher</label>
-			<div id="resultUsers"></div>
+			<input type="text" class="searchUser" id="searchUserInProfil" placeholder="Rechercher des slackers" />
+			<label for='searchUserInProfil' class='btn-search'>Rechercher</label>
+			<div class="result user"></div>
 		</section>
 
 		<a href="#" id="logout">Déconnexion</a>

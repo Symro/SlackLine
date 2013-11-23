@@ -21,7 +21,7 @@
         <script type="text/javascript" src="js/fb_connect.js"></script>
         <?php endif; ?>
 
-        <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBoOm_lPvUSlokpQ8XHfSrGUJOm6vNxLjg&sensor=true"></script>
+        <!--<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyBoOm_lPvUSlokpQ8XHfSrGUJOm6vNxLjg&sensor=true"></script>-->
         <script type="text/javascript" src="js/main.js"></script>
         <script type="text/javascript" src="js/mapoo.js"></script>
         <script type="text/javascript" src="js/mapuser.js"></script>

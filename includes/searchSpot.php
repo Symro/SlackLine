@@ -38,6 +38,10 @@ if($_POST)
         echo "<div class='show'>Aucun résultat</div>";
     }
 
+    // Classe CSS pour l'affichage
+    $class_show = isset($_POST['simpleSearch']) ? "simple" : "complet";
+
+
     // Affichage des résultats
     while($donnee = $reponse->fetch(PDO::FETCH_ASSOC))
     {
@@ -57,12 +61,14 @@ if($_POST)
 
 
         ?>
-            <div class="show">
+            <div class="show <?php echo $class_show; ?>" data-id="<?php echo $id; ?>">
+                <?php if($class_show == "complet"){ ?>
                 <button class="<?php echo $class; ?>" data-id="<?php echo $id; ?>"><?php echo $text; ?></button>
+                <?php } ?>
                 <span><?php echo $final_username; ?> - </span>
                 <span><?php echo $final_email; ?></span>
                 <div>
-                    <div class="rateit-rated" data-rateit-value="<?php echo $note; ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                    <div class="rateit-rated" min="0" max="5" data-rateit-value="<?php echo $note; ?>" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                 </div>
             </div>
             

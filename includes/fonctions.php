@@ -70,8 +70,13 @@ function nextDays($nb = 5){
     
     echo "<select>";
 
-    for ($i = 1; $i <= $nb; $i++){
-        echo "<option data-date=".date("Y-m-d", time() + 86400 * $i) .">" .date("d/m/Y", time() + 86400 * $i) . "</option>";
+    for ($i = 0; $i < $nb; $i++){
+        
+        if($i == 0){ $date = "Aujourd'hui"; }
+        elseif($i == 1){ $date = "Demain"; }
+        else{ $date = "Le ".date("d/m/Y", time() + 86400 * $i); }
+
+        echo "<option data-date=".date("Y-m-d", time() + 86400 * $i) .">" .$date. "</option>";
     }
 
     echo "</select>";
