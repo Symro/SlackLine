@@ -93,7 +93,7 @@ $('#map').on('click','.itineraryButton',function(e){
 });
 
 // Ecouteur placer un marker à partir de l'adresse
-$('#addAddress').submit(function(e){
+$('#addMarker').submit(function(e){
     event.preventDefault();
     $("input[name='validAddress']").prop('disabled',true);
     address=$('input[name=addressAdded]').val();

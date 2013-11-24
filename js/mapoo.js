@@ -178,7 +178,15 @@ var mapObject={
                         event.preventDefault();
                         var titre=$("input[name='spotName']").val();
                         var description=$("textarea[name='description']").val();
-                        var adresse=$("input[name='spotAddress']").val();   
+                        var adresse=$("input[name='spotAddress']").val();
+
+                        var skills = new Array();
+                        // on récupère toutes les catégories de slackline actives
+                        $("#spot .skills .skill.active").each(function(i) {
+                            skills[i] = $(this).data('type');
+                        });
+                        console.dir(skills);
+                        
                         // Appel Ajax pour insertion dans la BDD
                         $.ajax({
                             url: 'insert.php',
@@ -244,7 +252,7 @@ var mapObject={
                     console.dir(prevMarker);
                 });
 
-                $('#spotStep3').on('click',function(e){
+                $('#saveSpot').on('click',function(e){
                     event.preventDefault();
 
                     var titre=$("input[name='spotName']").val();
@@ -253,12 +261,19 @@ var mapObject={
 
                     console.log(titre);
 
+                    var skills = new Array();
+                    // on récupère toutes les catégories de slackline actives
+                    $("#spot .skills .skill.active").each(function(i) {
+                        skills[i] = $(this).data('type');
+                    });
+                    console.dir(skills);
+
                     // Appel Ajax pour insertion dans la BDD
                     $.ajax({
                         url: 'insert.php',  
                         dataType:'json',
                         type: 'POST',
-                        data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse,
+                        data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse+'&skills='+skills,
                         success:handleResponse
                     });
                 });
@@ -276,14 +291,14 @@ var mapObject={
                         prevMarker.visible=false;
                         // Callback
                         mapObject.params.markerAdded.call(this,results[0].geometry.location);
-                    }
 
-                    mapObject.map.panTo(marker.position);
-                    mapObject.map.setZoom(15);
+                        mapObject.map.panTo(marker.position);
+                        mapObject.map.setZoom(15);
+                    }
                 }
 
             }else{
-                alert('Erreur : '+GeocoderStatus);
+                alert('Erreur : ');
             }
         });
     }

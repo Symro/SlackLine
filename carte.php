@@ -119,8 +119,8 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 				<p>Sur la carte à l’aide du clic droit ou entrez une adresse</p>
 				<form id="addMarker">
 	                <fieldset>
-	                	<input type="text" class="addSpot" name="addSpot" placeholder="Vincennes, Ourcq…" />
-	                	<input type="submit" for="addSpot" class='btn-large'/></input>
+	                	<input type="text" class="addSpot" name="addressAdded" placeholder="Vincennes, Ourcq…" />
+	                	<input type="submit" for="addSpot" class='btn-large' name="validAddress"/></input>
 	                </fieldset>
 	            </form>
 			</div>
@@ -132,7 +132,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
                     <label for="description">Description du spot : </label>
                     <textarea placeholder="Quels sont les point positifs de ce spot ?" rows="5" class="description" id="description"></textarea>
                     <label for="adresse">Adresse du spot :</label>
-                    <input type="text" name="adresse" id="adresse" />
+                    <input type="text" name="spotAddress" id="adresse" />
 
                     <!-- <input type="checkbox" name="categorie" value="shortline"><label>shortline</label>
                     <input type="checkbox" name="categorie" value="longline"><label>longline</label> -->
