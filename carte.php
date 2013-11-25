@@ -47,21 +47,63 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
         <div id="map">
         </div>
 
-        <div id="dialog-form" title="Ajouter un spot">
+        <div id="itineraryForm" title="Calculer un intinéraire">
             <p class="validateTips">All form fields are required.</p>
 
             <form>
                 <fieldset>
-                    <label for="titre">Nom du spot : </label>
-                    <input type="text" name="titre" class="text ui-widget-content ui-corner-all" id="name" />
-                    <label for="description">Description du spot : </label>
-                    <input type="text" name="description" class="text ui-widget-content ui-corner-all" />
-                    <label for="adresse">Adresse du spot :</label>
-                    <input type="text" name="adresse" class="text ui-widget-content ui-corner-all">
-                    <!-- <input type="checkbox" name="categorie" value="shortline"><label>shortline</label>
-                    <input type="checkbox" name="categorie" value="longline"><label>longline</label> -->
+                        <p>Selectionnez votre type de transport : </p>
+                        <span id="car">Voiture</span>
+                        <span id="walk">A pied</span>
+                        <span id="transit">Transports</span>
+                        <span id="bike">A bicyclette</span>
+                    <label for="depart">Départ : </label>
+                    <input type="text" name="depart" class="text ui-widget-content ui-corner-all" id="depart" />
+                    <label for="arrivee">Arrivée : </label>
+                    <input type="text" name="arrivee" class="text ui-widget-content ui-corner-all" />
                 </fieldset>
             </form>
+        </div>
+
+        <div id="subscribeSpot" class="hidden">
+                <h2><strong>Quand</strong> irez-vous à<br />ce spot ?</h2>
+                
+                <div class="selectJour">
+                <?php nextDays(5); ?>
+                </div>
+                
+                <div class="selectHeureDepart">
+                        <span>DE : </span>
+                        <input id="timeStart" data-format="HH:mm"  name="timeStart" type="text">
+
+                </div>
+                <div class="selectHeureArrivee">
+                        <span>À : </span>
+                        <input id="timeEnd" data-format="HH:mm"  name="timeEnd" type="text">
+                </div>
+                
+                <div class="matos">
+                 <label class="switch-button large" for="material">
+                <input type="checkbox" id="material" class="switch" name="material" value="yes" <?php if(isset($_POST['material'])) echo "checked='checked'"; ?> >
+                <span>Matériel           
+                    <span>Non</span>
+                    <span>Oui</span>
+                </span>
+                <a class="btn btn-primary"></a>
+              	</label>
+                </div>
+                        
+                <div class="initiation">
+                <label class="switch-button large" for="initiation">
+                <input type="checkbox" id="initiation" class="switch" name="initiation" value="yes" <?php if(isset($_POST['initiation'])) echo "checked='checked'"; ?> >
+                <span>Proposer une initiation ? 
+                    <span>Non</span>
+                    <span>Oui</span>
+                </span>
+                <a class="btn btn-primary"></a>
+              </label>
+              <p>(Votre statut deviendra "professeur")</p>
+            </div>
         </div>
 	
 	<!-- FIN CODE SYLVAIN FUSION -->

@@ -24,19 +24,18 @@ include('includes/fonctions.php');
 						$real_skills = array("shortline", "trickline", "jumpline", "longline", "highline", "blindline", "waterline");
 						$skills = $_POST['skills'];
 						// On fait la différence entre les valeurs reçues par l'utilistaur et les 'vraies valeurs'
-						// $difference = array_intersect($skills, $real_skills);
-						// $final_skills = implode(", ", $difference);
+						$difference = array_intersect($skills, $real_skills);
+						$final_skills = implode(", ", $difference);
 
 						$adresse=filter_var($_POST['adresse'],FILTER_SANITIZE_STRING);
 
 						// Préparation de la requete puis execution
-						$stmt=$PDO->prepare('INSERT INTO spots (latitude,longitude,titre,description,adresse) VALUES (:latitude,:longitude,:titre,:description,:adresse,:categorie)');
+						$stmt=$PDO->prepare('INSERT INTO spots (latitude,longitude,titre,description,adresse) VALUES (:latitude,:longitude,:titre,:description,:adresse,)');
 						$stmt->bindParam(':latitude',$latitude);
 						$stmt->bindParam(':longitude',$longitude);
 						$stmt->bindParam(':titre',$titre);
 						$stmt->bindParam(':description',$description);
 						$stmt->bindParam(':adresse',$adresse);
-						$stmt->bindParam(':categorie',$final_skills);
 
 						$stmt->execute();
 

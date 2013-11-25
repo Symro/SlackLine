@@ -298,7 +298,7 @@ var mapObject={
                 }
 
             }else{
-                alert('Erreur : ');
+                alert('Erreur : '+GeocoderStatus);
             }
         });
     }
