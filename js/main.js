@@ -10,6 +10,10 @@ $( document ).ready(function() {
         yearRange: "-90:+0",
     });
 
+    $('#profil').mCustomScrollbar({
+        advanced:{ updateOnContentResize: true }
+    });
+
     /* Trad FR Moment.js */
 
     moment.lang('fr', {
