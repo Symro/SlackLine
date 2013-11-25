@@ -142,14 +142,19 @@ var mapObject={
     // Ajout d'un marker
     addMarker:function(pos,map){
         google.maps.event.clearInstanceListeners(mapObject.map);
+
         var lat=pos.lat();
         var lng=pos.lng();
         // console.log('latitude du marker : '+lat);
         // console.log('longitude du marker : '+lng);
         // var address=pos;
+
         mapObject.params.geocoder.geocode({'latLng':pos},function(results,status){
+
             if (status==google.maps.GeocoderStatus.OK) {
                 if (results[1]) {
+
+                    $("input[name='validAddress']").prop('disabled',true);
                     // var address=results[1].formatted_address;
                     $("input[name='spotAddress']").val(results[1].formatted_address);
 
@@ -176,6 +181,7 @@ var mapObject={
                     // Insertion en bdd après validation
                     $('#saveSpot').on('click',function(e){
                         event.preventDefault();
+
                         var titre=$("input[name='spotName']").val();
                         var description=$("textarea[name='description']").val();
                         var adresse=$("input[name='spotAddress']").val();
@@ -218,7 +224,7 @@ var mapObject={
                     alert('Adresse non trouvée');
                 }
             }else{
-                alert('Erreur : '+GeocoderStatus);
+                alert('Erreur : '+status);
             }
         });
 
@@ -228,11 +234,16 @@ var mapObject={
         console.log('Ajout d\'un marker par une adresse : '+address);
 
         google.maps.event.clearInstanceListeners(mapObject.map);
+
         mapObject.params.geocoder.geocode({'address':address},function(results,status){
+
             if (status==google.maps.GeocoderStatus.OK) {
-                console.log(results[0]);
+
+                $("input[name='validAddress']").prop('disabled',true);
+
                 var lat=results[0].geometry.location.lat();
                 var lng=results[0].geometry.location.lng();
+
                 $("input[name='spotAddress']").val(address);
 
                 var prevMarker=new google.maps.Marker({
@@ -259,21 +270,21 @@ var mapObject={
                     var description=$("textarea[name='description']").val();
                     var adresse=$("input[name='spotAddress']").val();
 
-                    console.log(titre);
-
-                    // var skills = new Array();
+                    var skillsTab = new Array();
                     // // on récupère toutes les catégories de slackline actives
-                    // $("#spot .skills .skill.active").each(function(i) {
-                    //     skills[i] = $(this).data('type');
-                    // });
-                    // console.dir(skills);
+                    $("#spot .skills .skill.active").each(function(i) {
+                        skillsTab[i] = $(this).data('type');
+                    });
+                    var skills= String(skillsTab);
+                    skills = skills.replace(",", ", ");
+                    console.log(skills);
 
                     // Appel Ajax pour insertion dans la BDD
                     $.ajax({
                         url: 'insert.php',  
                         dataType:'json',
                         type: 'POST',
-                        data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse,
+                        data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse+'&skills='+skills,
                         success:handleResponse
                     });
                 });
@@ -283,11 +294,13 @@ var mapObject={
                     console.log('callback');
 
                     if (data.error==false) {
+
                         var marker=new google.maps.Marker({
                             position:prevMarker.position,
                             map:mapObject.map,
                             icon:iconePerso
                         });
+
                         prevMarker.visible=false;
                         // Callback
                         mapObject.params.markerAdded.call(this,results[0].geometry.location);
@@ -298,7 +311,7 @@ var mapObject={
                 }
 
             }else{
-                alert('Erreur : '+GeocoderStatus);
+                alert('Erreur : '+status);
             }
         });
     }

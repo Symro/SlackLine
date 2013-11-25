@@ -24,7 +24,6 @@ mapObject.init({
         });
         // Ecouteur pour l'ajout de marker
         google.maps.event.addListener(mapObject.map, 'rightclick',function(event){
-            $("input[name='validAddress']").prop('disabled',true);
             mapObject.addMarker(event.latLng,mapObject.map);
         });
 	},
@@ -43,6 +42,7 @@ mapObject.init({
 
 	markerAdded:function(pos){
 		console.log('markerAdded');
+        $("input[name='validAddress']").prop('disabled',false);
 	},
 
     itineraryCalculated:function(request){
@@ -94,7 +94,6 @@ $('#map').on('click','.itineraryButton',function(e){
 // Ecouteur placer un marker à partir de l'adresse
 $('#addMarker').submit(function(e){
     event.preventDefault();
-    $("input[name='validAddress']").prop('disabled',true);
     address=$('input[name=addressAdded]').val();
     mapObject.addMarkerByAddress(address);
 });
