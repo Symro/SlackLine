@@ -20,12 +20,22 @@
 
         <meta name="language" content="fr" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/png" href="img/favicon.png" />
+    	<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" /><![endif]-->
+
         <link href='http://fonts.googleapis.com/css?family=Pacifico|Open+Sans:400,300,600,700' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/bootstrap.css" type="text/css" media="screen" />
         <link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/bootstrap-editable.css" type="text/css" media="screen" />
-        <link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/jquery.mCustomScrollbar.css" type="text/css" media="screen" />
         <link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/jquery-ui-1.10.3.custom.css" type="text/css" media="screen" />
-        <link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/style.css" type="text/css" media="screen" />
+		<?php if(isset($custom_class) && $custom_class == 'home'): ?>
+        <link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/bootstrap-responsive.min.css" type="text/css" media="screen" />
+        <link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/style_home.css" type="text/css" media="screen" />
+    	<?php else: ?>
+    	<link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/jquery.mCustomScrollbar.css" type="text/css" media="screen" />
+		<link rel="stylesheet" title="Design" href="<?php echo ROOTPATH; ?>css/style.css" type="text/css" media="screen" />
+		<?php endif; ?>
+        
 
         <title><?php echo $titre; ?></title>
 

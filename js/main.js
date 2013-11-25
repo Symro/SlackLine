@@ -1,14 +1,5 @@
 $( document ).ready(function() {
 
-    // Affichage calendrier jQuery UI en Francais
-    $.datepicker.setDefaults( $.datepicker.regional[ "fr" ] );
-
-    $("#birthday:not([readonly='readonly'])").datepicker({
-        dateFormat : "dd/mm/yy",
-        changeMonth: true,
-        changeYear: true,
-        yearRange: "-90:+0",
-    });
 
     $('#profil').mCustomScrollbar({
         advanced:{ updateOnContentResize: true }
@@ -139,7 +130,7 @@ $( document ).ready(function() {
                 type: "POST",
                 dataType: "json",
                 success: function(data){
-                    window.location.href = "login.php?logout";
+                    window.location.href = "index.php?logout";
                 }
             });
 
