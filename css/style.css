@@ -9,6 +9,8 @@ font-family: 'Open Sans', sans-serif;
 
 body{
 	font-family: 'Open Sans', sans-serif;
+	height:100%;
+	overflow:hidden;
 }
 
 *{
@@ -588,8 +590,30 @@ div>input[type='checkbox']{
 	width:350px;
 
 	height:100%;
-	overflow:auto;
+	overflow:visible;
 }
+#profil .mCSB_container,
+#profil .mCustomScrollBox{
+	overflow:visible !important;
+}
+#profil .mCustomScrollBox>.mCSB_scrollTools{
+	right:-30px;
+}
+#profil nav:first-child{
+	top:-20px;
+}
+
+#profil #profilClose{
+	
+	position:absolute;
+	top:0;
+	right:0;
+}
+#profil #profilClose img{
+	width:20px;
+	height:20px;
+}
+
 #profil section{
 	position:relative;
 	margin:0 0 45px 0;
@@ -1213,7 +1237,7 @@ div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%;
 div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
 .ui-dialog .ui-state-error { padding: .3em; }
 .validateTips { border: 1px solid transparent; padding: 0.3em; }
-#map{position:absolute;left:0;width:100%;height:768px;background-color:#fff;margin:1em 0 0 0 ;box-shadow: 0 5px 10px rgba(255,255,255,.4);}
+#map{position:absolute;top:0;left:0;width:100%;height:100%;background-color:#fff;margin:0;box-shadow: 0 5px 10px rgba(255,255,255,.4);}
 #map img{max-width:none;}
 #dialog-form{display:none;}
 

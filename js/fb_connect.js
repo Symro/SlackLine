@@ -117,5 +117,17 @@ $(document).ready(function() {
             return [day, month, year].join('/');
         }
 
-  });        
+  });   
+
+    // Affichage calendrier jQuery UI en Francais
+    $.datepicker.setDefaults( $.datepicker.regional[ "fr" ] );
+
+    $("#birthday:not([readonly='readonly'])").datepicker({
+        dateFormat : "dd/mm/yy",
+        changeMonth: true,
+        changeYear: true,
+        yearRange: "-90:+0",
+    });
+
+
 });

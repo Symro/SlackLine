@@ -1,14 +1,5 @@
 $( document ).ready(function() {
 
-    // Affichage calendrier jQuery UI en Francais
-    $.datepicker.setDefaults( $.datepicker.regional[ "fr" ] );
-
-    $("#birthday:not([readonly='readonly'])").datepicker({
-        dateFormat : "dd/mm/yy",
-        changeMonth: true,
-        changeYear: true,
-        yearRange: "-90:+0",
-    });
 
     $('#profil').mCustomScrollbar({
         advanced:{ updateOnContentResize: true }
@@ -109,7 +100,7 @@ $( document ).ready(function() {
             });
 
             d = new Date();
-            $("#profil .infos img").attr("src", siteUrl+"upload/"+id+".jpg?"+ new Date().getTime() );
+            $("#profil .infos img, #profilDisplay").attr("src", siteUrl+"upload/"+id+".jpg?"+ new Date().getTime() );
         }
 
     } 
@@ -139,7 +130,7 @@ $( document ).ready(function() {
                 type: "POST",
                 dataType: "json",
                 success: function(data){
-                    window.location.href = "login.php?logout";
+                    window.location.href = "index.php?logout";
                 }
             });
 
@@ -614,16 +605,19 @@ $( document ).ready(function() {
 
     $('body').on('click', '#profil.edition .skill', function(){
         $(this).toggleClass('active');
-    })
+    });
 
     $('body').on('click', '#profilDisplay' , function(){
         $(this).fadeOut('slow');
         $('#profil').fadeTo('slow',1);
-    })
+    });
+    $('body').on('click', '#profilClose', function(){
+        $('#profilDisplay').fadeIn('slow');
+        $('#profil').fadeTo('slow',0);
+    });
 
     var editionProfil = function(){
 
-        console.log('enabled');
         $('#profil').toggleClass('edition');
         $('#profil .editable').editable('enable');
 
