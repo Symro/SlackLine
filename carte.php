@@ -170,9 +170,9 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 			<form>
                 <fieldset>
                     <label for="titre">Nom du spot : </label>
-                    <input type="text" name="titre" id="titre" />
+                    <input type="text" name="spotName" id="titre" />
                     <label for="description">Description du spot : </label>
-                    <textarea placeholder="Quels sont les point positifs de ce spot ?" rows="5" class="description" id="description"></textarea>
+                    <textarea name="description" placeholder="Quels sont les point positifs de ce spot ?" rows="5" class="description" id="description"></textarea>
                     <label for="adresse">Adresse du spot :</label>
                     <input type="text" name="spotAddress" id="adresse" />
 

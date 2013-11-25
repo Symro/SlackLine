@@ -261,19 +261,19 @@ var mapObject={
 
                     console.log(titre);
 
-                    var skills = new Array();
-                    // on récupère toutes les catégories de slackline actives
-                    $("#spot .skills .skill.active").each(function(i) {
-                        skills[i] = $(this).data('type');
-                    });
-                    console.dir(skills);
+                    // var skills = new Array();
+                    // // on récupère toutes les catégories de slackline actives
+                    // $("#spot .skills .skill.active").each(function(i) {
+                    //     skills[i] = $(this).data('type');
+                    // });
+                    // console.dir(skills);
 
                     // Appel Ajax pour insertion dans la BDD
                     $.ajax({
                         url: 'insert.php',  
                         dataType:'json',
                         type: 'POST',
-                        data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse+'&skills='+skills,
+                        data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse,
                         success:handleResponse
                     });
                 });

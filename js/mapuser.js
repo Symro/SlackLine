@@ -43,7 +43,6 @@ mapObject.init({
 
 	markerAdded:function(pos){
 		console.log('markerAdded');
-		mapObject.render();
 	},
 
     itineraryCalculated:function(request){
