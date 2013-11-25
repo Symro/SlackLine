@@ -1,7 +1,7 @@
 <?php
 
 
-/* TEMP */
+/* TEMP 
 
 if(isset($_SESSION) && !empty($_SESSION)){
       echo "Session active : <br/>";
@@ -11,7 +11,7 @@ else{
       echo "pas de session active <br/>";
 }
 
-/* FIN TEMP */
+*/
 
 
 if(isset($_POST['login'])){

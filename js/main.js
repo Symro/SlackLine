@@ -100,7 +100,7 @@ $( document ).ready(function() {
             });
 
             d = new Date();
-            $("#profil .infos img").attr("src", siteUrl+"upload/"+id+".jpg?"+ new Date().getTime() );
+            $("#profil .infos img, #profilDisplay").attr("src", siteUrl+"upload/"+id+".jpg?"+ new Date().getTime() );
         }
 
     } 
@@ -605,16 +605,19 @@ $( document ).ready(function() {
 
     $('body').on('click', '#profil.edition .skill', function(){
         $(this).toggleClass('active');
-    })
+    });
 
     $('body').on('click', '#profilDisplay' , function(){
         $(this).fadeOut('slow');
         $('#profil').fadeTo('slow',1);
-    })
+    });
+    $('body').on('click', '#profilClose', function(){
+        $('#profilDisplay').fadeIn('slow');
+        $('#profil').fadeTo('slow',0);
+    });
 
     var editionProfil = function(){
 
-        console.log('enabled');
         $('#profil').toggleClass('edition');
         $('#profil .editable').editable('enable');
 

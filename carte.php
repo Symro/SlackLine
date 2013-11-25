@@ -355,6 +355,9 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	<img src="<?php if($img_profil){ echo $img_profil; } ?>" id="profilDisplay" alt="Accéder à mon profil"/>
 
 	<aside id="profil">
+		<nav>
+			<a href="#" id="profilClose"><img src="img/close.svg" alt="Fermer"/></a>
+		</nav>
 
 		<section class="infos">
 			<figure>
