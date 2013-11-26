@@ -1,8 +1,8 @@
 $( document ).ready(function() {
 
 
-    $('#profil').mCustomScrollbar({
-        advanced:{ updateOnContentResize: true }
+    $('#profil, #slacker > .spotsFav .result').mCustomScrollbar({
+        advanced:{ updateOnContentResize: true,autoScrollOnFocus: false }
     });
 
     /* Trad FR Moment.js */
@@ -275,7 +275,8 @@ $( document ).ready(function() {
             
             $resultSpots.mCustomScrollbar({
                 advanced:{
-                    updateOnContentResize: true
+                    updateOnContentResize: true,
+                    autoScrollOnFocus: false
                 }
             });
         }
@@ -324,7 +325,8 @@ $( document ).ready(function() {
 
             $resultSlackers.mCustomScrollbar({
                 advanced:{
-                    updateOnContentResize: true
+                    updateOnContentResize: true,
+                    autoScrollOnFocus: false
                 }
             });
         }
@@ -960,6 +962,32 @@ $( document ).ready(function() {
     $('#slacker').on('click', '.favSlacker', function(){
         $(this).toggleClass('addFavSlacker removeFavSlacker');
     });
+
+
+    /* INSCRIPTION SUR UN SPOT */
+
+    $('body').on('click', '.spotInscription', function(){
+
+        var id = $(this).data('id');
+        spotInscription(id);
+
+    });
+
+    var spotInscription = function(spotId){
+
+        $.each(mapMarkers.responseJSON ,function(key,val){
+            if(val.id == spotId){
+                var currentSpot = mapMarkers.responseJSON[key];
+                var note    = '<div class="rateit-rated" min="0" max="5" data-rateit-value="'+currentSpot.note+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div>';
+                var modal   = $('#spotInscription');
+
+                modal.find('.modal-body h2').text( currentSpot.titre );
+                //modal.find('.modal-body div:first').html( note ).rateit();
+
+            }
+        });
+
+    }
 
 
 

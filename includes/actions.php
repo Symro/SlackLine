@@ -224,7 +224,7 @@ else{
 			global $PDO;
 
 		    // Obtenir la liste des points
-            $result = $PDO->query('SELECT latitude,longitude,titre,description,adresse,materiel,note,categorie FROM spots');
+            $result = $PDO->query('SELECT id,latitude,longitude,titre,description,adresse,materiel,note,categorie FROM spots');
             // On récupère la liste des markers dans un tableau
             $markers=json_encode($result->fetchAll(PDO::FETCH_ASSOC));
             // Fermeture de la connexion
