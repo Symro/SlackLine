@@ -42,7 +42,13 @@ mapObject.init({
 
 	markerAdded:function(pos){
 		console.log('markerAdded');
+
         $("input[name='validAddress']").prop('disabled',false);
+
+        console.log(pos);
+
+        mapObject.map.panTo(pos);
+        mapObject.map.setZoom(20);
 	},
 
     itineraryCalculated:function(request){

@@ -168,7 +168,7 @@ var mapObject={
 
                     // Centrage/zoom sur le marker
                     mapObject.map.panTo(prevMarker.position);
-                    mapObject.map.setZoom(15);
+                    mapObject.map.setZoom(20);
 
                     //Ecouteur pour récupérer les coords après un dragend 
                     google.maps.event.addListener(prevMarker, 'dragend', function(e){
@@ -186,12 +186,14 @@ var mapObject={
                         var description=$("textarea[name='description']").val();
                         var adresse=$("input[name='spotAddress']").val();
 
-                        var skills = new Array();
+                        var skillsTab = new Array();
                         // on récupère toutes les catégories de slackline actives
                         $("#spot .skills .skill.active").each(function(i) {
-                            skills[i] = $(this).data('type');
+                            skillsTab[i] = $(this).data('type');
                         });
-                        console.dir(skills);
+                        var skills= String(skillsTab);
+                        skills = skills.replace(",",", ");
+                        console.log(skills);
                         
                         // Appel Ajax pour insertion dans la BDD
                         $.ajax({
@@ -254,7 +256,7 @@ var mapObject={
                 });
 
                 mapObject.map.panTo(prevMarker.position);
-                mapObject.map.setZoom(15);
+                mapObject.map.setZoom(20);
 
                 google.maps.event.addListener(prevMarker, 'dragend', function(e){
                     console.log('dragend');
@@ -276,7 +278,7 @@ var mapObject={
                         skillsTab[i] = $(this).data('type');
                     });
                     var skills= String(skillsTab);
-                    skills = skills.replace(",", ", ");
+                    skills = skills.replace(",",", ");
                     console.log(skills);
 
                     // Appel Ajax pour insertion dans la BDD
@@ -305,8 +307,6 @@ var mapObject={
                         // Callback
                         mapObject.params.markerAdded.call(this,results[0].geometry.location);
 
-                        mapObject.map.panTo(marker.position);
-                        mapObject.map.setZoom(15);
                     }
                 }
 

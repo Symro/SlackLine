@@ -175,9 +175,6 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
                     <textarea name="description" placeholder="Quels sont les point positifs de ce spot ?" rows="5" class="description" id="description"></textarea>
                     <label for="adresse">Adresse du spot :</label>
                     <input type="text" name="spotAddress" id="adresse" />
-
-                    <!-- <input type="checkbox" name="categorie" value="shortline"><label>shortline</label>
-                    <input type="checkbox" name="categorie" value="longline"><label>longline</label> -->
                 </fieldset>
             </form>
 			
