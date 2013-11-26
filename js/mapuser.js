@@ -4,15 +4,17 @@ mapObject.init({
 	// Une fois la carte affichée
 	rendered:function(){
         console.log('rendered')
-		$.getJSON(siteUrl+"markers.json", function(data){
+		mapMarkers = $.getJSON(siteUrl+"markers.json", function(data){
             $.each(data,function(key,val){
                 var posMarker=new google.maps.LatLng(parseFloat(val.latitude),parseFloat(val.longitude));
-                var contentMarker='<div class="markerInfo"><p>Nom : '+val.titre+'<br/>Description : '+val.description+'<br/>Adresse : '+val.adresse+'<p><a href="" class="itineraryButton" data-address="'+val.adresse+'" data-lng="'+val.longitude+'" data-lat="'+val.latitude+'">itinéraire</a></br><a href="" class="inscription" >M\'inscrire à ce spot</a></p></div>';
+                var contentMarker='<div class="markerInfo"><p>Nom : '+val.titre+'<br/>Description : '+val.description+'<br/>Adresse : '+val.adresse+'<p><a href="" class="itineraryButton" data-address="'+val.adresse+'" data-lng="'+val.longitude+'" data-lat="'+val.latitude+'">itinéraire</a></br><a href="#spotInscription" role="button" data-toggle="modal" data-id="'+val.id+'" class="spotInscription" >M\'inscrire à ce spot</a></p></div>';
                 var marker=new google.maps.Marker({
                     position:posMarker,
                     map:mapObject.map,
                     icon:iconePerso
                 });
+                marker.id = val.id;
+
                 var infowindow=new google.maps.InfoWindow({
                     content:contentMarker
                 });
@@ -20,6 +22,7 @@ mapObject.init({
                 google.maps.event.addListener(marker,'click',function(){
                     infowindow.open(mapObject.map,marker);
                 });
+
             });
         });
         // Ecouteur pour l'ajout de marker

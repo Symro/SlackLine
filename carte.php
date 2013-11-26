@@ -421,6 +421,24 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 	</aside>
 
+	<!-- Modal -->
+	<div id="spotInscription" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+			
+
+		</div>
+		<div class="modal-body">
+			<h2></h2>
+			<div></div>
+			
+
+
+
+		</div>
+
+	</div>
+
 
 <?php
 }
