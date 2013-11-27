@@ -24,7 +24,9 @@ include('includes/fonctions.php');
                     	if (isset($_POST['skills'])&&!empty($_POST['skills'])) {
 
                     		$real_skills = array("shortline", "trickline", "jumpline", "longline", "highline", "blindline", "waterline");
-                            $skills = $_POST['skills'];
+                            $skills = explode(",", $_POST['skills']);
+                            $difference = array_intersect($skills, $real_skills);
+                            $final_skills = implode(", ", $difference);
 
 
 	                        // Préparation de la requete puis execution
@@ -34,7 +36,7 @@ include('includes/fonctions.php');
 	                        $stmt->bindParam(':titre',$titre);
 	                        $stmt->bindParam(':description',$description);
 	                        $stmt->bindParam(':adresse',$adresse);
-	                        $stmt->bindParam(':categorie',$skills);
+	                        $stmt->bindParam(':categorie',$final_skills);
 
 	                        $stmt->execute();
 

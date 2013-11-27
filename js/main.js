@@ -1,66 +1,40 @@
 $( document ).ready(function() {
 
 
+    /* Valeur par défaut pour X-Editable */
+    $.fn.editable.defaults.params = { action : "editProfil" };
+    $.fn.editable.defaults.pk = id;
+
+    /* Custom Scrollbar - initialisation */
+
     $('#profil, #slacker > .spotsFav .result').mCustomScrollbar({
         advanced:{ updateOnContentResize: true,autoScrollOnFocus: false }
     });
 
-    /* Trad FR Moment.js */
-
-    moment.lang('fr', {
-        months : "janvier_février_mars_avril_mai_juin_juillet_août_septembre_octobre_novembre_décembre".split("_"),
-        monthsShort : "janv._févr._mars_avr._mai_juin_juil._août_sept._oct._nov._déc.".split("_"),
-        weekdays : "dimanche_lundi_mardi_mercredi_jeudi_vendredi_samedi".split("_"),
-        weekdaysShort : "dim._lun._mar._mer._jeu._ven._sam.".split("_"),
-        weekdaysMin : "Di_Lu_Ma_Me_Je_Ve_Sa".split("_"),
-        longDateFormat : {
-            LT : "HH:mm",
-            L : "DD/MM/YYYY",
-            LL : "D MMMM YYYY",
-            LLL : "D MMMM YYYY LT",
-            LLLL : "dddd D MMMM YYYY LT"
-        },
-        calendar : {
-            sameDay: "[Aujourd'hui à] LT",
-            nextDay: '[Demain à] LT',
-            nextWeek: 'dddd [à] LT',
-            lastDay: '[Hier à] LT',
-            lastWeek: 'dddd [dernier à] LT',
-            sameElse: 'L'
-        },
-        relativeTime : {
-            future : "dans %s",
-            past : "il y a %s",
-            s : "quelques secondes",
-            m : "une minute",
-            mm : "%d minutes",
-            h : "une heure",
-            hh : "%d heures",
-            d : "un jour",
-            dd : "%d jours",
-            M : "un mois",
-            MM : "%d mois",
-            y : "une année",
-            yy : "%d années"
-        },
-        ordinal : function (number) {
-            return number + (number === 1 ? 'er' : 'ème');
-        },
-        week : {
-            dow : 1, // Monday is the first day of the week.
-            doy : 4  // The week that contains Jan 4th is the first week of the year.
-        }
-    });
-
-    moment.lang('fr');
-
+    /* Combodate - initialisation */
     $('#timeStart, #timeEnd').combodate({
-        firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+        firstItem: 'name',
         minuteStep: 15,
         template: "<b> HH </b><i>h</i><b> mm </b>",
         firstItem:"empty"
     }); 
 
+    /* Calcul de l'age d'une personne à partir d'un DATE */
+    function getAge(dateString) {
+      var today = new Date();
+      var birthDate = new Date(dateString);
+      var age = today.getFullYear() - birthDate.getFullYear();
+      var m = today.getMonth() - birthDate.getMonth();
+      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+        age--;
+      }
+      return age;
+    }
+
+
+
+    /* ------------------- EDITON DU PROFIL ------------------- */
+    /* -------------------------------------------------------- */
 
     $('body').on('click', '#profil.edition .infos img', function(){
         console.log("clicked");
@@ -75,11 +49,11 @@ $( document ).ready(function() {
 
     $('#uploadForm').on('submit', function(e) {
         e.preventDefault();
-        $('#submitButton').attr('disabled', ''); // disable upload button
+        $('#submitButton').attr('disabled', '');
         //show uploading message
         $("#profil figure img").after('<span class="loader"></span>');
         $(this).ajaxSubmit({
-            success:  afterSuccess //call function after success
+            success:  afterSuccess
         });
     });
 
@@ -105,23 +79,10 @@ $( document ).ready(function() {
 
     } 
 
-
-
-    // Valeur par défaut pour X-Editable
-    $.fn.editable.defaults.params = { action : "editProfil" };
-    $.fn.editable.defaults.pk = id;
-
+    /* --------------- ENVOI DE REQUETES AJAJ ----------------- */
+    /* -------------------------------------------------------- */
 	
 	var request = {
-
-        params : {
-
-
-        },
-        init : function(){
-
-
-        },
 
         logout : function(){
 
@@ -144,18 +105,8 @@ $( document ).ready(function() {
                 dataType: 'json',
                 data: actionData,
                 success: function(data){
-
                         if (typeof callback === 'undefined') { console.log(data); }
                         else{ callback(data); };
-
-                        /*
-                        if(data.erreur){
-                            $("body").append('Déjà en favoris..');
-                        }
-                        else{
-                            $('body').append('Supprimé !');
-                        }
-                        */
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     $('body').append('Une erreur s\'est produite.. '+xhr.stat+"   "+thrownError);
@@ -172,12 +123,9 @@ $( document ).ready(function() {
                 data: {
                     action: actionName
                 },
-                
                 success: function(data){
-
                     if (typeof callback === 'undefined') { console.log(data); }
                     else{ callback(data); };
-
                 },
                 error: function (xhr, ajaxOptions, thrownError) {
                     $('body').append('Une erreur s\'est produite.. '+xhr.stat+"   "+thrownError);
@@ -186,42 +134,15 @@ $( document ).ready(function() {
         }
 
 
-    } /* FIN OBJET REQUEST */
-
+    }
 
     function callback(data){
         console.log(data);
     }
 
 
-	$( "#form-inscription" ).on( "submit", function( event ) {
-
-        $.ajax({
-            type: "POST",
-            dataType: 'JSON',
-            url: "form_traitement.php",
-            data: {
-                first_name: info.first_name,
-                last_name: info.last_name,
-                email: info.email,
-                birthday: info.birthday,
-                id_fb : info.id
-            },
-
-            success: function( data ){
-                console.log("return : "+data);
-            }
-
-
-	   });
-    });
-
-
-
-    /* ________________________________ */ 
-    /* _______ MANIPULATION BDD _______ */
-    /* ________________________________ */ 
-
+    /* ------------------ FONCTIONNALITÉS --------------------- */
+    /* -------------------------------------------------------- */
 
     function formatErrorMessage(jqXHR, exception) {
 
@@ -243,12 +164,11 @@ $( document ).ready(function() {
     }
 
     // Déconnexion de l'utilisateur
-
     $('#logout').on('click', function(){
         request.logout();
     });
 
-
+    // Fonction de callback - Affichage des Spots Favoris de l'utilisateur
     var afficherSpotsFavoris = function(data){
         $resultSpots = $('#profil .spotsFav .result');
 
@@ -287,14 +207,16 @@ $( document ).ready(function() {
         }
     };
 
-    /* Afficher les Slackers Favoris */
 
+    /* ------------------------------------------------------------- */
+    /* -- FEATURE : Ajout d'utilisateur en favoris ----------------- */
+    /* ------------------------------------------------------------- */
+    
     $('#favoriteSlackers').on('click', function(){
-
         request.actionGet( 'getFavSlackers' ,  afficherSlackersFavoris );
-
     });
 
+    // Fonction de callback - Affichage des Spots Favoris de l'utilisateur
     var afficherSlackersFavoris = function(data){
 
         $resultSlackers = $('.result.user');
@@ -339,18 +261,20 @@ $( document ).ready(function() {
     };
 
 
-    /* Rrecherche + Affichage des résultats */
+    /* ------------------------------------------------------------- */
+    /* -- FEATURE : Plugin de recherche + Affichage des résultats    */
+    /* ------------------------------------------------------------- */
 
     $.fn.search = function(options) {
 
         var params = {
 
-            result: "",             // jQuery Container of search results
-            rate: false,            // display Rating ?
-            url: "",                // url to file
-            simpleSearch: false,    // affichage simple ou complexe (ajout/retrait favoris)
-            onSuccess: null,
-            onEmptySearch: null
+            result: "",             // Objet jQuery pour afficher le résultat
+            rate: false,            // Affichage de la notation
+            url: "",                // URL de l'appel AJAJ
+            simpleSearch: false,    // Affichage simple ou complexe > (ajout/retrait favoris)
+            onSuccess: null,        // Fonction de callback - affichage
+            onEmptySearch: null     // Fonction de callback - champ vide
         }
 
         var property = $.extend(this.params,options);
@@ -452,53 +376,9 @@ $( document ).ready(function() {
     });
 
 
-
-
-/*
-
-    $(".searchSpot").keyup(function() { 
-        var searchid = $(this).val();
-        var dataString = 'search='+ searchid;
-        if(searchid!='')
-        {
-            $.ajax({
-                type: "POST",
-                url: "includes/searchSpot.php",
-                data: dataString,
-                cache: false,
-                success: function(data) {
-                    $("#resultSpots").html(data).show();
-                    $('#resultSpots').mCustomScrollbar();
-                    $('.rateit-rated').rateit();
-                }
-            });
-        }
-        else{
-            request.actionGet('getFavSpots', afficherSpotsFavoris );
-        }
-
-    });
-
-    $("#resultSpots").on("click",function(e){ 
-        var $clicked = $(e.target);
-        var $name = $clicked.find('.name').html();
-        var decoded = $("<div/>").html($name).text();
-        $('#searchid').val(decoded);
-    });
-
-    $('#searchid').click(function(){
-        $("#resultSpots").fadeIn();
-    });
-
-
-
-*/
-
-
-
-    /* AJOUTER / SUPPRIMER SLACKER DES FAVORIS */
-
-
+    /* ------------------------------------------------------------- */
+    /* -- FEATURE : Ajouter / Supprimer des SLACKERS de ses favoris  */
+    /* ------------------------------------------------------------- */
 
     $('body').on('click', '.removeFavSlacker', function(){
 
@@ -530,26 +410,52 @@ $( document ).ready(function() {
         
     }
 
-    function getAge(dateString) {
-      var today = new Date();
-      var birthDate = new Date(dateString);
-      var age = today.getFullYear() - birthDate.getFullYear();
-      var m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-      return age;
+
+    $('body').on('click', '#getProfil' , function(){
+        request.actionGet ( 'getUserProfil' , afficherProfil);
+    })
+
+    /* ------------------------------------------------------------- */
+    /* -- FEATURE : Ajouter / Supprimer des SPOTS de ses favoris     */
+    /* ------------------------------------------------------------- */
+
+    $('body').on('click', '.addFavSpot', function(){
+
+        params = {action: 'addFavSpot' , spotId: $(this).data('id')};
+        request.actionPost ( params , afficherSpots);
+    });
+
+    $('body').on('click', '.removeFavSpot', function(){
+
+        params = {action: 'removeFavSpot' , spotId: $(this).data('id')};
+        request.actionPost ( params , afficherSpots );
+
+    });
+
+    var afficherSpots = function(data){
+
+        var res = $('.spotsFav .result button');
+        console.log('This Afficher Spots ');
+
+
+        if(res.hasClass('animate')){
+            res.filter('[data-id='+data.id+']').parents('.show').slideUp(600, function(){
+                $(this).remove();
+                if($('.spotsFav .result .mCSB_container').is(':empty')){
+                    request.actionGet ( 'getFavSpots', afficherSpotsFavoris );
+                }
+            });
+        }
+        else{
+            res.filter('[data-id='+data.id+']').toggleClass('addFavSpot removeFavSpot');
+        }
+
     }
 
 
-
-
-    $('body').on('click', '#getProfil' , function(){
-
-        request.actionGet ( 'getUserProfil' , afficherProfil);
-
-    })
-
+    /* ------------------------------------------------------------- */
+    /* -- FEATURE : Affichage du profil de l'utilisateur connecté    */
+    /* ------------------------------------------------------------- */
 
     var afficherProfil = function(data){
 
@@ -589,7 +495,6 @@ $( document ).ready(function() {
 
             $('#profil .skills > div').isotope({ filter: '.active' });
 
-
             if(parseInt(data[0].materiel) == 1){
                 $('#material').prop('checked','checked');
             }
@@ -605,10 +510,6 @@ $( document ).ready(function() {
 
     });
 
-    $('body').on('click', '#profil.edition .skill', function(){
-        $(this).toggleClass('active');
-    });
-
     $('body').on('click', '#profilDisplay' , function(){
         $(this).fadeOut('slow');
         $('#profil').fadeTo('slow',1);
@@ -616,6 +517,26 @@ $( document ).ready(function() {
     $('body').on('click', '#profilClose', function(){
         $('#profilDisplay').fadeIn('slow');
         $('#profil').fadeTo('slow',0);
+    });
+
+
+    /* ------------------------------------------------------------- */
+    /* -- FEATURE : Edition du profil                                */
+    /* ------------------------------------------------------------- */
+
+
+    // Appelle les fonctions d'édition du profil
+    $('body').on('click', '#editProfil, button[name="editSkills"]',  function(){
+        if($('#profil').hasClass('edition')){
+            editionProfilCompleted();
+        }
+        else{
+            editionProfil();
+        }
+    });
+
+    $('body').on('click', '#profil.edition .skill', function(){
+        $(this).toggleClass('active');
     });
 
     var editionProfil = function(){
@@ -631,6 +552,7 @@ $( document ).ready(function() {
         $('#profil .infos input[type=tel]').prop('disabled',false).prop('readonly', true);
         $('#editProfil').text('Enregistrer mes modifications');
 
+        // Edition des champs avec x-editable
         $('#profil .infos span:nth-of-type(1)').editable({
             name: 'date_naissance',
             type: 'combodate',
@@ -651,8 +573,7 @@ $( document ).ready(function() {
 
         });
 
-
-         $('#profil .infos span:nth-of-type(2)').editable({
+        $('#profil .infos span:nth-of-type(2)').editable({
             name: 'niveau',
             url: './includes/actions.php',
             type: 'select',
@@ -688,17 +609,16 @@ $( document ).ready(function() {
                 $(this).val(data.value).attr('value', data.value );
             }
 
-
         });
 
         $('#profil p:nth-child(9) span:nth-child(2)').editable({
             name: 'telephone',
             url: './includes/actions.php',
-            type: 'tel',
-
+            type: 'tel'
         });
 
     }
+
     // Désactive l'édition du profil
     var editionProfilCompleted = function(){
         var skills = new Array();
@@ -720,19 +640,7 @@ $( document ).ready(function() {
 
     }
 
-    // Appelle les fonctions d'édition du profil
-    $('body').on('click', '#editProfil, button[name="editSkills"]',  function(){
-        $this = $(this);
-        if($('#profil').hasClass('edition')){
-            editionProfilCompleted();
-        }
-        else{
-            editionProfil();
-        }
-    });
-
-
-
+    // Callback si l'utilisateur n'a pas renseigné de catégorie pratiqué dans son profil
     var afficherSkillsProfil = function(data){
         if(data.erreur == true){
             var msg = $('<p>').addClass('text-error').text( data.msg );
@@ -742,77 +650,37 @@ $( document ).ready(function() {
     }
 
 	// REQUETES GET DE BASE - AFFICHAGE PROFIL 
-    request.actionGet ( 'getUserProfil' , afficherProfil);
-    request.actionGet ( 'getFavSpots', afficherSpotsFavoris );
-    request.actionGet ( 'getFavSlackers', afficherSlackersFavoris );
-    request.actionGet ( 'getSpot' , afficherSpots);
+    request.actionGet ( 'getUserProfil',    afficherProfil);
+    request.actionGet ( 'getFavSpots',      afficherSpotsFavoris);
+    request.actionGet ( 'getFavSlackers',   afficherSlackersFavoris);
+    request.actionGet ( 'getSpot',          afficherSpots);
 
 
-    /* AJOUTER / SUPPRIMER SPOTS DES FAVORIS */
+    /* ------------------------------------------------------------- */
+    /* -- FEATURE : Création d'un Spot                               */
+    /* ------------------------------------------------------------- */
 
-    $('body').on('click', '.addFavSpot', function(){
+    var spotCreation = function(){
+        $('#saveSpot').text('Nouveau spot ajouté !').prop('disabled',true).next().removeClass('hidden');
 
-        params = {action: 'addFavSpot' , spotId: $(this).data('id')};
-        request.actionPost ( params , afficherSpots);
-
-    });
-
-    $('body').on('click', '.removeFavSpot', function(){
-
-        params = {action: 'removeFavSpot' , spotId: $(this).data('id')};
-        request.actionPost ( params , afficherSpots );
-
-    });
-
-    var afficherSpots = function(data){
-
-        var res = $('.spotsFav .result button');
-        console.log('This Afficher Spots ');
-
-
-        if(res.hasClass('animate')){
-            res.filter('[data-id='+data.id+']').parents('.show').slideUp(600, function(){
-                $(this).remove();
-                if($('.spotsFav .result .mCSB_container').is(':empty')){
-                    request.actionGet ( 'getFavSpots', afficherSpotsFavoris );
-                }
-            });
-        }
-        else{
-            res.filter('[data-id='+data.id+']').toggleClass('addFavSpot removeFavSpot');
-        }
-
-    }
-
-
-    /* TEMP */
-
-    //$('#profil').prev().trigger("click");
-
-
-    var afficherSpotsOuverts = function(data){
-        // $('.content').html("Spot Ouvert : "+data[0].id_spot+" Id Utilisateur : "+data[0].id_utilisateur+" Fermeture le : "+data[0].date_fermeture);
-        //console.log(data);
-
-        $.each(data, function( key, value ) {
-            console.log("clé : "+key+" valeur : ID SPOT"+value.id_spot+" USER "+value.id_utilisateur+" DATE FERM. "+value.date_fermeture);
+        var skills = new Array();
+        // on récupère toutes les catégories de slackline actives
+        $("#spot .skills .skill.active").each(function(i) {
+            skills[i] = $(this).data('type');
         });
 
+        $('#spot .skills > div').isotope({ filter: '.active' });
+
+        $('#spot').removeClass('edition');
+
     }
 
-    $('body').on('click', '.temp', function(){
+    var spotCreationCompleted = function(){
+        $('#saveSpot').text('Valider').prop('disabled',false).next().addClass('hidden');
 
-        request.actionGet ( 'getSpotOpen', afficherSpotsOuverts );
-
-    });
-
-    setTimeout(function(){ 
-        // récuperer les spots 'ouverts' toutes les 3 minutes
-        request.actionGet ( 'getSpotOpen', afficherSpotsOuverts );
-    }, 18000);
-
-    /* FIN TEMP */
-
+        $('#spot').removeClass('edition');
+        $('#spot .skills > div').isotope({ filter: '*' }).children('li').removeClass('active');
+    }
 
     $('body').on('click', '#spot.edition .skill', function(){
         $(this).toggleClass('active');
@@ -823,46 +691,16 @@ $( document ).ready(function() {
         $('#spot').addClass('edition');
     });
 
-   
-    /* CREATION D'UN SPOT */
-
-    var spotCreation = function(){
-        $('#saveSpot').text('Nouveau spot ajouté !').prop('disabled',true).next().removeClass('hidden');
-
-
-        var skills = new Array();
-        // on récupère toutes les catégories de slackline actives
-        $("#spot .skills .skill.active").each(function(i) {
-            skills[i] = $(this).data('type');
-        });
-        console.dir(skills);
-
-        $('#spot .skills > div').isotope({ filter: '.active' });
-
-        $('#spot').removeClass('edition');
-        
-
-
-    }
-
-    var spotCreationCompleted = function(){
-        $('#saveSpot').text('Valider').prop('disabled',false).next().addClass('hidden');
-
-
-        $('#spot').removeClass('edition');
-        $('#spot .skills > div').isotope({ filter: '*' }).children('li').removeClass('active');
-        
-    }
-
-
     // Clic sur croix > fermeture mode edition
-    $('body').on('click', 'a[href=#accueilCarte]', spotCreationCompleted)
+    $('body').on('click', 'a[href=#accueilCarte]', spotCreationCompleted);
+
     // Clic sur valider > enregistrement en BDD
     $('#saveSpot').on('click', spotCreation);
 
 
-
-    /* CONSULTER UN PROFIL DE SLACKER */
+    /* ------------------------------------------------------------- */
+    /* -- FEATURE : Consulter le profil d'un utilisateur (slacker)   */
+    /* ------------------------------------------------------------- */
 
     $('body').on('click', '.rechercheSlacker .show.simple' , function(){
 
@@ -944,17 +782,16 @@ $( document ).ready(function() {
                 $resultSpots.append( wrap );
             }
 
-
             $('#slacker').addClass('open').removeClass('close');
 
         }
 
     }
 
-
     $('#closeSlacker').on('click', function(){
         $('#slacker').addClass('close').removeClass('open');
     });
+
 
     /* TODO :
     revoir ajout suppression slacker */
@@ -964,7 +801,9 @@ $( document ).ready(function() {
     });
 
 
-    /* INSCRIPTION SUR UN SPOT */
+    /* ------------------------------------------------------------- */
+    /* -- FEATURE : S'inscrire sur un spot                           */
+    /* ------------------------------------------------------------- */
 
     $('body').on('click', '.spotInscription', function(){
 
@@ -977,18 +816,84 @@ $( document ).ready(function() {
 
         $.each(mapMarkers.responseJSON ,function(key,val){
             if(val.id == spotId){
-                var currentSpot = mapMarkers.responseJSON[key];
+                currentSpot = mapMarkers.responseJSON[key];
                 var note    = '<div class="rateit-rated" min="0" max="5" data-rateit-value="'+currentSpot.note+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div>';
                 var modal   = $('#spotInscription');
 
-                modal.find('.modal-body h2').text( currentSpot.titre );
+                modal.find('.modal-body h2:first').text( currentSpot.titre );
+                modal.find(".skill").removeClass('active');
                 //modal.find('.modal-body div:first').html( note ).rateit();
+
+
+                // Boucle sur les catégories pratiquées
+            
+                var slacker_skills = currentSpot.categorie.replace(/\s/g,'');
+                slacker_skills = slacker_skills.split(",");
+
+                var skills = "";
+                for (var i=0; i<slacker_skills.length; i++) {
+                    if(slacker_skills[i].length > 1){
+                        modal.find(".skill").each(function() {
+                            var type = $(this).data("type");
+                            if(type == slacker_skills[i]){
+                                $(this).addClass('active');
+                            }
+                        });
+                    }
+                }
+
+                modal.find('.skills > div').isotope({ filter: '.active' });
+
+
+                
 
             }
         });
 
     }
 
+    // Au changement de date dans la modal
+    $('#spotInscription .calendar select').on('change', function(){
+        var date = $(this).children(':selected').data('date');
+
+        params = {action: 'getSlackerOnSpot' , date: date , spot: currentSpot.id};
+        request.actionPost ( params , afficherSlackerSurSpot);
+
+    });
+
+    var afficherSlackerSurSpot = function(data){
+        console.dir(data);
+    }
+
+
+
+
+
+
+    /* TEMP : FEATURE SPOTS OUVERTS */
+
+    var afficherSpotsOuverts = function(data){
+        // $('.content').html("Spot Ouvert : "+data[0].id_spot+" Id Utilisateur : "+data[0].id_utilisateur+" Fermeture le : "+data[0].date_fermeture);
+        //console.log(data);
+
+        $.each(data, function( key, value ) {
+            console.log("clé : "+key+" valeur : ID SPOT"+value.id_spot+" USER "+value.id_utilisateur+" DATE FERM. "+value.date_fermeture);
+        });
+
+    }
+
+    $('body').on('click', '.temp', function(){
+
+        request.actionGet ( 'getSpotOpen', afficherSpotsOuverts );
+
+    });
+
+    setTimeout(function(){ 
+        // récuperer les spots 'ouverts' toutes les 3 minutes
+        request.actionGet ( 'getSpotOpen', afficherSpotsOuverts );
+    }, 18000);
+
+    /* FIN TEMP */
 
 
 });

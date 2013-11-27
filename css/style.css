@@ -562,6 +562,23 @@ div>input[type='checkbox']{
 
 
 /* ____________________ PARTIE CARTE _______________________ */
+
+
+h2{
+	color:#434a54;
+	text-transform: uppercase;
+	font-weight:normal;
+	font-size:1.1rem;
+	line-height:1rem;
+	margin-bottom:16px;
+}
+
+
+
+
+
+
+
 /* ________________________PROFIL___________________________ */
 
 
@@ -616,14 +633,6 @@ div>input[type='checkbox']{
 	z-index:1;
 	margin:0 0 45px 0;
 	clear:both;
-}
-#profil section h2{
-	color:#434a54;
-	text-transform: uppercase;
-	font-weight:normal;
-	font-size:1.1rem;
-	line-height:1rem;
-	margin-bottom:16px;
 }
 #profil .infos figure{
 	position:relative;
@@ -728,14 +737,16 @@ div>input[type='checkbox']{
 }
 
 #spot .skills div,
-#profil .skills div{
+#profil .skills div,
+#spotInscription .skills div{
 	clear:both;
 	width:180px;
 	margin:0 auto;
 }
 #spot .skills li,
 #profil .skills li,
-#slacker .skills li{
+#slacker .skills li,
+#spotInscription .skills li{
 	position:relative;
 	list-style:none;
 	float:left;

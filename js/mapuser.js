@@ -13,7 +13,6 @@ mapObject.init({
                     map:mapObject.map,
                     icon:iconePerso
                 });
-                marker.id = val.id;
 
                 var infowindow=new google.maps.InfoWindow({
                     content:contentMarker
@@ -102,7 +101,7 @@ $('#map').on('click','.itineraryButton',function(e){
 
 // Ecouteur placer un marker à partir de l'adresse
 $('#addMarker').submit(function(e){
-    event.preventDefault();
+    e.preventDefault();
     address=$('input[name=addressAdded]').val();
     mapObject.addMarkerByAddress(address);
 });

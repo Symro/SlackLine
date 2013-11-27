@@ -88,8 +88,6 @@ if(isset($_POST['submit'])){
                 else{   $phone =  $_POST['phone'];}
                 */
 
-                var_dump($form_error);
-
                 // Si aucune erreur
                 if(empty($form_error)){
 
@@ -176,10 +174,8 @@ if(isset($_POST['submit'])){
                      echo $msg; 
 
                 }   
-      
-
         }
-
+        
         else{
             // Adresse e-mail déjà utilisée !
             $email_error = true;

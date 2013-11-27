@@ -430,10 +430,30 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 		</div>
 		<div class="modal-body">
 			<h2></h2>
-			<div></div>
+			<div class="note"></div>
 			
 
+			<section class="skills">
+				<h2><strong>Catégories</strong> pratiquées</h2>
+				<div class="clearfix">
+					<li class="skill shortline" data-type="shortline">Shortline</li>
+					<li class="skill trickline" data-type="trickline">Trickline</li>
+					<li class="skill jumpline" data-type="jumpline">Jumpline</li>
+					<li class="skill longline" data-type="longline">Longline</li>
+					<li class="skill highline" data-type="highline">Highline</li>
+					<li class="skill blindline" data-type="blindline">Blindline</li>
+					<li class="skill waterline" data-type="waterline">Waterline</li>
+				</div>
+			</section>
 
+			<section class="calendar">
+				<h2><strong>Personnes</strong> Présentes</h2>
+				<div class="selectJour">
+					<?php nextDays(5); ?>
+				</div>
+				<div id="resultCalendar" class="result"></div>
+
+			</section>
 
 		</div>
 
@@ -446,7 +466,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 // Sinon redirection
 else{
 
-	header("Location: ./login.php");
+	header("Location: ./index.php");
 	exit;
 	
 }

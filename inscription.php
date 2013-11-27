@@ -35,6 +35,14 @@ include('form_traitement.php');
 
         <a href="#" id="fb-connect">Compléter avec Facebook</a>
 
+        <?php 
+        if(isset($form_error)){
+            foreach($form_error as $key => $value){
+              echo "<div class='text-error'>". $value."</div>";
+            }
+            echo "<br/>";
+        }
+        ?>
 
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" id="form-inscription" <?php if( isset($email_error) && $email_error === true ): ?>class="email-error"<?php endif; ?>>
 

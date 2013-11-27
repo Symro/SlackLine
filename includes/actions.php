@@ -255,6 +255,7 @@ else{
 	        case 'saveSkills' 		: saveSkills(); break;
 
 	        case 'getSlackerProfil' : getSlackerProfil(); break;
+	        case 'getSlackerOnSpot' : getSlackerOnSpot(); break;
 
 	        //case 'blah' : blah();break;
 	        // ...etc...
@@ -690,6 +691,45 @@ else{
 		}
 
 	}
+
+	function getSlackerOnSpot(){
+		global $PDO;
+
+		try {
+
+			$reponse = $PDO->prepare("SELECT utilisateurs.id, nom, prenom, niveau, HOUR(spots_ouvert.date_ouverture), HOUR(spots_ouvert.date_fermeture)
+							FROM utilisateurs
+							INNER JOIN spots_ouvert
+							ON spots_ouvert.id_utilisateur =  utilisateurs.id
+							WHERE date_ouverture LIKE CONCAT(:date,'%') 
+							AND spots_ouvert.id_spot = :spot");
+
+			$reponse->execute(array(
+	            ':date'	=> $_POST['date'],
+	            ':spot'	=> $_POST['spot']
+	        ));
+
+			 
+			if( $reponse ) {
+				$donnees = $reponse->fetchAll(PDO::FETCH_ASSOC);
+				echo json_encode($donnees);
+				$reponse->closeCursor();
+			}
+			else{
+				echo json_encode(
+					array(
+						"erreur" => true,
+						"msg" => "Une erreur est survenue lors de la récupération des données"
+				));
+			}
+
+		}catch ( Exception $e ) {
+			echo "Une erreur est survenue lors de la récupération des données";
+		}
+
+	}
+
+
 
 
 

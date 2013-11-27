@@ -180,7 +180,7 @@ var mapObject={
 
                     // Insertion en bdd après validation
                     $('#saveSpot').on('click',function(e){
-                        event.preventDefault();
+                        e.preventDefault();
 
                         var titre=$("input[name='spotName']").val();
                         var description=$("textarea[name='description']").val();
@@ -191,16 +191,13 @@ var mapObject={
                         $("#spot .skills .skill.active").each(function(i) {
                             skillsTab[i] = $(this).data('type');
                         });
-                        var skills= String(skillsTab);
-                        skills = skills.replace(",",", ");
-                        console.log(skills);
                         
                         // Appel Ajax pour insertion dans la BDD
                         $.ajax({
                             url: 'insert.php',
                             dataType:'json',
                             type: 'POST',
-                            data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse,
+                            data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse+'&skills='+skillsTab,
                             success:handleResponse
                         });
                     });
@@ -277,16 +274,13 @@ var mapObject={
                     $("#spot .skills .skill.active").each(function(i) {
                         skillsTab[i] = $(this).data('type');
                     });
-                    var skills= String(skillsTab);
-                    skills = skills.replace(",",", ");
-                    console.log(skills);
 
                     // Appel Ajax pour insertion dans la BDD
                     $.ajax({
                         url: 'insert.php',  
                         dataType:'json',
                         type: 'POST',
-                        data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse+'&skills='+skills,
+                        data: 'latitude='+lat+'&longitude='+lng+'&titre='+titre+'&description='+description+'&adresse='+adresse+'&skills='+skillsTab,
                         success:handleResponse
                     });
                 });
