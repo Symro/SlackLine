@@ -7,7 +7,7 @@ $( document ).ready(function() {
 
     /* Custom Scrollbar - initialisation */
 
-    $('#profil, #slacker > .spotsFav .result').mCustomScrollbar({
+    $('#profil, #slacker > .spotsFav .result, #spotDisplay').mCustomScrollbar({
         advanced:{ updateOnContentResize: true,autoScrollOnFocus: false }
     });
 
@@ -30,6 +30,8 @@ $( document ).ready(function() {
       }
       return age;
     }
+    /* Ajout de 0 pour les heures ou minutes */
+    function addZero(n){return n<10 ? '0'+n : n}
 
 
 
@@ -702,8 +704,11 @@ $( document ).ready(function() {
     /* -- FEATURE : Consulter le profil d'un utilisateur (slacker)   */
     /* ------------------------------------------------------------- */
 
-    $('body').on('click', '.rechercheSlacker .show.simple' , function(){
+    $('body').on('click', '.rechercheSlacker .show.simple, #resultCalendar .show.simple' , function(){
 
+        var m = $("#spotDisplay");
+        if(m.hasClass('in')){ m.modal('hide');}
+m
         params = {action: 'getSlackerProfil' , userId: $(this).data('id')};
         request.actionPost ( params , afficherProfilSlacker);
 
@@ -805,22 +810,23 @@ $( document ).ready(function() {
     /* -- FEATURE : S'inscrire sur un spot                           */
     /* ------------------------------------------------------------- */
 
-    $('body').on('click', '.spotInscription', function(){
+    $('body').on('click', '.spotDisplay', function(){
 
         var id = $(this).data('id');
-        spotInscription(id);
+        spotDisplay(id);
 
     });
 
-    var spotInscription = function(spotId){
+    var spotDisplay = function(spotId){
 
         $.each(mapMarkers.responseJSON ,function(key,val){
             if(val.id == spotId){
                 currentSpot = mapMarkers.responseJSON[key];
                 var note    = '<div class="rateit-rated" min="0" max="5" data-rateit-value="'+currentSpot.note+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div>';
-                var modal   = $('#spotInscription');
+                var modal   = $('#spotDisplay');
 
                 modal.find('.modal-body h2:first').text( currentSpot.titre );
+                modal.find('.description').text( currentSpot.description );
                 modal.find(".skill").removeClass('active');
                 //modal.find('.modal-body div:first').html( note ).rateit();
 
@@ -844,26 +850,65 @@ $( document ).ready(function() {
 
                 modal.find('.skills > div').isotope({ filter: '.active' });
 
-
-                
-
             }
         });
+
+        var date = $('#spotDisplay .selectJour option:first').data('date');
+        params = {action: 'getSlackerOnSpot' , date: date , spot: currentSpot.id};
+        request.actionPost ( params , afficherSlackerSurSpot);
 
     }
 
     // Au changement de date dans la modal
-    $('#spotInscription .calendar select').on('change', function(){
-        var date = $(this).children(':selected').data('date');
+    $('#spotDisplay .calendar select').on('change', function(){
 
+        var date = $(this).children(':selected').data('date');
         params = {action: 'getSlackerOnSpot' , date: date , spot: currentSpot.id};
         request.actionPost ( params , afficherSlackerSurSpot);
-
+        
     });
 
     var afficherSlackerSurSpot = function(data){
-        console.dir(data);
+        var $resultSlackerSurSpot = $('#spotDisplay .calendar .result').empty();
+        
+        if(data.length != 0){
+
+            $.each(data, function(i, value) {
+            
+                var photo_default = siteUrl+'upload/default.jpg';
+                var photo   =  $('<img>').attr('src', siteUrl+'upload/'+value.id+'.jpg');
+                photo.error(function(){
+                    $(this).attr('src', photo_default);
+                });
+                var date_ouverture_heure    = addZero(value.date_ouverture_heure);
+                var date_ouverture_minute   = addZero(value.date_ouverture_minute);
+                var date_fermeture_heure    = addZero(value.date_fermeture_heure);
+                var date_fermeture_minute    = addZero(value.date_fermeture_minute);
+
+
+                var wrap    = $('<div>').addClass('show simple').attr('data-id', value.id);
+                var span1   = $('<span>').html( value.prenom + " "+ value.nom.substring(0,1) + "." );
+                var span2   = $('<span>').html( value.niveau );
+                var span3   = $('<span>').html( "DE : "+date_ouverture_heure+"H"+date_ouverture_minute+" À : "+date_fermeture_heure+"H"+date_fermeture_minute );
+                var div     = $('<div>').append( span1, span2 , span3);
+
+                wrap.append( photo , div);
+
+                $resultSlackerSurSpot.append( wrap );
+
+            });
+
+        }
+        else{
+            var wrap    = $('<p>').addClass('show text-error').html('Personne n\'a prévu de se rendre sur ce spot. Essayez une autre date');
+            $resultSlackerSurSpot.append( wrap );
+        }
+
+
+
     }
+
+
 
 
 
@@ -871,6 +916,10 @@ $( document ).ready(function() {
 
 
     /* TEMP : FEATURE SPOTS OUVERTS */
+
+    $('#spotDisplay').on('show.bs.modal', function () {
+        $('#spotDisplay .modal-content').css('height',$( window ).height()*0.8);
+    });
 
     var afficherSpotsOuverts = function(data){
         // $('.content').html("Spot Ouvert : "+data[0].id_spot+" Id Utilisateur : "+data[0].id_utilisateur+" Fermeture le : "+data[0].date_fermeture);

@@ -11,6 +11,7 @@ body{
 	font-family: 'Open Sans', sans-serif;
 	height:100%;
 	overflow:hidden;
+	color:#828282;
 }
 
 *{
@@ -28,9 +29,11 @@ body{
 	display:none;
 }
 
-footer{
-	background:none;
-	height:auto;
+.modal .modal-body{
+	max-height:inherit;
+}
+.modal.fade.in{
+	top:0%;
 }
 
 body.inscription {
@@ -39,6 +42,16 @@ body.inscription {
 	background:url('../img/bg_inscription_full.jpg') no-repeat center fixed;
 	background-size: cover; 
 }
+.logo img{
+	margin-left: 15px;
+	margin-bottom: 50px;
+}
+
+footer{
+	background:none;
+	height:auto;
+}
+
 
 /* Inscription - Formulaire */
 
@@ -738,7 +751,7 @@ h2{
 
 #spot .skills div,
 #profil .skills div,
-#spotInscription .skills div{
+#spotDisplay .skills div{
 	clear:both;
 	width:180px;
 	margin:0 auto;
@@ -746,7 +759,7 @@ h2{
 #spot .skills li,
 #profil .skills li,
 #slacker .skills li,
-#spotInscription .skills li{
+#spotDisplay .skills li{
 	position:relative;
 	list-style:none;
 	float:left;
@@ -1575,6 +1588,7 @@ button.large,
 	width: 100%;
 	font-family: 'Open Sans', sans-serif;
 	border-color: rgba(110, 149, 75, 1);
+	padding: 8px;
 }
 
 #resultSpots .show:hover,
@@ -1582,5 +1596,63 @@ button.large,
 .result .show:hover,
 {
 	background:rgba(151, 206, 104, 1);
+}
+#resultSpot, #resultUser{
+	display:none;
+}
+
+#spotDisplay{
+	width: 383px;
+	height:90%;
+	top:0;
+	background:#F4F3F0;
+	border-radius:0;
+}
+
+#spotDisplay .mCSB_container{
+	padding:0 55px 25px;
+}
+#spotDisplay .mCustomScrollBox > .mCSB_scrollTools{
+	right:25px;
+}
+
+#spotDisplay .result{
+	margin-bottom:20px;
+}
+#spotDisplay .show.simple{
+	width:auto;
+	overflow:inherit;
+	min-height:80px;
+}
+#spotDisplay .show.simple:hover{
+	color:#FFF;
+}
+
+#spotDisplay .show.simple > div{
+	float:left;
+	width:67%;
+}
+
+#spotDisplay .show.simple > div span:nth-child(1){
+	font-size:0.9rem;
+	font-weight:600;
+	text-transform:uppercase;
+}
+
+
+#spotDisplay .modal-body > h2:first-child{
+	color: #97ce68;
+	font-weight: 200;
+	text-align: center;
+}
+#spotDisplay .modal-body > div,
+#spotDisplay .modal-body > section{
+	margin-bottom:20px;
+}
+
+.modal-body{
+	overflow-x: hidden;
+	margin:0 auto;
+	width:100%;
 }
 

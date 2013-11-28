@@ -162,7 +162,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 				<form id="addMarker">
 	                <fieldset>
 	                	<input type="text" class="addSpot" name="addressAdded" placeholder="Vincennes, Ourcq…" />
-	                	<input type="submit" for="addSpot" class='btn-large' name="validAddress"/></input>
+	                	<input type="submit" class='btn-large' name="validAddress"/></input>
 	                </fieldset>
 	            </form>
 			</div>
@@ -340,9 +340,9 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	
 	<div class="reseauxSociaux">
 		<ul>
-			<li class="fb"><a href="https://www.facebook.com/asso.parislack" target="_blank"></a></li>
-			<li class="twitter"><a href="#" target="_blank"></a></li>
-			<li class="google"><a href="#" target="_blank"></a></li>
+			<li class="fb"><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://alexandreguerard.fr/site/PariSlack/&p[images][0]=&p[title]=Parislack&p[summary]=Parislack%20r%C3%A9f%C3%A9rence%20tous%20les%20meilleurs%20spot%20de%20slackline%20dans%20Paris%20et%20ses%20alentours,%20rejoignez-nous%20!" target="_blank"></a></li>
+			<li class="twitter"><a href="http://twitter.com/home?status=Parislack%20r%C3%A9f%C3%A9rence%20les%20meilleurs%20spot%20de%20slackline%20dans%20Paris%20et%20ses%20alentours,%20rejoignez-nous%20!%20http://alexandreguerard.fr/site/PariSlack" target="_blank"></a></li>
+			<li class="google"><a href="https://plus.google.com/share?url=http://alexandreguerard.fr/site/PariSlack" target="_blank"></a></li>
 		</ul>
 	</div>
 
@@ -422,16 +422,17 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	</aside>
 
 	<!-- Modal -->
-	<div id="spotInscription" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+	<div id="spotDisplay" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
 		<div class="modal-header">
 			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-			
-
 		</div>
 		<div class="modal-body">
 			<h2></h2>
 			<div class="note"></div>
 			
+			<section class="description">
+
+			</section>
 
 			<section class="skills">
 				<h2><strong>Catégories</strong> pratiquées</h2>
@@ -452,7 +453,46 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 					<?php nextDays(5); ?>
 				</div>
 				<div id="resultCalendar" class="result"></div>
+				<button type="submit" name="validAddress" class="btn large">S'y rendre</button>
+			</section>
 
+		</div>
+
+	</div>
+
+	<!-- Modal -->
+	<div id="spotInscription" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		</div>
+		<div class="modal-body">
+			<h2></h2>
+			<div class="note"></div>
+			
+			<section class="description">
+
+			</section>
+
+			<section class="skills">
+				<h2><strong>Catégories</strong> pratiquées</h2>
+				<div class="clearfix">
+					<li class="skill shortline" data-type="shortline">Shortline</li>
+					<li class="skill trickline" data-type="trickline">Trickline</li>
+					<li class="skill jumpline" data-type="jumpline">Jumpline</li>
+					<li class="skill longline" data-type="longline">Longline</li>
+					<li class="skill highline" data-type="highline">Highline</li>
+					<li class="skill blindline" data-type="blindline">Blindline</li>
+					<li class="skill waterline" data-type="waterline">Waterline</li>
+				</div>
+			</section>
+
+			<section class="calendar">
+				<h2><strong>Personnes</strong> Présentes</h2>
+				<div class="selectJour">
+					<?php nextDays(5); ?>
+				</div>
+				<div id="resultCalendar" class="result"></div>
+				<button type="submit" name="validAddress" class="btn large">S'y rendre</button>
 			</section>
 
 		</div>
