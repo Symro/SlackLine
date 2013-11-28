@@ -9,8 +9,6 @@ font-family: 'Open Sans', sans-serif;
 
 body{
 	font-family: 'Open Sans', sans-serif;
-	height:100%;
-	overflow:hidden;
 }
 
 *{
@@ -42,18 +40,18 @@ body.inscription {
 
 /* Inscription - Formulaire */
 
-aside.wrap-form-inscription{
-	width:380px;
+.wrap-form-inscription{
+	/*width:380px;*/
 	height:auto;
-	padding:25px 55px 45px 55px;
+	padding:25px 40px 0px 40px;
 	margin-bottom:20px;
 	background:#f4f3f0;
 	border-radius:5px;
-	position:absolute;
-	right:10%;
+	/*position:absolute;*/
+	/*right:10%;*/
 }
 
-aside h1{
+ h1{
 	font-size:2.5rem;
 	font-family: 'Pacifico', cursive;
 	color:#8cc152;
@@ -81,32 +79,32 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 	vertical-align: middle;
 }
 
-aside.wrap-form-inscription input,
-aside.wrap-form-inscription select{
+.wrap-form-inscription input,
+.wrap-form-inscription select{
 	width:100%;
 }
 
-aside.wrap-form-inscription select {
+.wrap-form-inscription select {
     color: #7d7d7b;
 }
-aside.wrap-form-inscription select option:disabled {
+.wrap-form-inscription select option:disabled {
     color:#C4C4C4;
 }
-aside.wrap-form-inscription select option:selected{
+.wrap-form-inscription select option:selected{
 	color:#555555;
 }
 
-aside.wrap-form-inscription input:invalid,
-aside.wrap-form-inscription select:invalid,
-aside.wrap-form-inscription input.erreur,
-aside.wrap-form-inscription select.erreur{
+.wrap-form-inscription input:invalid,
+.wrap-form-inscription select:invalid,
+.wrap-form-inscription input.erreur,
+.wrap-form-inscription select.erreur{
 	background:url('../img/invalid.png') no-repeat 95% center;
 	transition:background 500ms ease;
 }
-aside.wrap-form-inscription input.erreur:valid,
-aside.wrap-form-inscription select.erreur:valid,
-aside.wrap-form-inscription input.erreur:readonly,
-aside.wrap-form-inscription select.erreur:readonly{
+.wrap-form-inscription input.erreur:valid,
+.wrap-form-inscription select.erreur:valid,
+.wrap-form-inscription input.erreur:readonly,
+.wrap-form-inscription select.erreur:readonly{
 	background-position:400px center;
 }
 
@@ -126,23 +124,23 @@ input:focus:invalid:focus, textarea:focus:invalid:focus, select:focus:invalid:fo
 	box-shadow: none;
 }
 
-aside.wrap-form-inscription input:nth-child(1),aside.wrap-form-inscription input:nth-child(2){
+.wrap-form-inscription input:nth-child(1),.wrap-form-inscription input:nth-child(2){
 	width:50%;
 	float:left;
 }
 
-aside.wrap-form-inscription input:nth-child(1){
+.wrap-form-inscription input:nth-child(1){
 	border-radius: 4px 0px 0px 4px;
 
 }
-aside.wrap-form-inscription input:nth-child(2){
+.wrap-form-inscription input:nth-child(2){
 	border-radius: 0px 4px 4px 0px;
 	border-left:1px solid transparent;
 }
 
 
 
-aside.wrap-form-inscription textarea{
+.wrap-form-inscription textarea{
 	height:70px;
 	width:100%;
 	resize:vertical;
@@ -230,10 +228,10 @@ textarea:focus, input[type="text"]:focus, input[type="password"]:focus, input[ty
 	outline: 0 none;
 }
 
-aside.wrap-form-inscription input:nth-child(2):focus:valid, aside.wrap-form-inscription input:nth-child(2):active:valid{
+.wrap-form-inscription input:nth-child(2):focus:valid, .wrap-form-inscription input:nth-child(2):active:valid{
 	border-left:1px solid #70A647;
 }
-aside.wrap-form-inscription input:nth-child(2):focus:invalid, aside.wrap-form-inscription input:nth-child(2):active:invalid{
+.wrap-form-inscription input:nth-child(2):focus:invalid, .wrap-form-inscription input:nth-child(2):active:invalid{
 	border-left:1px solid #E9322D;
 }
 
@@ -562,23 +560,6 @@ div>input[type='checkbox']{
 
 
 /* ____________________ PARTIE CARTE _______________________ */
-
-
-h2{
-	color:#434a54;
-	text-transform: uppercase;
-	font-weight:normal;
-	font-size:1.1rem;
-	line-height:1rem;
-	margin-bottom:16px;
-}
-
-
-
-
-
-
-
 /* ________________________PROFIL___________________________ */
 
 
@@ -607,32 +588,20 @@ h2{
 	width:350px;
 
 	height:100%;
-	overflow:visible;
+	overflow:auto;
 }
-#profil > .mCustomScrollBox.mCSB_container,
-#profil > .mCustomScrollBox{
-	overflow:visible !important;
-}
-#profil > .mCustomScrollBox> .mCSB_scrollTools{
-	right:-30px;
-}
-
-#profil #profilClose{
-	position:absolute;
-	z-index:2;
-	top:0;
-	right:0;
-}
-#profil #profilClose img{
-	width:20px;
-	height:20px;
-}
-
 #profil section{
 	position:relative;
-	z-index:1;
 	margin:0 0 45px 0;
 	clear:both;
+}
+#profil section h2{
+	color:#434a54;
+	text-transform: uppercase;
+	font-weight:normal;
+	font-size:1.1rem;
+	line-height:1rem;
+	margin-bottom:16px;
 }
 #profil .infos figure{
 	position:relative;
@@ -737,16 +706,14 @@ h2{
 }
 
 #spot .skills div,
-#profil .skills div,
-#spotInscription .skills div{
+#profil .skills div{
 	clear:both;
 	width:180px;
 	margin:0 auto;
 }
 #spot .skills li,
 #profil .skills li,
-#slacker .skills li,
-#spotInscription .skills li{
+#slacker .skills li{
 	position:relative;
 	list-style:none;
 	float:left;
@@ -1224,23 +1191,19 @@ button.removeFavSlacker{
 /* jQuery RateIt Plugin */
 
 .rateit{display:block;width:85px;position:relative;-webkit-user-select:none;-khtml-user-select:none;-moz-user-select:none;-o-user-select:none;-ms-user-select:none;user-select:none;-webkit-touch-callout:none;}
-.rateit .rateit-range{position:relative;display:inline-block;background:url(../img/star.png);height:16px;outline:none;}
+.rateit .rateit-range{position:relative;display:inline-block;background:url(../img/star.gif);height:16px;outline:none;}
 .rateit .rateit-range *{display:block;}
 .rateit .rateit-hover,.rateit .rateit-selected{position:absolute;left:0;}
 .rateit .rateit-hover-rtl,.rateit .rateit-selected-rtl{left:auto;right:0;}
-.rateit .rateit-hover{background:url(../img/star.png) left -32px;}
+.rateit .rateit-hover{background:url(../img/star.gif) left -32px;}
 .rateit .rateit-hover-rtl{background-position:right -32px;}
-.rateit .rateit-selected{background:url(../img/star.png) left -16px;}
+.rateit .rateit-selected{background:url(../img/star.gif) left -16px;}
 .rateit .rateit-selected-rtl{background-position:right -16px;}
-.rateit button.rateit-reset{background:url(../img/delete.png) 0 0;width:16px;height:16px;display:inline-block;float:left;outline:none;border:none;padding:0;}
+.rateit button.rateit-reset{background:url(../img/delete.gif) 0 0;width:16px;height:16px;display:inline-block;float:left;outline:none;border:none;padding:0;}
 .rateit button.rateit-reset:hover,.rateit button.rateit-reset:focus{background-position:0 -16px;}
 * html .rateit,* html .rateit .rateit-range,* + html .rateit,* + html .rateit .rateit-range{display:inline;}
-.rateit .rateit-preset,.rateit .rateit-preset-rtl{background:url(../img/star.png) left -48px;}
+.rateit .rateit-preset,.rateit .rateit-preset-rtl{background:url(../img/star.gif) left -48px;}
 
-/*
-.result .show:hover .rateit .rateit-selected{
-	background:url("../img/star.png") repeat scroll left -16px rgba(0, 0, 0, 0);
-}*/
 
 
 /* FUSION CODE SYLVAIN */
@@ -1250,7 +1213,7 @@ div#users-contain table { margin: 1em 0; border-collapse: collapse; width: 100%;
 div#users-contain table td, div#users-contain table th { border: 1px solid #eee; padding: .6em 10px; text-align: left; }
 .ui-dialog .ui-state-error { padding: .3em; }
 .validateTips { border: 1px solid transparent; padding: 0.3em; }
-#map{position:absolute;top:0;left:0;width:100%;height:100%;background-color:#fff;margin:0;box-shadow: 0 5px 10px rgba(255,255,255,.4);}
+#map{position:absolute;left:0;width:100%;height:768px;background-color:#fff;margin:1em 0 0 0 ;box-shadow: 0 5px 10px rgba(255,255,255,.4);}
 #map img{max-width:none;}
 #dialog-form{display:none;}
 
@@ -1584,3 +1547,106 @@ button.large,
 	background:rgba(151, 206, 104, 1);
 }
 
+
+
+
+/*INTE ALEX INSCRIPTION*/
+.header {
+  display: block;
+  background-color: #434a54;
+  background-image: url('../img/logoSlogan.svg');
+  background-repeat: no-repeat;
+  position: absolute;
+  background-position: left;
+  background-size: 45%;
+  left: 0;
+  height: 100px;
+  z-index: 70;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+}
+.headerBox{
+	color:white;
+  height:100px;
+  background-color: #2d394b;  
+}
+
+.headerBox:after{
+  content:''; 
+  height:0; 
+  width:0; 
+  display:block; 
+  border:20px transparent solid; 
+  border-bottom-width:0; 
+  border-top-color:#2d394b; 
+  position:absolute; 
+  left: 150px;
+  top: 100px;
+}
+.greyBox {
+  font-family: "Open Sans";
+  position: absolute;
+  z-index: 80;
+  font-size: 12px;
+  border-radius: 5px;
+  width: 350px; 
+  color: #a6a5a3;
+/*  padding: 25px 55px 45px 55px;*/
+  background-color: #f7f4eb;
+}
+
+.greyBox h1{
+  line-height: 90px;
+  margin:0;
+  text-align: center;
+  color:#fff;
+  font-family: 'Pacifico', cursive;
+}
+
+.btn-slack {
+  display:block;
+  font-size: 1rem;
+  height:50px;
+  width:100%;
+  color: white;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+  background-color: #8bc052;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#8CC152), to(#6CA546));
+  background-image: -webkit-linear-gradient(#8CC152, #6CA546);
+  background-image: -moz-linear-gradient(#8CC152, #6CA546);
+  background-image: -o-linear-gradient(#8CC152, #6CA546);
+  background-image: linear-gradient(#8CC152, #6CA546);
+
+}
+.btn-slack:hover{
+  background-color: #6CA546;
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6CA546), to(#8CC152));
+  background-image: -webkit-linear-gradient(#6CA546, #8CC152);
+  background-image: -moz-linear-gradient(#6CA546, #8CC152);
+  background-image: -o-linear-gradient(#6CA546, #8CC152);
+  background-image: linear-gradient(#6CA546, #8CC152);
+}
+
+@media (max-width: 770px) {
+	body.inscription{
+		background: none;
+		background-color: #f7f4eb;
+	}
+  .header{
+    height: 75px;
+    background-size: 91%;
+    background-position: center;
+  }
+  .greyBox {
+    margin-top:100px;
+    left: 50%;
+    margin-left: -175px;
+  }
+  .headerBox{
+    height:100px;
+  }
+  .inHeader{
+    background-size: 100%;
+  }
+}
