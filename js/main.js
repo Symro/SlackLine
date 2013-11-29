@@ -495,7 +495,7 @@ $( document ).ready(function() {
                 }
             }
 
-            $('#profil .skills > div').isotope({ filter: '.active' });
+            $('#profil .skills > ul').isotope({ filter: '.active' });
 
             if(parseInt(data[0].materiel) == 1){
                 $('#material').prop('checked','checked');
@@ -505,7 +505,7 @@ $( document ).ready(function() {
 
     };
 
-    $('#profil .skills > div').isotope({
+    $('#profil .skills > ul').isotope({
       // options
       itemSelector : '.skill',
       layoutMode : 'fitRows'
@@ -549,7 +549,7 @@ $( document ).ready(function() {
         $('button[name=editSkills]').toggleClass('hidden');
 
         // on affiche toutes les catégories pratiquées
-        $('#profil .skills > div').isotope({ filter: '*' });
+        $('#profil .skills > ul').isotope({ filter: '*' });
 
         $('#profil .infos input[type=tel]').prop('disabled',false).prop('readonly', true);
         $('#editProfil').text('Enregistrer mes modifications');
@@ -635,7 +635,7 @@ $( document ).ready(function() {
         $('#profil').toggleClass('edition');
         $('#profil .editable').editable('disable');
         $('button[name=editSkills]').toggleClass('hidden');
-        $('#profil .skills > div').isotope({ filter: '.active' });
+        $('#profil .skills > ul').isotope({ filter: '.active' });
         $('#profil .infos input[type=tel]').prop('disabled',true).prop('readonly', false);
         $('.text-error').slideUp('slow', function(){$(this).remove();});
         $('#editProfil').text('Modifier mon profil');
@@ -671,7 +671,7 @@ $( document ).ready(function() {
             skills[i] = $(this).data('type');
         });
 
-        $('#spot .skills > div').isotope({ filter: '.active' });
+        $('#spot .skills > ul').isotope({ filter: '.active' });
 
         $('#spot').removeClass('edition');
 
@@ -681,7 +681,7 @@ $( document ).ready(function() {
         $('#saveSpot').text('Valider').prop('disabled',false).next().addClass('hidden');
 
         $('#spot').removeClass('edition');
-        $('#spot .skills > div').isotope({ filter: '*' }).children('li').removeClass('active');
+        $('#spot .skills > ul').isotope({ filter: '*' }).children('li').removeClass('active');
     }
 
     $('body').on('click', '#spot.edition .skill', function(){
@@ -754,7 +754,7 @@ m
                 }
             }
 
-            $('#slacker .skills > div').isotope({ filter: '.active' });
+            $('#slacker .skills > ul').isotope({ filter: '.active' });
 
 
             if(parseInt(data[0].materiel) == 1){
@@ -848,7 +848,7 @@ m
                     }
                 }
 
-                modal.find('.skills > div').isotope({ filter: '.active' });
+                modal.find('.skills > ul').isotope({ filter: '.active' });
 
             }
         });

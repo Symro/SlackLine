@@ -202,7 +202,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 			<div class="skills">
 				<h2><strong>Catégories</strong> pratiquées</h2>
-				<div class="clearfix">
+				<ul class="clearfix">
 					<li class="skill shortline" data-type="shortline">Shortline</li>
 					<li class="skill trickline" data-type="trickline">Trickline</li>
 					<li class="skill jumpline" data-type="jumpline">Jumpline</li>
@@ -210,7 +210,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 					<li class="skill highline" data-type="highline">Highline</li>
 					<li class="skill blindline" data-type="blindline">Blindline</li>
 					<li class="skill waterline" data-type="waterline">Waterline</li>
-				</div>
+				</ul>
 			</div>
 
 			<footer class="suivant">
@@ -317,7 +317,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 		<section class="skills">
 			<h2><strong>Catégories</strong> pratiquées</h2>
-			<div class="clearfix">
+			<ul class="clearfix">
 				<li class="skill shortline" data-type="shortline">Shortline</li>
 				<li class="skill trickline" data-type="trickline">Trickline</li>
 				<li class="skill jumpline" data-type="jumpline">Jumpline</li>
@@ -325,7 +325,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 				<li class="skill highline" data-type="highline">Highline</li>
 				<li class="skill blindline" data-type="blindline">Blindline</li>
 				<li class="skill waterline" data-type="waterline">Waterline</li>
-			</div>
+			</ul>
 		</section>
 
 		<section class="spotsFav">
@@ -388,7 +388,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 		<section class="skills">
 			<h2><strong>Catégories</strong> pratiquées</h2>
-			<div class="clearfix">
+			<ul class="clearfix">
 				<li class="skill shortline" data-type="shortline">Shortline</li>
 				<li class="skill trickline" data-type="trickline">Trickline</li>
 				<li class="skill jumpline" data-type="jumpline">Jumpline</li>
@@ -396,7 +396,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 				<li class="skill highline" data-type="highline">Highline</li>
 				<li class="skill blindline" data-type="blindline">Blindline</li>
 				<li class="skill waterline" data-type="waterline">Waterline</li>
-			</div>
+			</ul>
 			<button name="editSkills" class="hidden">Enregistrer les modifications</button>
 		</section>
 
@@ -436,7 +436,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 			<section class="skills">
 				<h2><strong>Catégories</strong> pratiquées</h2>
-				<div class="clearfix">
+				<ul class="clearfix">
 					<li class="skill shortline" data-type="shortline">Shortline</li>
 					<li class="skill trickline" data-type="trickline">Trickline</li>
 					<li class="skill jumpline" data-type="jumpline">Jumpline</li>
@@ -444,7 +444,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 					<li class="skill highline" data-type="highline">Highline</li>
 					<li class="skill blindline" data-type="blindline">Blindline</li>
 					<li class="skill waterline" data-type="waterline">Waterline</li>
-				</div>
+				</ul>
 			</section>
 
 			<section class="calendar">
@@ -475,7 +475,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 			<section class="skills">
 				<h2><strong>Catégories</strong> pratiquées</h2>
-				<div class="clearfix">
+				<ul class="clearfix">
 					<li class="skill shortline" data-type="shortline">Shortline</li>
 					<li class="skill trickline" data-type="trickline">Trickline</li>
 					<li class="skill jumpline" data-type="jumpline">Jumpline</li>
@@ -483,7 +483,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 					<li class="skill highline" data-type="highline">Highline</li>
 					<li class="skill blindline" data-type="blindline">Blindline</li>
 					<li class="skill waterline" data-type="waterline">Waterline</li>
-				</div>
+				</ul>
 			</section>
 
 			<section class="calendar">

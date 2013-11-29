@@ -96,7 +96,6 @@ $('#maPosition').on('click',function(e){
 });
 
 // Ecouteurs itinéraire
-<<<<<<< HEAD
 $('#map').on('click','.itineraryButton',function(e){
     e.preventDefault();
     var pos=new google.maps.LatLng(parseFloat($(this).data('lat')),parseFloat($(this).data('lng')));
