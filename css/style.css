@@ -1558,15 +1558,12 @@ nav li {
 }
 
 .lieu h3 {
-	text-transform: uppercase;
-	font-weight: 200;
-}
-
-.lieu h3, .lieu p {
 	color: #97ce68;
+	text-transform: uppercase;
 	text-align: center;
 	font-weight: 200;
-	line-height: 0.8em;
+	line-height: 1em;
+	margin-bottom:10px;
 }
 
 .noteDepart p {
@@ -1835,6 +1832,79 @@ button.large,
 	margin: 0 auto;
 	width: 100%;
 }
+
+/* Modal - itinéraire */
+
+#itineraryForm ul li{
+	list-style: none;
+	height: 50px;
+	width: 50px;
+	display: inline-block;
+	text-align: center;	
+}
+#itineraryForm ul{
+	margin-left: 55px;	
+}
+#car {
+	background: url("../img/SpriteTransports.svg") no-repeat scroll 2% 10% / 65px 65px rgba(0, 0, 0, 0);
+	background-size: 430%;
+	display: inline-block;
+	border: 2px solid #c1c1c1;
+	border-radius: 5px 0px 0px 5px;
+}
+#car:hover,
+#car.active {
+	background: url("../img/SpriteTransports.svg") no-repeat scroll 2% 94% / 65px 65px rgba(0, 0, 0, 0);
+	background-size: 430%;
+	background-color: #c1c1c1;
+}
+#walk {
+	background: url("../img/SpriteTransports.svg") no-repeat scroll 33% 10% / 65px 65px rgba(0, 0, 0, 0);
+	background-size: 430%;
+	display: inline-block;
+	border: 2px solid #c1c1c1;
+	border-radius: 0px 0px 0px 0px;
+	margin-left: -6px;
+	
+}
+#walk:hover,
+#walk.active {
+	background: url("../img/SpriteTransports.svg") no-repeat scroll 33% 94% / 65px 65px rgba(0, 0, 0, 0);
+	background-size: 430%;
+	background-color: #c1c1c1;
+}
+#transit {
+	background: url("../img/SpriteTransports.svg") no-repeat scroll 66% 10% / 65px 65px rgba(0, 0, 0, 0);
+	background-size: 430%;
+	display: inline-block;
+	border: 2px solid #c1c1c1;
+	border-radius: 0px 0px 0px 0px;
+	margin-left: -6px;
+	
+}
+#transit:hover,
+#transit.active {
+	background: url("../img/SpriteTransports.svg") no-repeat scroll 66% 94% / 65px 65px rgba(0, 0, 0, 0);
+	background-size: 430%;
+	background-color: #c1c1c1;
+}
+#bike {
+	background: url("../img/SpriteTransports.svg") no-repeat scroll 100% 9% / 65px 65px rgba(0, 0, 0, 0);
+	background-size: 400%;
+	display: inline-block;
+	border: 2px solid #c1c1c1;
+	border-radius: 0px 5px 5px 0px;
+	margin-left: -6px;
+	
+}
+#bike:hover,
+#bike.active {
+	background: url("../img/SpriteTransports.svg") no-repeat scroll 100% 95% / 65px 65px rgba(0, 0, 0, 0);
+	background-size: 400%;
+	background-color: #c1c1c1;
+}
+
+
 
 
 

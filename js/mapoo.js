@@ -93,7 +93,7 @@ var mapObject={
 
                 $("#itineraryForm").dialog({
                     autoOpen:true,
-                    height:300,
+                    height:400,
                     width:350,
                     modal:true,
                     buttons:{
@@ -218,7 +218,9 @@ var mapObject={
                             });             
 
                             // Callback
-                            mapObject.refreshMarker(marker.position);
+                            mapObject.refreshMarker();
+                            mapObject.render(marker.position);
+                            mapObject.params.markerAdded.call();
                         }
                     }
                 }else{
@@ -304,6 +306,7 @@ var mapObject={
                         // Callback
                         mapObject.refreshMarker();
                         mapObject.render(marker.position);
+                        mapObject.params.markerAdded.call();
                     }
                 }
 
@@ -322,6 +325,43 @@ var mapObject={
             data: {
                     action: 'getSpot'
                 }
+        });
+    },
+
+    getInfoWindow:function(val,posMarker,open){
+
+        var contentMarker='<div class="markerInfo"><p>Nom : '+val.titre+'<br/>Description : '+val.description+'<br/>Adresse : '+val.adresse+'<p><a href="" class="itineraryButton" data-address="'+val.adresse+'" data-lng="'+val.longitude+'" data-lat="'+val.latitude+'">itinéraire</a></br><a href="#spotDisplay" role="button" data-toggle="modal" data-id="'+val.id+'" class="spotDisplay" >M\'inscrire à ce spot</a></p></div>';
+
+        var marker=new google.maps.Marker({
+            position:posMarker,
+            map:mapObject.map,
+            icon:iconePerso
+        });
+
+        var infowindow=new google.maps.InfoWindow({
+            content:contentMarker
+        });
+        
+        if (open===false) {
+            google.maps.event.addListener(marker,'click',function(){
+                infowindow.open(mapObject.map,marker);
+            });            
+        }else{
+            infowindow.open(mapObject.map,marker);
+        }
+        
+    },
+
+    displaySpot:function(id){
+        $.each(mapMarkers.responseJSON ,function(key,val){
+            if(val.id == id){
+                console.log(val);
+                var pos=new google.maps.LatLng(val.latitude,val.longitude);
+                mapObject.map.panTo(pos);
+                mapObject.map.setZoom(16);
+                open=true;
+                mapObject.getInfoWindow(val,pos,open);
+            }
         });
     }
 }

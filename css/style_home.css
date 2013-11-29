@@ -883,6 +883,14 @@ button a, button a:hover{
   background-image: linear-gradient(#6CA546, #8CC152);
 }
 
+.btn-slack a{
+  display:block;
+  width:100%;
+  height:100%;
+}
+
+
+
 .icon-chevron-left-white {
   z-index: 11;
   content:'';

@@ -49,63 +49,22 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
         <div id="itineraryForm" title="Calculer un intinéraire">
             <p class="validateTips">All form fields are required.</p>
-
             <form>
                 <fieldset>
                         <p>Selectionnez votre type de transport : </p>
-                        <span id="car">Voiture</span>
-                        <span id="walk">A pied</span>
-                        <span id="transit">Transports</span>
-                        <span id="bike">A bicyclette</span>
+                        <ul class="clearfix">
+	                        <li id="car"></li>
+							<li id="walk"></li>
+							<li id="transit"></li>
+							<li id="bike"></li>
+						</ul>
                     <label for="depart">Départ : </label>
                     <input type="text" name="depart" class="text ui-widget-content ui-corner-all" id="depart" />
                     <label for="arrivee">Arrivée : </label>
                     <input type="text" name="arrivee" class="text ui-widget-content ui-corner-all" />
                 </fieldset>
             </form>
-        </div>
-
-        <div id="subscribeSpot" class="hidden">
-                <h2><strong>Quand</strong> irez-vous à<br />ce spot ?</h2>
-                
-                <div class="selectJour">
-                <?php nextDays(5); ?>
-                </div>
-                
-                <div class="selectHeureDepart">
-                        <span>DE : </span>
-                        <input id="timeStart" data-format="HH:mm"  name="timeStart" type="text">
-
-                </div>
-                <div class="selectHeureArrivee">
-                        <span>À : </span>
-                        <input id="timeEnd" data-format="HH:mm"  name="timeEnd" type="text">
-                </div>
-                
-                <div class="matos">
-                 <label class="switch-button large" for="material">
-                <input type="checkbox" id="material" class="switch" name="material" value="yes" <?php if(isset($_POST['material'])) echo "checked='checked'"; ?> >
-                <span>Matériel           
-                    <span>Non</span>
-                    <span>Oui</span>
-                </span>
-                <a class="btn btn-primary"></a>
-              	</label>
-                </div>
-                        
-                <div class="initiation">
-                <label class="switch-button large" for="initiation">
-                <input type="checkbox" id="initiation" class="switch" name="initiation" value="yes" <?php if(isset($_POST['initiation'])) echo "checked='checked'"; ?> >
-                <span>Proposer une initiation ? 
-                    <span>Non</span>
-                    <span>Oui</span>
-                </span>
-                <a class="btn btn-primary"></a>
-              </label>
-              <p>(Votre statut deviendra "professeur")</p>
-            </div>
-        </div>
-	
+        </div>	
 	<!-- FIN CODE SYLVAIN FUSION -->
 
 	<!-- FUSION CODE AUDREY -->
@@ -196,13 +155,12 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 			</nav>
 			
 			<header class="lieu">
-				<h3>Parc ML Kingk</h3>
-				<p>26.10.2013 - 14h30.17h30</p>
+				<h3>Spot sans nom</h3>
 			</header>
 
 			<div class="skills">
 				<h2><strong>Catégories</strong> pratiquées</h2>
-				<div class="clearfix">
+				<ul class="clearfix">
 					<li class="skill shortline" data-type="shortline">Shortline</li>
 					<li class="skill trickline" data-type="trickline">Trickline</li>
 					<li class="skill jumpline" data-type="jumpline">Jumpline</li>
@@ -210,7 +168,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 					<li class="skill highline" data-type="highline">Highline</li>
 					<li class="skill blindline" data-type="blindline">Blindline</li>
 					<li class="skill waterline" data-type="waterline">Waterline</li>
-				</div>
+				</ul>
 			</div>
 
 			<footer class="suivant">
@@ -317,7 +275,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 		<section class="skills">
 			<h2><strong>Catégories</strong> pratiquées</h2>
-			<div class="clearfix">
+			<ul class="clearfix">
 				<li class="skill shortline" data-type="shortline">Shortline</li>
 				<li class="skill trickline" data-type="trickline">Trickline</li>
 				<li class="skill jumpline" data-type="jumpline">Jumpline</li>
@@ -325,7 +283,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 				<li class="skill highline" data-type="highline">Highline</li>
 				<li class="skill blindline" data-type="blindline">Blindline</li>
 				<li class="skill waterline" data-type="waterline">Waterline</li>
-			</div>
+			</ul>
 		</section>
 
 		<section class="spotsFav">
@@ -388,7 +346,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 		<section class="skills">
 			<h2><strong>Catégories</strong> pratiquées</h2>
-			<div class="clearfix">
+			<ul class="clearfix">
 				<li class="skill shortline" data-type="shortline">Shortline</li>
 				<li class="skill trickline" data-type="trickline">Trickline</li>
 				<li class="skill jumpline" data-type="jumpline">Jumpline</li>
@@ -396,7 +354,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 				<li class="skill highline" data-type="highline">Highline</li>
 				<li class="skill blindline" data-type="blindline">Blindline</li>
 				<li class="skill waterline" data-type="waterline">Waterline</li>
-			</div>
+			</ul>
 			<button name="editSkills" class="hidden">Enregistrer les modifications</button>
 		</section>
 
@@ -436,7 +394,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 			<section class="skills">
 				<h2><strong>Catégories</strong> pratiquées</h2>
-				<div class="clearfix">
+				<ul class="clearfix">
 					<li class="skill shortline" data-type="shortline">Shortline</li>
 					<li class="skill trickline" data-type="trickline">Trickline</li>
 					<li class="skill jumpline" data-type="jumpline">Jumpline</li>
@@ -444,7 +402,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 					<li class="skill highline" data-type="highline">Highline</li>
 					<li class="skill blindline" data-type="blindline">Blindline</li>
 					<li class="skill waterline" data-type="waterline">Waterline</li>
-				</div>
+				</ul>
 			</section>
 
 			<section class="calendar">
@@ -475,7 +433,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
 			<section class="skills">
 				<h2><strong>Catégories</strong> pratiquées</h2>
-				<div class="clearfix">
+				<ul class="clearfix">
 					<li class="skill shortline" data-type="shortline">Shortline</li>
 					<li class="skill trickline" data-type="trickline">Trickline</li>
 					<li class="skill jumpline" data-type="jumpline">Jumpline</li>
@@ -483,7 +441,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 					<li class="skill highline" data-type="highline">Highline</li>
 					<li class="skill blindline" data-type="blindline">Blindline</li>
 					<li class="skill waterline" data-type="waterline">Waterline</li>
-				</div>
+				</ul>
 			</section>
 
 			<section class="calendar">
