@@ -200,8 +200,8 @@ include('form_login.php');
   
   <!-- <a href="" id="controls"></a> -->
   <video id="video">
-    <source src="assets/ParislackMP4HD.mp4" type='video/mp4' >
-    <source src="assets/pariSlackHD.ogv" type='video/ogg' >
+    <source src="assets/pariSlack.mp4" type='video/mp4' >
+    <source src="assets/ParislackBQ.oggtheora.ogv" type='video/ogg' >
     <p>Your user agent does not support the HTML5 Video element.</p>
   </video>
   

@@ -21,6 +21,15 @@
         <meta name="language" content="fr" />
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="Parislack vous permet de trouver les meilleurs endroits pour pratiquer la slackline dans Paris, et d’organiser des rendez-vous avec les slackers." />
+        
+        <meta property="og:title" content="Parislack" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="http://prod.florent-grandval.fr/Slackline/" />
+		<meta property="og:image" content="http://prod.florent-grandval.fr/Slackline/img/favicon.png"/>
+		<meta property="og:site_name" content="Parislack" />
+		<meta property="og:description" content="Parislack vous permet de trouver les meilleurs endroits pour pratiquer la slackline dans Paris, et d’organiser des rendez-vous avec les slackers." />
+
         <link rel="icon" type="image/png" href="img/favicon.png" />
     	<!--[if IE]><link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico" /><![endif]-->
 

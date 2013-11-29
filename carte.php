@@ -13,30 +13,7 @@ include('header.php');
 // Si l'utilisateur est identifié 
 if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in']) && $_SESSION['membre_logged_in'] === true ){
 
-	//var_dump($_SESSION);
-	// echo " <br/> BDD Email  : ".$_SESSION['membre_email'];
-	// echo " <br/> BDD Identifiant  : ".$_SESSION['membre_id'];
-	// echo " <br/> BDD Mdp  : ".$_SESSION['membre_mdp']." <br/><br/>";
-
 	?>
-
-
-	<button class="temp"> SPOTS OUVERT </button>
-
-	<!--<button id="getProfil"> Mon profil </button>-->
-
-	<div class="content">
-
-	</div>
-
-	<?php //nextDays(5); ?>
-
-	<div id="content">
-
-	</div>
-	<div id="slackers">
-	
-	</div>
 	
 	
 	<!-- CODE SYLVAIN FUSION -->
@@ -298,9 +275,9 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 	
 	<div class="reseauxSociaux">
 		<ul>
-			<li class="fb"><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://alexandreguerard.fr/site/PariSlack/&p[images][0]=&p[title]=Parislack&p[summary]=Parislack%20r%C3%A9f%C3%A9rence%20tous%20les%20meilleurs%20spot%20de%20slackline%20dans%20Paris%20et%20ses%20alentours,%20rejoignez-nous%20!" target="_blank"></a></li>
-			<li class="twitter"><a href="http://twitter.com/home?status=Parislack%20r%C3%A9f%C3%A9rence%20les%20meilleurs%20spot%20de%20slackline%20dans%20Paris%20et%20ses%20alentours,%20rejoignez-nous%20!%20http://alexandreguerard.fr/site/PariSlack" target="_blank"></a></li>
-			<li class="google"><a href="https://plus.google.com/share?url=http://alexandreguerard.fr/site/PariSlack" target="_blank"></a></li>
+			<li class="fb"><a href="http://www.facebook.com/sharer/sharer.php?s=100&p[url]=http://prod.florent-grandval.fr/Slackline/&p[images][0]=&p[title]=Parislack&p[summary]=Parislack%20r%C3%A9f%C3%A9rence%20tous%20les%20meilleurs%20spot%20de%20slackline%20dans%20Paris%20et%20ses%20alentours,%20rejoignez-nous%20!" target="_blank"></a></li>
+			<li class="twitter"><a href="http://twitter.com/home?status=Parislack%20r%C3%A9f%C3%A9rence%20les%20meilleurs%20spot%20de%20slackline%20dans%20Paris%20et%20ses%20alentours,%20rejoignez-nous%20!%20http://prod.florent-grandval.fr/Slackline/" target="_blank"></a></li>
+			<li class="google"><a href="https://plus.google.com/share?url=http://prod.florent-grandval.fr/Slackline/" target="_blank"></a></li>
 		</ul>
 	</div>
 
