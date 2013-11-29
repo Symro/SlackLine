@@ -910,11 +910,13 @@ m
             $resultSlackerSurSpot.append( wrap );
         }
 
-
-
     }
 
 
+    $('#itineraryForm ul li').on('click', function(){
+        $(this).siblings().removeClass();
+        $(this).addClass('active');
+    });
 
 
 

@@ -93,7 +93,7 @@ var mapObject={
 
                 $("#itineraryForm").dialog({
                     autoOpen:true,
-                    height:300,
+                    height:400,
                     width:350,
                     modal:true,
                     buttons:{

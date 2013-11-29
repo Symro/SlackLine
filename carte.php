@@ -49,14 +49,15 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 
         <div id="itineraryForm" title="Calculer un intinéraire">
             <p class="validateTips">All form fields are required.</p>
-
             <form>
                 <fieldset>
                         <p>Selectionnez votre type de transport : </p>
-                        <span id="car">Voiture</span>
-                        <span id="walk">A pied</span>
-                        <span id="transit">Transports</span>
-                        <span id="bike">A bicyclette</span>
+                        <ul class="clearfix">
+	                        <li id="car"></li>
+							<li id="walk"></li>
+							<li id="transit"></li>
+							<li id="bike"></li>
+						</ul>
                     <label for="depart">Départ : </label>
                     <input type="text" name="depart" class="text ui-widget-content ui-corner-all" id="depart" />
                     <label for="arrivee">Arrivée : </label>
@@ -196,7 +197,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 			</nav>
 			
 			<header class="lieu">
-				<h3>Parc ML Kingk</h3>
+				<h3>Spot sans nom</h3>
 			</header>
 
 			<div class="skills">
