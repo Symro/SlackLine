@@ -101,3 +101,16 @@ $('body').on('click','.rechercheSpot .show',function(){
     var id=$(this).data('id');
     mapObject.displaySpot(id);
 });
+
+// Ecouteur pour annuler l'ajout d'un spot
+$('a[href=acceuilCarte]').on('click',function(){
+    console.log('Annulation ajout marker');
+
+    $("input[name='validAddress']").prop('disabled',false);
+    $("input[name='spotName']").val('');
+    $("textarea[name='description']").val('');
+    $("input[name='spotAddress']").val('');
+    $("input[name='addressAdded']").val('');
+
+    mapObject.render();
+});
