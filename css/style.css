@@ -46,7 +46,6 @@ body.inscription {
     /*width:380px;*/
     height:auto;
     padding:25px 40px 0px 40px;
-    margin-bottom:20px;
     background:#f4f3f0;
     border-radius:5px;
     /*position:absolute;*/
@@ -321,9 +320,9 @@ div>input[type='checkbox']{
         display: block;
         font-family: 'Oswald',sans-serif;
         font-size: 15px;
-        height: 37px;
+        height: 40px;
         line-height: 20px;
-        padding:10px 0px 0 55px;
+        padding:1px 0px 0 55px;
         text-transform: uppercase;
         width: auto;
         margin-bottom:1em;
@@ -1624,6 +1623,7 @@ button.large,
   z-index: 80;
   font-size: 12px;
   border-radius: 5px;
+  right: 11%;
   width: 350px; 
   color: #a6a5a3;
 /*  padding: 25px 55px 45px 55px;*/

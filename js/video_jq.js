@@ -4,10 +4,12 @@ player.video=$('#video');
 player.button=$('#button');
 player.media=document.getElementById('video');
 player.media.load();
+player.media.pause();
+
 
 
 player.playPause = function () {
-	$(player.button).removeClass('loading');
+	$(player.button).removeClass('play');
 	if(player.media.paused){
 		player.media.play();
 		$(player.video).addClass('play');
@@ -35,7 +37,7 @@ player.setTime = function(e){
 
 
 $(player.video)
-.on({'canplaythrough' : player.playPause,'click' : player.playPause})
+.on({'click' : player.playPause})
 .bind('timeupdate',player.updateProgress);
 $('#progressBar').on('click',player.setTime);
 $('#button').on('click',player.playPause);
