@@ -697,7 +697,7 @@ else{
 
 		try {
 
-			$reponse = $PDO->prepare("SELECT utilisateurs.id, nom, prenom, niveau, HOUR(spots_ouvert.date_ouverture), HOUR(spots_ouvert.date_fermeture)
+			$reponse = $PDO->prepare("SELECT utilisateurs.id, nom, prenom, niveau, HOUR(spots_ouvert.date_ouverture) AS date_ouverture_heure , MINUTE(spots_ouvert.date_ouverture) AS date_ouverture_minute , HOUR(spots_ouvert.date_fermeture) AS date_fermeture_heure , MINUTE(spots_ouvert.date_fermeture) AS date_fermeture_minute
 							FROM utilisateurs
 							INNER JOIN spots_ouvert
 							ON spots_ouvert.id_utilisateur =  utilisateurs.id

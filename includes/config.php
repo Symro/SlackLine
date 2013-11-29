@@ -6,7 +6,7 @@ define("PARAM_nom_bd",      'hetic_slackline'); // le nom de votre base de donn√
 define("PARAM_utilisateur", 'root'); // nom d'utilisateur pour se connecter
 define("PARAM_mot_passe",   ''); // mot de passe de l'utilisateur pour se connecter
 
-define('ROOTPATH', 'http://'.$_SERVER['HTTP_HOST'].'/Slackline/pariSlack/', true);
+define('ROOTPATH', 'http://'.$_SERVER['HTTP_HOST'].'/Slackline/', true);
 define('TITRESITE', 'Parislack - Recherche de spot de Slackline sur Paris', true);
 define('CLASSPAGE', 'accueil', true);
 
