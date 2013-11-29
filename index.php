@@ -183,16 +183,18 @@ include('form_login.php');
        <h1><strong>DECOUVREZ </strong>LA SLACKLINE</h1>
     </div>
   </div>
+
   <div id="button" class="loading">
     <span></span>
-    <span></span>
   </div>
-
-  <video id="video" autoplay="false">
+  
+  <!-- <a href="" id="controls"></a> -->
+  <video id="video">
     <source src="assets/pariSlack.mp4" type='video/mp4' >
+    <source src="assets/ParislackBQ.oggtheora.ogv" type='video/ogg' >
     <p>Your user agent does not support the HTML5 Video element.</p>
   </video>
-
+  
   <div id="progressBar">
     <span class="progress"></span>
     <span class="buffer"></span>

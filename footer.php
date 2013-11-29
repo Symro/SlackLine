@@ -33,6 +33,7 @@
         <script type="text/javascript" src="js/jquery.fullPage.min.js"></script>
         <script type="text/javascript" src="js/video_jq.js"></script>
         <script type="text/javascript" src="js/owl.carousel.js"></script>
+        <script type="text/javascript" src="js/script.js"></script>
 
         <script type="text/javascript">
             $(document).ready(function(){

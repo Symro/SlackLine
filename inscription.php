@@ -1,18 +1,16 @@
 <?php 
 
 session_start();
+
 header('Content-type: text/html; charset=utf-8');
 include('includes/config.php'); 
 include('includes/fonctions.php');
-
 
 $titre = "Paris Slackline - Accueil";
 $custom_class = "inscription";
 
 include('header.php');
-
 include('form_traitement.php');
-
 
 /*
     Opérateur ternaire :
@@ -24,7 +22,6 @@ include('form_traitement.php');
 */
 
 ?>
-
 
 <div id="fb-root"></div>
         

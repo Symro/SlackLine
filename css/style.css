@@ -62,6 +62,7 @@ h2 {
 	margin-bottom: 16px;
 }
 
+
 footer {
 	background: none;
 	height: auto;
@@ -340,18 +341,18 @@ div>input[type='checkbox'] {
 /* Inscription - Bouton Facebook */
 
 #fb-connect {
-	position: relative;
-	background: none repeat scroll 0 0 #354F88;
-	color: #FFFFFF;
-	display: block;
-	font-family: 'Oswald',sans-serif;
-	font-size: 15px;
-	height: 37px;
-	line-height: 20px;
-	padding: 10px 0px 0 55px;
-	text-transform: uppercase;
-	width: auto;
-	margin-bottom: 1em;
+    position:relative;
+    background: none repeat scroll 0 0 #354F88;
+    color: #FFFFFF;
+    display: block;
+    font-family: 'Oswald',sans-serif;
+    font-size: 15px;
+    height: 40px;
+    line-height: 20px;
+    padding:1px 0px 0 55px;
+    text-transform: uppercase;
+    width: auto;
+    margin-bottom:1em;
 }
 
 #fb-connect:before {
@@ -1874,15 +1875,14 @@ button.large,
 }
 
 .greyBox {
-	font-family: "Open Sans";
-	position: absolute;
-	z-index: 80;
-	font-size: 12px;
-	border-radius: 5px;
-	width: 350px;
-	color: #a6a5a3;
-/*  padding: 25px 55px 45px 55px;*/
-	background-color: #f7f4eb;
+  font-family: "Open Sans";
+  position: absolute;
+  z-index: 80;
+  font-size: 12px;
+  border-radius: 5px;
+  right: 11%;
+  width: 350px; 
+  color: #a6a5a3;
 }
 
 .greyBox h1 {

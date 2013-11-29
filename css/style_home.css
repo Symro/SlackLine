@@ -59,42 +59,27 @@ body, html {
 /* VIDEO */
 video{opacity:0;-webkit-transition:opacity 5s;display:block;margin:0 auto;width:100%;}
 video.play{opacity:1;}
-#progressBar{
-  width:80%;
-  height:8px;
-  border-radius:4px;
-  border:1px solid #fff;
-  position:absolute;
-  bottom:50px;
-  left:10%;
-  opacity:.6;
-  z-index:6;}
-#progressBar span{
-  border-top-left-radius:2px;
-  border-bottom-left-radius:2px;
-  height:6px;
-  background-color:#fff;
-  display:inline-block;
-  position:absolute;
-  top:1px;}
+
+#progressBar{width:80%;height:8px;border-radius:4px;border:1px solid #fff;position:absolute;bottom:20px;left:10%;opacity:.6;z-index:6;}
+#progressBar span{border-top-left-radius:2px;border-bottom-left-radius:2px;height:6px;background-color:#fff;display:inline-block;position:absolute;top:1px;}
 
 #progressBar .progress{z-index:7;}
 #progressBar .buffer{opacity:.5;}
 
-#button{position:absolute;top:41%;left:44%;z-index:2;height:200px;width:200px;border:10px solid #fff;border-radius:200px;opacity:.5;text-align:center;background:transparent;transition:opacity .2s ease, -webkit-transform .2s ease;}
+#button{position:absolute;top:41%;left:42%;z-index:2;height:200px;width:200px;border:10px solid #fff;border-radius:200px;opacity:.5;text-align:center;background:transparent;transition:opacity .2s ease, -webkit-transform .2s ease;}
 #button.off{-webkit-transform:scale(4);opacity:0;}
-#button.loading{-webkit-animation: loading 1s infinite linear;}
-#button span{display:inline-block;height:100px;width:40px;background:#fff;margin:4em .5em 0 0;}
+
+#button span{margin:0em .5em 0 0;content: '';height: 0;width: 0;display: block;border: 45px transparent solid;border-right-width: 0;border-left-color: #FFF;position: absolute;top: 0px;left: 85px;top: 54px; }
+
+#random{position:absolute;z-index:30;display:inline-block;height:30px;width:30px;border-radius:15px;background-color:rgba(255,255,255,.5);text-align:center;padding:5px 0 0 0;box-sizing:border-box;bottom:10px;left:5%;}
 
 /*Carousel*/
-
 .owl-theme .owl-controls{
   margin-top: 10px;
   text-align: center;
 }
 
 /* Styling Next and Prev buttons */
-
 .owl-theme .owl-controls .owl-buttons div{
   display: inline-block;
   zoom: 1;
@@ -211,7 +196,6 @@ video.play{opacity:1;}
     padding-bottom: 5%;
 }
 
-
 /* fix */
 .owl-carousel  .owl-wrapper,
 .owl-carousel  .owl-item{
@@ -222,8 +206,6 @@ video.play{opacity:1;}
   -moz-transform: translate3d(0,0,0);
   -ms-transform: translate3d(0,0,0);
 }
-
-
 
 
 p {
@@ -242,10 +224,6 @@ h2{
   font-weight: 500;
   line-height: 20px;
 }
-
-
-
-
 
 button,
 .btn {
@@ -401,52 +379,49 @@ input[type="submit"]:hover{
   color: #FFF;
 }
 
-
 #section4{
   background-color: black;
   padding: 0 0 0 0;
   margin:0 0 0 0;
  }
  #section4 h1{
-background-image: url('../img/eye.png');
-background-repeat: no-repeat;
-background-position: left;
-padding:4% 45px 4% 45px;
-position: absolute;
-color: #FFF;
+  background-image: url('../img/eye.png');
+  background-repeat: no-repeat;
+  background-position: left;
+  padding:4% 45px 4% 45px;
+  position: absolute;
+  color: #FFF;
 }
  
 #section0::before{
-position: absolute;
-top:94%;
-content: '';
-pointer-events: none;
-left: 50%;
-z-index: 100;
-width: 100px;
-height: 100px;
-border-radius: 50%;
-background: #8bc052;
-margin-left: -50px;
-
+  position: absolute;
+  top:94%;
+  content: '';
+  pointer-events: none;
+  left: 50%;
+  z-index: 100;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: #8bc052;
+  margin-left: -50px;
 }
 
 /*HEADER*/
 .header {
-display: block;
-background-color: #434a54;
-background-image: url('../img/logoSlogan.svg');
-background-repeat: no-repeat;
-position: absolute;
-background-position: left;
-background-size: 45%;
-left: 0;
-height: 100px;
-z-index: 70;
-width: 100%;
-padding: 0;
-margin: 0;
-
+  display: block;
+  background-color: #434a54;
+  background-image: url('../img/logoSlogan.svg');
+  background-repeat: no-repeat;
+  position: absolute;
+  background-position: left;
+  background-size: 45%;
+  left: 0;
+  height: 100px;
+  z-index: 70;
+  width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 .headerConnect{
@@ -525,6 +500,12 @@ margin: 0;
   .owl-carousel {
     padding-top: 22%;
   }
+
+  #button{
+      top: 32%;
+left: 26%;
+  }
+
 }
 
 .greyBox h1{
