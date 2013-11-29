@@ -10,21 +10,9 @@ mapObject.init({
             $.each(data,function(key,val){
                 var posMarker=new google.maps.LatLng(parseFloat(val.latitude),parseFloat(val.longitude));
 
-                var contentMarker='<div class="markerInfo"><p>Nom : '+val.titre+'<br/>Description : '+val.description+'<br/>Adresse : '+val.adresse+'<p><a href="" class="itineraryButton" data-address="'+val.adresse+'" data-lng="'+val.longitude+'" data-lat="'+val.latitude+'">itinéraire</a></br><a href="#spotDisplay" role="button" data-toggle="modal" data-id="'+val.id+'" class="spotDisplay" >M\'inscrire à ce spot</a></p></div>';
+                open=false;
+                mapObject.getInfoWindow(val,posMarker,open);
 
-                var marker=new google.maps.Marker({
-                    position:posMarker,
-                    map:mapObject.map,
-                    icon:iconePerso
-                });
-
-                var infowindow=new google.maps.InfoWindow({
-                    content:contentMarker
-                });
-                // Ecouteur affichage infowindow
-                google.maps.event.addListener(marker,'click',function(){
-                    infowindow.open(mapObject.map,marker);
-                });
             });
         });
         // Ecouteur pour l'ajout de marker
@@ -45,17 +33,14 @@ mapObject.init({
         });
 	},
 
-	markerAdded:function(pos){
+	markerAdded:function(){
         console.log('markerAdded');
-		console.log(pos);
 
         $("input[name='validAddress']").prop('disabled',false);
         $("input[name='spotName']").val('');
         $("textarea[name='description']").val('');
         $("input[name='spotAddress']").val('');
-
-        mapObject.map.panTo(pos);
-        mapObject.map.setZoom(18);
+        $("input[name='addressAdded']").val('');
 	},
 
     itineraryCalculated:function(request){
@@ -109,4 +94,10 @@ $('#addMarker').submit(function(e){
     e.preventDefault();
     address=$('input[name=addressAdded]').val();
     mapObject.addMarkerByAddress(address);
+});
+
+// Ecouteur pour cibler un marquer lors d'un clic sur les recherches
+$('body').on('click','.rechercheSpot .show',function(){
+    var id=$(this).data('id');
+    mapObject.displaySpot(id);
 });
