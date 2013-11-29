@@ -9,7 +9,7 @@ player.media.pause();
 
 
 player.playPause = function () {
-	$(player.button).removeClass('play');
+	$(player.button).removeClass('loading');
 	if(player.media.paused){
 		player.media.play();
 		$(player.video).addClass('play');

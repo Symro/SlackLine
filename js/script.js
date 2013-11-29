@@ -2,6 +2,10 @@ $(document).ready(function() {
 
     $("#rescale").click(function() {
 
+        // Code déclenchement animation Parislack
+
+        $("#iconeParislack img:nth-child(1)").addClass("anim_parislack");
+
         // Code déclenchement animation Slackline
 
         $("#iconeSlackline img:nth-child(1)").addClass("anim_sol");

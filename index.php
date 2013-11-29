@@ -55,47 +55,58 @@ include('form_login.php');
     <div class="row">
       <div id="owl-section1" class="owl-carousel">
         <div class="item">
-          <div class="">
-            <img src="img/anim/anim1.png" alt="HighLine">
-          </div>
+            <div id="iconeParislack" style="left:" class="icone">
+              <img src="img/anim/logo_parislack.png" alt="Illustration slackline"/>
+            </div>
           <p>Parislack est une association créée en 2011 visant à promouvoir l'activité de la slackline sur Paris et toute sa région. Son but est de fédérer les pratiquants, organiser des événements et faire découvrir cette discipline.</p>
         </div>
         <div class="item">
-          <div class="">
-            <img src="img/anim/anim1.png" alt="HighLine">
-          </div>
+            <div id="iconeSlackline" class="icone">
+              <img src="img/anim/sol_arbres.png" alt="Illustration slackline"/>
+              <img src="img/anim/sangle.png" alt="Illustration slackline"/>
+              <img src="img/anim/perso.png" alt="Illustration slackline"/>
+            </div>
           <p>Le principe de la slackline est de progresser sur une sangle plate plus ou moins tendue (et placée plus ou moins haut) à la manière d'un funambule. Elle peut être pratiquée un peu partout (parcs, falaises, lacs, étangs, etc...) à moins de respecter certaines consignes de sécurité et d'installation.</p>
         </div>
         <div class="item">
-          <div class="">
-            <img src="img/anim/anim1.png" alt="HighLine">
-          </div>
+            <div id="iconeConvivialite" class="icone">
+              <img src="img/anim/persoG.png" alt="Illustration convivialité"/>
+              <img src="img/anim/persoD.png" alt="Illustration convivialité"/>
+            </div>
           <p>La communauté des slackers (les pratiquants) est surtout composée de passionnés qui revendique la convivialité et l'ouverture d'esprit qui caractérise ce sport.</p>
         </div>
         <div class="item">
-          <div class="">
-            <img src="img/anim/anim1.png" alt="HighLine">
-          </div>
+            <div id="iconeCarte" class="icone">
+              <img src="img/anim/carte.png" alt="Illustration service : La carte"/>
+              <img src="img/anim/spot.png" alt="Illustration service : La carte"/>
+              <img src="img/anim/spot.png" alt="Illustration service : La carte"/>
+              <img src="img/anim/spot.png" alt="Illustration service : La carte"/>
+              <img src="img/anim/spot.png" alt="Illustration service : La carte"/>
+              <img src="img/anim/spot.png" alt="Illustration service : La carte"/>
+            </div>
           <p>Le but de ce site web est principalement de permettre aux personnes souhaitant pratiquer - ou découvrir - cette discipline de pouvoir se retrouver sur les meilleurs spots de la capitale.</p>
         </div>
         <div class="item">
-          <div class="">
-            <img src="img/anim/anim1.png" alt="HighLine">
-          </div>
+            <div id="iconeSpot" class="icone">
+              <img src="img/anim/bulle_spot.png" alt="Illustration service : Le spot"/>
+              <img src="img/anim/spot_grand.png" alt="Illustration service : Le spot"/>
+              <img src="img/anim/curseur_grand.png" alt="Illustration service : Le spot"/>
+            </div>
           <p>En effet, grâce à un système de localisation et de marquage cartographié, chaque utilisateur peut indiquer à quel moment et quel jour il souhaite se rendre à un spot en particulier.</p>
         </div>
         <div class="item">
-          <div class="">
-            <img src="img/anim/anim1.png" alt="HighLine">
-          </div>
+            <div id="iconeSlacker" class="icone">
+              <img src="img/anim/bulle_slacker.png" alt="Illustration service : Le spot"/>
+              <img src="img/anim/spot_moyen.png" alt="Illustration service : Le spot"/>
+              <img src="img/anim/curseur_moyen.png" alt="Illustration service : Le spot"/>
+            </div>
           <p>Ainsi, les autres pratiquants peuvent voir en temps réel quels sont les spots occupés et pour combien de temps et ainsi décider de rejoindre ou non les slackers déjà présents.</p>
         </div>
         <div class="item">
-          <div class="">
-            <img src="img/anim/anim1.png" alt="HighLine">
-          </div>
           <p>Si tu souhaite rejoindre la grande famille des slackers parisiens et découvrir cette discipline, inscris-toi à notre plateforme, trouve un spot et viens vite nous retrouver !</p>
-        </div>
+          <button class="btn-slack"><a href="inscription.php">INSCRIS-TOI</a></button>
+          </div>
+          
       </div>
     </div>
   </div>
@@ -108,9 +119,8 @@ include('form_login.php');
     <div class="row">
       <div id="owl-section2" class="owl-carousel">
         <div class="item">
-          <div class="">
+
             <img src="img/icons/shortline.svg" alt="HighLine">
-          </div>
           <div class="tableau">
             <h1>SHORTLINE</h1>
             <p>La highline (haute corde) nécessite une sangle tendue au-dessus de 5 mètres de hauteur. À une telle hauteur et a fortiori au delà, un équipement de sécurité doit être mis en place afin de ne pas risquer sa vie.</p>
