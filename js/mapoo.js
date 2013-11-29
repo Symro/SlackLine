@@ -341,7 +341,7 @@ var mapObject={
         var infowindow=new google.maps.InfoWindow({
             content:contentMarker
         });
-        console.log('etat'+open);
+        
         if (open===false) {
             google.maps.event.addListener(marker,'click',function(){
                 infowindow.open(mapObject.map,marker);

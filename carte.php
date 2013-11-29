@@ -64,49 +64,7 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
                     <input type="text" name="arrivee" class="text ui-widget-content ui-corner-all" />
                 </fieldset>
             </form>
-        </div>
-
-        <div id="subscribeSpot" class="hidden">
-                <h2><strong>Quand</strong> irez-vous à<br />ce spot ?</h2>
-                
-                <div class="selectJour">
-                <?php nextDays(5); ?>
-                </div>
-                
-                <div class="selectHeureDepart">
-                        <span>DE : </span>
-                        <input id="timeStart" data-format="HH:mm"  name="timeStart" type="text">
-
-                </div>
-                <div class="selectHeureArrivee">
-                        <span>À : </span>
-                        <input id="timeEnd" data-format="HH:mm"  name="timeEnd" type="text">
-                </div>
-                
-                <div class="matos">
-                 <label class="switch-button large" for="material">
-                <input type="checkbox" id="material" class="switch" name="material" value="yes" <?php if(isset($_POST['material'])) echo "checked='checked'"; ?> >
-                <span>Matériel           
-                    <span>Non</span>
-                    <span>Oui</span>
-                </span>
-                <a class="btn btn-primary"></a>
-              	</label>
-                </div>
-                        
-                <div class="initiation">
-                <label class="switch-button large" for="initiation">
-                <input type="checkbox" id="initiation" class="switch" name="initiation" value="yes" <?php if(isset($_POST['initiation'])) echo "checked='checked'"; ?> >
-                <span>Proposer une initiation ? 
-                    <span>Non</span>
-                    <span>Oui</span>
-                </span>
-                <a class="btn btn-primary"></a>
-              </label>
-              <p>(Votre statut deviendra "professeur")</p>
-            </div>
-        </div>
-	
+        </div>	
 	<!-- FIN CODE SYLVAIN FUSION -->
 
 	<!-- FUSION CODE AUDREY -->
