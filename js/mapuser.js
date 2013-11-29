@@ -9,7 +9,9 @@ mapObject.init({
 		mapMarkers = $.getJSON(siteUrl+"markers.json", function(data){
             $.each(data,function(key,val){
                 var posMarker=new google.maps.LatLng(parseFloat(val.latitude),parseFloat(val.longitude));
-                var contentMarker='<div class="markerInfo"><p>Nom : '+val.titre+'<br/>Description : '+val.description+'<br/>Adresse : '+val.adresse+'<p><a href="" class="itineraryButton" data-address="'+val.adresse+'" data-lng="'+val.longitude+'" data-lat="'+val.latitude+'">idtinéraire</a></br><a href="#spotInscription" role="button" data-toggle="modal" data-id="'+val.id+'" class="spotInscription" >M\'inscrire à ce spot</a></p></div>';
+
+                var contentMarker='<div class="markerInfo"><p>Nom : '+val.titre+'<br/>Description : '+val.description+'<br/>Adresse : '+val.adresse+'<p><a href="" class="itineraryButton" data-address="'+val.adresse+'" data-lng="'+val.longitude+'" data-lat="'+val.latitude+'">itinéraire</a></br><a href="#spotDisplay" role="button" data-toggle="modal" data-id="'+val.id+'" class="spotDisplay" >M\'inscrire à ce spot</a></p></div>';
+
                 var marker=new google.maps.Marker({
                     position:posMarker,
                     map:mapObject.map,
@@ -94,6 +96,7 @@ $('#maPosition').on('click',function(e){
 });
 
 // Ecouteurs itinéraire
+<<<<<<< HEAD
 $('#map').on('click','.itineraryButton',function(e){
     e.preventDefault();
     var pos=new google.maps.LatLng(parseFloat($(this).data('lat')),parseFloat($(this).data('lng')));
