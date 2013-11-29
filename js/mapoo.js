@@ -16,10 +16,11 @@ var mapObject={
 
     // Affichage de la carte
     render:function(pos){
-        if(typeof pos==='object'){
-                // si on a la position de l'utilisateur on reécupère ses coords
-                var latLng=new google.maps.LatLng(pos.latitude,pos.longitude);
-                this.params.zoom=16;
+        if(pos){
+            console.log(pos);
+            // si on a la position  on reécupère ses coords
+            var latLng=new google.maps.LatLng(pos.lat(),pos.lng());
+            this.params.zoom=18;
         }
         else{
             // Sinon on récupère celle par défaut
@@ -168,7 +169,7 @@ var mapObject={
 
                     // Centrage/zoom sur le marker
                     mapObject.map.panTo(prevMarker.position);
-                    mapObject.map.setZoom(20);
+                    mapObject.map.setZoom(8);
 
                     //Ecouteur pour récupérer les coords après un dragend 
                     google.maps.event.addListener(prevMarker, 'dragend', function(e){
@@ -206,17 +207,18 @@ var mapObject={
                     function handleResponse(data){
                         $('#answer').get(0).innerHTML=data.msg;
                         if (data.error==false) {
-                            var marker=new google.maps.Marker({
-                                position:prevMarker.position,
-                                map:mapObject.map,
-                                icon:iconePerso
-                            });
 
                             // On masque le marker de prévisualisation
                             prevMarker.visible=false;
 
+                            var marker=new google.maps.Marker({
+                                position:prevMarker.position,
+                                map:mapObject.map,
+                                icon:iconePerso
+                            });             
+
                             // Callback
-                            mapObject.params.markerAdded.call(this,marker.position);
+                            mapObject.refreshMarker(marker.position);
                         }
                     }
                 }else{
@@ -253,7 +255,7 @@ var mapObject={
                 });
 
                 mapObject.map.panTo(prevMarker.position);
-                mapObject.map.setZoom(20);
+                mapObject.map.setZoom(9);
 
                 google.maps.event.addListener(prevMarker, 'dragend', function(e){
                     console.log('dragend');
@@ -263,7 +265,7 @@ var mapObject={
                 });
 
                 $('#saveSpot').on('click',function(e){
-                    event.preventDefault();
+                    e.preventDefault();
 
                     var titre=$("input[name='spotName']").val();
                     var description=$("textarea[name='description']").val();
@@ -291,22 +293,35 @@ var mapObject={
 
                     if (data.error==false) {
 
+                        prevMarker.visible=false;
+
                         var marker=new google.maps.Marker({
                             position:prevMarker.position,
                             map:mapObject.map,
                             icon:iconePerso
                         });
 
-                        prevMarker.visible=false;
                         // Callback
-                        mapObject.params.markerAdded.call(this,results[0].geometry.location);
-
+                        mapObject.refreshMarker();
+                        mapObject.render(marker.position);
                     }
                 }
 
             }else{
                 alert('Erreur : '+status);
             }
+        });
+    },
+
+    refreshMarker:function(){
+        console.log("refreshMarker");
+
+        $.ajax({
+            url: 'includes/actions.php',
+            type:"GET",
+            data: {
+                    action: 'getSpot'
+                }
         });
     }
 }

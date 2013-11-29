@@ -1,13 +1,15 @@
 mapObject.init({
 	map:'#map',
+    zoom:13,
 	pos:new google.maps.LatLng(48.856614,2.352221),
 	// Une fois la carte affichée
 	rendered:function(){
         console.log('rendered')
+
 		mapMarkers = $.getJSON(siteUrl+"markers.json", function(data){
             $.each(data,function(key,val){
                 var posMarker=new google.maps.LatLng(parseFloat(val.latitude),parseFloat(val.longitude));
-                var contentMarker='<div class="markerInfo"><p>Nom : '+val.titre+'<br/>Description : '+val.description+'<br/>Adresse : '+val.adresse+'<p><a href="" class="itineraryButton" data-address="'+val.adresse+'" data-lng="'+val.longitude+'" data-lat="'+val.latitude+'">itinéraire</a></br><a href="#spotInscription" role="button" data-toggle="modal" data-id="'+val.id+'" class="spotInscription" >M\'inscrire à ce spot</a></p></div>';
+                var contentMarker='<div class="markerInfo"><p>Nom : '+val.titre+'<br/>Description : '+val.description+'<br/>Adresse : '+val.adresse+'<p><a href="" class="itineraryButton" data-address="'+val.adresse+'" data-lng="'+val.longitude+'" data-lat="'+val.latitude+'">idtinéraire</a></br><a href="#spotInscription" role="button" data-toggle="modal" data-id="'+val.id+'" class="spotInscription" >M\'inscrire à ce spot</a></p></div>';
                 var marker=new google.maps.Marker({
                     position:posMarker,
                     map:mapObject.map,
@@ -21,7 +23,6 @@ mapObject.init({
                 google.maps.event.addListener(marker,'click',function(){
                     infowindow.open(mapObject.map,marker);
                 });
-
             });
         });
         // Ecouteur pour l'ajout de marker
@@ -43,14 +44,16 @@ mapObject.init({
 	},
 
 	markerAdded:function(pos){
-		console.log('markerAdded');
+        console.log('markerAdded');
+		console.log(pos);
 
         $("input[name='validAddress']").prop('disabled',false);
-
-        console.log(pos);
+        $("input[name='spotName']").val('');
+        $("textarea[name='description']").val('');
+        $("input[name='spotAddress']").val('');
 
         mapObject.map.panTo(pos);
-        mapObject.map.setZoom(20);
+        mapObject.map.setZoom(18);
 	},
 
     itineraryCalculated:function(request){
@@ -86,13 +89,13 @@ $(window).load(mapObject.render());
 
 // Ecouteur pour le boutton de geolocalisation
 $('#maPosition').on('click',function(e){
-	event.preventDefault();
+	e.preventDefault();
 	mapObject.getUserLocation();
 });
 
 // Ecouteurs itinéraire
 $('#map').on('click','.itineraryButton',function(e){
-    event.preventDefault();
+    e.preventDefault();
     var pos=new google.maps.LatLng(parseFloat($(this).data('lat')),parseFloat($(this).data('lng')));
     var address=String($(this).data('address'));
     console.log(address);
