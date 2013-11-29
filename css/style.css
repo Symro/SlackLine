@@ -1558,15 +1558,12 @@ nav li {
 }
 
 .lieu h3 {
-	text-transform: uppercase;
-	font-weight: 200;
-}
-
-.lieu h3, .lieu p {
 	color: #97ce68;
+	text-transform: uppercase;
 	text-align: center;
 	font-weight: 200;
-	line-height: 0.8em;
+	line-height: 1em;
+	margin-bottom:10px;
 }
 
 .noteDepart p {

@@ -197,7 +197,6 @@ if ( isset($_SESSION['membre_logged_in']) && !empty($_SESSION['membre_logged_in'
 			
 			<header class="lieu">
 				<h3>Parc ML Kingk</h3>
-				<p>26.10.2013 - 14h30.17h30</p>
 			</header>
 
 			<div class="skills">

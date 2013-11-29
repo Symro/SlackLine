@@ -699,6 +699,12 @@ $( document ).ready(function() {
     // Clic sur valider > enregistrement en BDD
     $('#saveSpot').on('click', spotCreation);
 
+    // Clic sur suivant
+    $('a[href=#catSpot]').on('click', function(){
+        var adresse = $('#infoSpot #adresse').val();
+        if(adresse){ $('.lieu h3').text( adresse ); } 
+    })
+
 
     /* ------------------------------------------------------------- */
     /* -- FEATURE : Consulter le profil d'un utilisateur (slacker)   */
