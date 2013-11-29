@@ -1,19 +1,5 @@
 <?php
 
-
-/* TEMP 
-
-if(isset($_SESSION) && !empty($_SESSION)){
-      echo "Session active : <br/>";
-      var_dump($_SESSION);
-}
-else{
-      echo "pas de session active <br/>";
-}
-
-*/
-
-
 if(isset($_POST['login'])){
 
       $form_error = array();
@@ -38,9 +24,9 @@ if(isset($_POST['login'])){
 
 
       // Affichage des erreurs
-      foreach ($form_error as $i => $value) {
-          echo $i . " => " .$value ." <br/> ";
-      }
+      // foreach ($form_error as $i => $value) {
+      //     echo $i . " => " .$value ." <br/> ";
+      // }
 
 
       if(empty($form_error)){

@@ -17,10 +17,9 @@ var mapObject={
     // Affichage de la carte
     render:function(pos){
         if(pos){
-            console.log(pos);
             // si on a la position  on reécupère ses coords
             var latLng=new google.maps.LatLng(pos.lat(),pos.lng());
-            this.params.zoom=18;
+            this.params.zoom=16;
         }
         else{
             // Sinon on récupère celle par défaut
@@ -35,8 +34,6 @@ var mapObject={
         // On crée la carte
         this.map=new google.maps.Map(document.querySelector(this.params.map),settings);
 
-        console.log(directionsDisplay);
-
         // callback
         mapObject.params.rendered.call(this);
     },
@@ -45,7 +42,6 @@ var mapObject={
     getUserLocation:function(){
         navigator.geolocation.getCurrentPosition(
             function(position){
-                console.log('userlocation');
                 // Callback
                 console.dir(position.coords);
                 var userLoc=position.coords;
@@ -60,7 +56,6 @@ var mapObject={
     },
 
     itinerary:function(pos,address){
-        console.log('itinerary');
 
         navigator.geolocation.getCurrentPosition(
             function(position){
@@ -76,19 +71,15 @@ var mapObject={
 
                 $('#car').on('click',function(e){
                     selectMode=google.maps.TravelMode.DRIVING;
-                    console.log(selectMode);
                 });
                 $('#walk').on('click',function(e){
                     selectMode=google.maps.TravelMode.WALKING;
-                    console.log(selectMode);
                 });
                 $('#transit').on('click',function(e){
                     selectMode=google.maps.TravelMode.TRANSIT;
-                    console.log(selectMode);
                 });
                 $('#bike').on('click',function(e){
                     selectMode=google.maps.TravelMode.BICYCLING;
-                    console.log(selectMode);
                 });
 
                 $("#itineraryForm").dialog({
@@ -100,14 +91,12 @@ var mapObject={
                         "Calculer un itinéraire":function(){
                             // On récupère l'adresse de départ si elle est saisie
                             if ($("input[name='depart']").val()!="Ma position") {
-                                console.log('différent');
                                 var itineraryRequest={
                                     origin:$("input[name='depart']").val(),
                                     destination:end,
                                     travelMode:selectMode
                                 };
                             }else{
-                                console.log('ma loc');
                                 var itineraryRequest={
                                     origin:start,
                                     destination:end,
@@ -134,7 +123,7 @@ var mapObject={
             },
 
             function(){
-                console.log('recup de la geoloc impossible');
+                
             },
             {enableHighAccuracy:true}
         );
@@ -146,9 +135,6 @@ var mapObject={
 
         var lat=pos.lat();
         var lng=pos.lng();
-        // console.log('latitude du marker : '+lat);
-        // console.log('longitude du marker : '+lng);
-        // var address=pos;
 
         mapObject.params.geocoder.geocode({'latLng':pos},function(results,status){
 
@@ -173,7 +159,7 @@ var mapObject={
 
                     //Ecouteur pour récupérer les coords après un dragend 
                     google.maps.event.addListener(prevMarker, 'dragend', function(e){
-                        console.log('dragend');
+
                         lat=prevMarker.position.lat();
                         lng=prevMarker.position.lng();
                         console.dir(prevMarker);
@@ -234,7 +220,6 @@ var mapObject={
     },
 
     addMarkerByAddress:function(address){
-        console.log('Ajout d\'un marker par une adresse : '+address);
 
         google.maps.event.clearInstanceListeners(mapObject.map);
 
@@ -260,7 +245,6 @@ var mapObject={
                 mapObject.map.setZoom(9);
 
                 google.maps.event.addListener(prevMarker, 'dragend', function(e){
-                    console.log('dragend');
                     lat=prevMarker.position.lat();
                     lng=prevMarker.position.lng();
                     console.dir(prevMarker);
@@ -291,7 +275,6 @@ var mapObject={
 
                 function handleResponse(data){
                     $('#answer').get(0).innerHTML=data.msg;
-                    console.log('callback');
 
                     if (data.error==false) {
 
@@ -317,7 +300,6 @@ var mapObject={
     },
 
     refreshMarker:function(){
-        console.log("refreshMarker");
 
         $.ajax({
             url: 'includes/actions.php',
@@ -355,7 +337,6 @@ var mapObject={
     displaySpot:function(id){
         $.each(mapMarkers.responseJSON ,function(key,val){
             if(val.id == id){
-                console.log(val);
                 var pos=new google.maps.LatLng(val.latitude,val.longitude);
                 mapObject.map.panTo(pos);
                 mapObject.map.setZoom(16);

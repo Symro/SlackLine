@@ -30,7 +30,6 @@ $(document).ready(function() {
                 };
             } else {
                 // Utilisateur déconnecté de fb ou de l'appli
-                console.log('Utilisateur déconnecté de fb ou de l\'appli');
 
                 button.onclick = function() {
                     FB.login(function(response) {
@@ -40,46 +39,22 @@ $(document).ready(function() {
                             });    
                         } else {
                             // l'Utilisateur a annulé l'identification ou a refusé l'accès à ses infos
-                            console.log('l\'Utilisateur a annulé l\'identification ou a refusé l\'accès à ses infos');
                         }
                     }, {scope:'email,user_birthday'});   
                 }
             }
         }
         
-        // run once with current status and whenever the status changes
         FB.getLoginStatus(updateButton);
         FB.Event.subscribe('auth.statusChange', updateButton);  
-        //FB.Event.subscribe('auth.logout', updateButton);  
-
-
-        //$('#loginbutton,#feedbutton').removeAttr('disabled');
-        //FB.getLoginStatus(updateStatusCallback);
 
         function login(response, info){
             if (response.authResponse) {
 
-                console.dir(response);
-                console.log(info);
                 var accessToken  =  response.authResponse.accessToken;
                 
-                // $('#user-info').html('<img src="https://graph.facebook.com/' + info.id + '/picture" alt="'+info.name+'"><br/>' + info.name
-                //                     + "<br /> Your Access Token: " + accessToken
-                //                     + "<br/> Prénom : "+ info.first_name
-                //                     + "<br/> Nom : "+ info.last_name
-                //                     + "<br/> Email : " + info.email
-                //                     + "<br/> Sexe : " + info.gender
-                //                     + "<br/> Anniversaire : " + info.birthday
-                //                     + "<br/> ID : "+parseInt(info.id)
-                //                     );
-
                 
                 if($('body').hasClass('inscription')){
-                    /*
-                    $('#lastname').val(info.last_name).prop('disabled', true);
-                    $('#firstname').val(info.first_name).prop('disabled', true);
-                    $('#email').val(info.email).prop('disabled', true);
-                    */
 
                     $('#lastname').val(info.last_name).prop("readonly",true).removeClass("erreur");
                     $('#firstname').val(info.first_name).prop("readonly",true).removeClass("erreur");
@@ -87,8 +62,6 @@ $(document).ready(function() {
                     $('#birthday').val(convertDate(info.birthday)).prop("readonly",true).removeClass("erreur");
                     
                     $('input[name=fb-picture]').val(info.id);
-                    console.log( $('input[name=fb-picture]').val() );
-
                 }
 
                 button.innerHTML = 'Se déconnecter de facebook';
@@ -100,8 +73,6 @@ $(document).ready(function() {
         function logout(response){
             button.innerHTML = 'Compléter avec facebook';
             $('#form-inscription').removeClass('email-error').children('input[type=text], input[type=email]').prop("readonly",false).val("");
-            console.log('Déconnecté');
-            //location.reload(); 
         }
 
 

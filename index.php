@@ -28,7 +28,7 @@ include('form_login.php');
           <div class="formulaire">
             <form autocomplete="off" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" id="form-inscription" <?php if( isset($email_error) && $email_error === true ): ?>class="email-error"<?php endif; ?>>
               <input type="text" id="email" name="email" placeholder="EMAIL" required>
-              <input type="password" id="password" name="password" placeholder="PASSWORD" required>
+              <input type="password" id="password" name="password" placeholder="MOT DE PASSE" required>
               <input type="submit" id="login" name="login" value="OK">
             </form>
             <section class="section-right slideLeft">
@@ -36,10 +36,10 @@ include('form_login.php');
             </section>      
             </br>
             <p>Ou se connecter avec:</p>
-            <a href="#" id="fb-connect">Completer avec Facebook</a>
-            <a href="#" id="google-connect">Completer avec Google+</a>
-            <hr></form>
-            <button class="btn-slack"><a href="inscription.php">INSCRIS-TOI</a></button>
+            <a href="inscription.php" id="fb-connect">Completer avec Facebook</a>
+            <a href="inscription.php" id="google-connect">Completer avec Google+</a>
+            <hr>
+            <a href="inscription.php" class="btn btn-slack">INSCRIS-TOI</a>
           </div>
         </div>
       </div>
@@ -200,8 +200,8 @@ include('form_login.php');
   
   <!-- <a href="" id="controls"></a> -->
   <video id="video">
-    <source src="assets/pariSlack.mp4" type='video/mp4' >
-    <source src="assets/ParislackBQ.oggtheora.ogv" type='video/ogg' >
+    <source src="assets/ParislackMP4HD.mp4" type='video/mp4' >
+    <source src="assets/pariSlackHD.ogv" type='video/ogg' >
     <p>Your user agent does not support the HTML5 Video element.</p>
   </video>
   

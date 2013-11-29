@@ -39,7 +39,6 @@ $( document ).ready(function() {
     /* -------------------------------------------------------- */
 
     $('body').on('click', '#profil.edition .infos img', function(){
-        console.log("clicked");
         $('#uploadForm input[type=file]').trigger('click');
 
     });
@@ -322,7 +321,6 @@ $( document ).ready(function() {
                 $(container).html(data).show().mCustomScrollbar();
             },
             onEmptySearch: function(){
-                console.log("#searchSpotInProfil OnEmptySearch");
                 request.actionGet('getFavSpots', afficherSpotsFavoris );
             }
         });
@@ -337,7 +335,6 @@ $( document ).ready(function() {
                 $(container).html(data).show().mCustomScrollbar();
             },
             onEmptySearch: function(){
-                console.log("#searchUserInProfil OnEmptySearch");
                 request.actionGet('getFavSlackers', afficherSlackersFavoris );
             }
         });
@@ -437,8 +434,6 @@ $( document ).ready(function() {
     var afficherSpots = function(data){
 
         var res = $('.spotsFav .result button');
-        console.log('This Afficher Spots ');
-
 
         if(res.hasClass('animate')){
             res.filter('[data-id='+data.id+']').parents('.show').slideUp(600, function(){
@@ -831,9 +826,9 @@ m
                 var note    = '<div class="rateit-rated" min="0" max="5" data-rateit-value="'+currentSpot.note+'" data-rateit-ispreset="true" data-rateit-readonly="true"></div>';
                 var modal   = $('#spotDisplay');
 
-                modal.find('.modal-body h2:first').text( currentSpot.titre );
-                modal.find('.description').text( currentSpot.description );
-                modal.find(".skill").removeClass('active');
+                modal.find('.modal-body h2:first').html( currentSpot.titre );
+                modal.find('.description').html( currentSpot.description );
+                modal.find(".skill > ul").removeClass('active');
                 //modal.find('.modal-body div:first').html( note ).rateit();
 
 
@@ -930,11 +925,9 @@ m
     });
 
     var afficherSpotsOuverts = function(data){
-        // $('.content').html("Spot Ouvert : "+data[0].id_spot+" Id Utilisateur : "+data[0].id_utilisateur+" Fermeture le : "+data[0].date_fermeture);
-        //console.log(data);
 
         $.each(data, function( key, value ) {
-            console.log("clé : "+key+" valeur : ID SPOT"+value.id_spot+" USER "+value.id_utilisateur+" DATE FERM. "+value.date_fermeture);
+            //console.log("clé : "+key+" valeur : ID SPOT"+value.id_spot+" USER "+value.id_utilisateur+" DATE FERM. "+value.date_fermeture);
         });
 
     }

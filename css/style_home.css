@@ -341,16 +341,16 @@ input[type="submit"]:hover{
  #section0{
   background-image: url(../img/ImgFullSize2.jpg);
  }
- 
- /*Creatin a ull height slide */
 
 #section1{
   background-color:#8bc052;
   color:#FFF;
   height: 100%;
   padding-top:14%; 
-  back
-
+ }
+ #section1 > .container,
+ #section2 > .container{
+  overflow:hidden;
  }
  #section1 p{
   line-height: 1.3em;
@@ -862,9 +862,10 @@ button a, button a:hover{
 .btn-slack {
   display:block;
   font-size: 1rem;
-  height:50px;
+  height:auto;
   width:100%;
   color: white;
+  padding:12px 0;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
   background-color: #8bc052;
   background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#8CC152), to(#6CA546));
@@ -872,22 +873,8 @@ button a, button a:hover{
   background-image: -moz-linear-gradient(#8CC152, #6CA546);
   background-image: -o-linear-gradient(#8CC152, #6CA546);
   background-image: linear-gradient(#8CC152, #6CA546);
-
-}
-.btn-slack:hover{
-  background-color: #6CA546;
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#6CA546), to(#8CC152));
-  background-image: -webkit-linear-gradient(#6CA546, #8CC152);
-  background-image: -moz-linear-gradient(#6CA546, #8CC152);
-  background-image: -o-linear-gradient(#6CA546, #8CC152);
-  background-image: linear-gradient(#6CA546, #8CC152);
 }
 
-.btn-slack a{
-  display:block;
-  width:100%;
-  height:100%;
-}
 
 
 
@@ -1075,30 +1062,52 @@ margin-top: 60px;
 .icone img{
   position: absolute;
   
-  transform : scale(0);
+  
   -webkit-transform : scale(0);
   -moz-transform : scale(0);
   -ms-transform : scale(0);
   -o-transform : scale(0);
+  transform : scale(0);
 }
 
 /* Animation d'apparition des élements d'illustration (TOUTES SLIDES CONFONDUES) */
 
 @-webkit-keyframes aparition{
   0% {
-    transform : scale(0);
+    
     -webkit-transform : scale(0);
     -moz-transform : scale(0);
     -ms-transform : scale(0);
     -o-transform : scale(0);
+    transform : scale(0);
   }
 
   100% {
-    transform : scale(1);
+    
     -webkit-transform : scale(1);
     -moz-transform : scale(1);
     -ms-transform : scale(1);
     -o-transform : scale(1);
+    transform : scale(1);
+  }
+}
+@-moz-keyframes aparition{
+  0% {
+    
+    -webkit-transform : scale(0);
+    -moz-transform : scale(0);
+    -ms-transform : scale(0);
+    -o-transform : scale(0);
+    transform : scale(0);
+  }
+
+  100% {
+    
+    -webkit-transform : scale(1);
+    -moz-transform : scale(1);
+    -ms-transform : scale(1);
+    -o-transform : scale(1);
+    transform : scale(1);
   }
 }
 
@@ -1139,6 +1148,49 @@ margin-top: 60px;
 /* Animation du personnage */
 
 @-webkit-keyframes rotate_perso{
+  0% {
+    transform : rotate(0deg);
+    -webkit-transform : rotate(0deg);
+    -moz-transform : rotate(0deg);
+    -ms-transform : rotate(0deg);
+    -o-transform : rotate(0deg);
+
+    transform-origin: 50% 100%;
+    -webkit-transform-origin: 50% 100%;
+    -moz-transform-origin: 50% 100%;
+    -ms-transform-origin: 50% 100%;
+    -o-transform-origin: 50% 100%;
+  }
+
+  50% {
+    transform : rotate(5deg);
+    -webkit-transform : rotate(5deg);
+    -moz-transform : rotate(5deg);
+    -ms-transform : rotate(5deg);
+    -o-transform : rotate(5deg);
+
+    transform-origin: 50% 100%;
+    -webkit-transform-origin: 50% 100%;
+    -moz-transform-origin: 50% 100%;
+    -ms-transform-origin: 50% 100%;
+    -o-transform-origin: 50% 100%;
+  }
+
+  100% {
+    transform : rotate(0deg);
+    -webkit-transform : rotate(0deg);
+    -moz-transform : rotate(0deg);
+    -ms-transform : rotate(0deg);
+    -o-transform : rotate(0deg);
+
+    transform-origin: 50% 100%;
+    -webkit-transform-origin: 50% 100%;
+    -moz-transform-origin: 50% 100%;
+    -ms-transform-origin: 50% 100%;
+    -o-transform-origin: 50% 100%;
+  }
+}
+@-moz-keyframes rotate_perso{
   0% {
     transform : rotate(0deg);
     -webkit-transform : rotate(0deg);
@@ -1324,10 +1376,62 @@ margin-top: 60px;
     -o-transform : rotate(0deg);
   }
 }
+@-moz-keyframes rotate_persoG {
+
+  0% {
+    transform : rotate(0deg);
+    -webkit-transform : rotate(0deg);
+    -moz-transform : rotate(0deg);
+    -ms-transform : rotate(0deg);
+    -o-transform : rotate(0deg);
+  }
+
+  50% {
+    transform : rotate(-10deg);
+    -webkit-transform : rotate(-10deg);
+    -moz-transform : rotate(-10deg);
+    -ms-transform : rotate(-10deg);
+    -o-transform : rotate(-10deg);
+  }
+
+  100% {
+    transform : rotate(0deg);
+    -webkit-transform : rotate(0deg);
+    -moz-transform : rotate(0deg);
+    -ms-transform : rotate(0deg);
+    -o-transform : rotate(0deg);
+  }
+}
 
 /* Animation de la rotation du personnage droite */
 
 @-webkit-keyframes rotate_persoD {
+
+  0% {
+    transform : rotate(0deg);
+    -webkit-transform : rotate(0deg);
+    -moz-transform : rotate(0deg);
+    -ms-transform : rotate(0deg);
+    -o-transform : rotate(0deg);
+  }
+
+  50% {
+    transform : rotate(10deg);
+    -webkit-transform : rotate(10deg);
+    -moz-transform : rotate(10deg);
+    -ms-transform : rotate(10deg);
+    -o-transform : rotate(10deg);
+  }
+
+  100% {
+    transform : rotate(0deg);
+    -webkit-transform : rotate(0deg);
+    -moz-transform : rotate(0deg);
+    -ms-transform : rotate(0deg);
+    -o-transform : rotate(0deg);
+  }
+}
+@-moz-keyframes rotate_persoD {
 
   0% {
     transform : rotate(0deg);
@@ -1714,6 +1818,65 @@ margin-top: 60px;
   }
 }
 
+
+@-moz-keyframes clic_curseur_grand{
+
+  0% {
+    left: 270px;
+    top: 145px;
+
+    transform : scale(1);
+    -webkit-transform : scale(1);
+    -moz-transform : scale(1);
+    -ms-transform : scale(1);
+    -o-transform : scale(1);
+  }
+    
+  95% {
+    left: 230px;
+    top: 95px;
+
+    transform : scale(1);
+    -webkit-transform : scale(1);
+    -moz-transform : scale(1);
+    -ms-transform : scale(1);
+    -o-transform : scale(1);
+  }
+
+  96% {
+    left: 230px;
+    top: 95px;
+
+    transform : scale(0.85);
+    -webkit-transform : scale(0.85);
+    -moz-transform : scale(0.85);
+    -ms-transform : scale(0.85);
+    -o-transform : scale(0.85);
+  }
+
+  99% {
+    left: 230px;
+    top: 95px;
+
+    transform : scale(0.85);
+    -webkit-transform : scale(0.85);
+    -moz-transform : scale(0.85);
+    -ms-transform : scale(0.85);
+    -o-transform : scale(0.85);
+  }
+
+  100% {
+    left: 230px;
+    top: 95px;
+
+    transform : scale(1);
+    -webkit-transform : scale(1);
+    -moz-transform : scale(1);
+    -ms-transform : scale(1);
+    -o-transform : scale(1);
+  }
+}
+
 /* Style de la bulle */
 
 #iconeSpot img:nth-child(1){
@@ -1895,6 +2058,65 @@ margin-top: 60px;
     -o-transform : scale(1);
   }
 }
+@-moz-keyframes clic_curseur_petit{
+
+  0% {
+    left: 260px;
+    top: 170px;
+
+    transform : scale(1);
+    -webkit-transform : scale(1);
+    -moz-transform : scale(1);
+    -ms-transform : scale(1);
+    -o-transform : scale(1);
+  }
+    
+  95% {
+    left: 220px;
+    top: 130px;
+
+    transform : scale(1);
+    -webkit-transform : scale(1);
+    -moz-transform : scale(1);
+    -ms-transform : scale(1);
+    -o-transform : scale(1);
+  }
+
+  96% {
+    left: 220px;
+    top: 130px;
+
+    transform : scale(0.85);
+    -webkit-transform : scale(0.85);
+    -moz-transform : scale(0.85);
+    -ms-transform : scale(0.85);
+    -o-transform : scale(0.85);
+  }
+
+  99% {
+    left: 220px;
+    top: 130px;
+
+    transform : scale(0.85);
+    -webkit-transform : scale(0.85);
+    -moz-transform : scale(0.85);
+    -ms-transform : scale(0.85);
+    -o-transform : scale(0.85);
+  }
+
+  100% {
+    left: 220px;
+    top: 130px;
+
+    transform : scale(1);
+    -webkit-transform : scale(1);
+    -moz-transform : scale(1);
+    -ms-transform : scale(1);
+    -o-transform : scale(1);
+  }
+}
+
+
 
 /* Style de la bulle */
 
